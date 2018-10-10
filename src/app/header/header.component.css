@@ -1,15 +1,3 @@
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+nav {
+    background-color: #003e5e;
 }
-
-a {
-    text-decoration: none;
-    color: white;
-}
-
-.spacer{
-    flex: 1 1 auto;
-}
-  
