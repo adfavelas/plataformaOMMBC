@@ -17,4 +17,4 @@ Dentro de la carpeta de ommbc se encuentra el script del servidor de Node (*serv
 
 Si te gustaría ver esta aplicación en vivo, haz click en el enlace que se encuentra debajo de éste parrafo. También se encuentran referencias a la documentación de las tecnologías utilizadas.
 
-  * [OMMBC Web App] (https://www.ommbc.org)
+  * [OMMBC Web App](https://www.ommbc.org)
