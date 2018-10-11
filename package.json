@@ -1,6 +1,6 @@
 {
   "name": "ommbc",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -50,5 +50,17 @@
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
     "typescript": "~2.7.2"
-  }
+  },
+  "description": "Sistema de entrenamiento en linea/virtual para la OMMBC",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adfavelas/plataformaOMMBC.git"
+  },
+  "author": "radix",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adfavelas/plataformaOMMBC/issues"
+  },
+  "homepage": "https://github.com/adfavelas/plataformaOMMBC#readme"
 }
