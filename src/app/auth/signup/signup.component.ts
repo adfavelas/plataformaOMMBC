@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import $ from 'jquery';
+
 
 @Component({
   selector: 'app-signup',
@@ -10,6 +12,14 @@ export class SignupComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    $(document).ready(function() {
+        $('#selectedTest').formSelect();
+    });
+    //   this.initJquery();
   }
+
+//   initJquery() {
+    
+//   }
 
 }

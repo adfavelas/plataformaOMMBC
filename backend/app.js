@@ -3,7 +3,7 @@ const express     = require("express");
 const bodyParser  = require("body-parser");
 const mongoose    = require('mongoose');
 const dotenv      = require('dotenv');
-
+const path        = require('path');
 dotenv.load();
 
 const app = express();
@@ -18,6 +18,7 @@ mongoose.connect(
   console.log("Connection failed!");
 });
 
+app.use(express.static('angular'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use((req, res, next) => {
@@ -32,5 +33,9 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.get('*', (req,res,next)=>{
+    res.sendFile('index.html');
+})
 
 module.exports = app;
