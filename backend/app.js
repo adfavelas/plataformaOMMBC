@@ -9,7 +9,7 @@ dotenv.load();
 const app = express();
 
 mongoose.connect(
-  `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0-zs90m.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true}
+  `mongodb+srv://${process.env.user}:${process.env.password}@cluster0-zs90m.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true}
 )
 .then(() => {
   console.log("Connected to database!");
