@@ -15,11 +15,6 @@ export class SignupComponent implements OnInit {
     $(document).ready(function() {
         $('#selectedTest').formSelect();
     });
-    //   this.initJquery();
   }
-
-//   initJquery() {
-    
-//   }
 
 }
