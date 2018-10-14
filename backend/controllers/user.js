@@ -60,7 +60,7 @@ exports.loginUser = (req,res) => {
         }
         const token = jwt.sign(
             { email: fetchedUser.email, userId: fetchedUser._id },
-            process.env.JWT_KEY,
+            "OMMBC SECRET KEY",
             { expiresIn: "3h" }
         );
         res.status(200).json({
@@ -69,7 +69,11 @@ exports.loginUser = (req,res) => {
             expiresIn: '3h',
             userId: fetchedUser._id
         });
+    }).catch(err => {
+        return res.status(401).json({
+            message: "Invalid authentication credentials!"
         });
+    });
 }
 
 exports.getAllUsers = (req,res)=> {

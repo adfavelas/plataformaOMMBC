@@ -11,4 +11,10 @@ export class AuthService {
     createUser(body: any) {
         return this.http.post<{ message: String, errorCode: Number}>('http://localhost:8080/api/auth/signup', body);
     }
+
+    login(body: any) {
+        return this.http.post<{ message: String, token: String, expresIn: String, userId: String}>(
+            'http://localhost:8080/api/auth/login', body
+        );
+    }
 }
