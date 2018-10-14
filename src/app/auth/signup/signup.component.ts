@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import $ from 'jquery';
+import { AuthService } from '../auth.service';
 
 
 
@@ -13,7 +14,7 @@ import $ from 'jquery';
 export class SignupComponent implements OnInit {
 
   form: FormGroup;
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.initForm();
@@ -58,6 +59,11 @@ export class SignupComponent implements OnInit {
     // Call Service for Post on Node
     if ( this.form.valid && this.verifyFields() ) {
       const authData = this.buildUserObject();
+      this.authService.createUser(authData).subscribe( res => {
+        console.log(res);
+      }, err => {
+        console.log(err);
+      });
     } else {
       return;
     }

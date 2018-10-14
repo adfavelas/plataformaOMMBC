@@ -7,6 +7,7 @@ const path        = require('path');
 dotenv.load();
 
 const app = express();
+const userRoutes = require('./routes/userRoutes');
 
 mongoose.connect(
   `mongodb+srv://${process.env.user}:${process.env.password}@cluster0-zs90m.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true}
@@ -34,8 +35,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('*', (req,res,next)=>{
-    res.sendFile('index.html');
-})
+app.use('/api/auth', userRoutes);
+// app.get('*', (req,res,next)=>{
+//     res.sendFile('index.html');
+// })
 
 module.exports = app;
