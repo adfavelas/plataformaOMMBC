@@ -6,66 +6,75 @@
 
             <div class="row">
                 <div class="input-field col s4">
-                    <input id="name" formControlName="name" type="text" class="validate">
+                    <input id="name" formControlName="name" type="text" class="validate" required>
                     <label for="name">Nombre</label>
+                    <span class="helper-text" data-error="Ingresa tu nombre."></span>
                 </div>
                 <div class="input-field col s4">
-                    <input id="firstLastName" formControlName="firstLastName" type="text" class="validate">
+                    <input id="firstLastName" formControlName="firstLastName" type="text" class="validate" required>
                     <label for="firstLastName">Apellido Paterno</label>
+                    <span class="helper-text" data-error="Ingresa al menos un apellido."></span>
                 </div>
                 <div class="input-field col s4">
                     <input id="secondLastName" formControlName="secondLastName" type="text" class="validate">
                     <label for="secondLastName">Apellido Materno</label>
                 </div>
             </div>
-
+            
             <div class="row">
                 <div class="input-field col s6">
+                    <!-- <input type="text" class="datepicker"> -->
                     <input placeholder="dd/mm/yyyy" id="birthDate" formControlName="birthDate" type="text" class="validate">
                     <label for="birthDate">Birth Date</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="email" type="email" formControlName="email" class="validate">
+                    <input id="email" type="email" formControlName="email" class="validate" required>
                     <label for="email">Correo electrónico</label>
+                    <span class="helper-text" data-error="Ingresa un correo electrónico válido."></span>
                 </div>
             </div>
-
+            
             <div class="row">
-                <div class="input-field col s6">
-                    <!-- <label>Estado</label> -->
-                    <select class="browser-default" formControlName="city">
+                <div class="col s6">
+                    <label>Ciudad</label>
+                    <select class="browser-default" formControlName="city" required>
                         <option value="" disabled selected>Ciudad</option>
                         <option value="1">Option 1</option>
                         <option value="2">Option 2</option>
                         <option value="3">Option 3</option>
                     </select>
+                    <span class="helper-text" data-error="Selecciona una ciudad."></span>
                 </div>
-                <div class="input-field col s6">
-                    <!-- <label>Estado</label> -->
-                    <select class="browser-default" formControlName="state">
+                <div class="col s6">
+                    <label>Estado</label>
+                    <select class="browser-default" formControlName="state" required>
                         <option value="" disabled selected>Estado</option>
                         <option value="1">Option 1</option>
                         <option value="2">Option 2</option>
                         <option value="3">Option 3</option>
                     </select>
+                    <span class="helper-text" data-error="Selecciona un estado."></span>
                 </div>
             </div>
-
+            
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="schoolName" type="text" class="validate" formControlName="schoolName">
+                    <input id="schoolName" type="text" class="validate" formControlName="schoolName" required>
                     <label for="schoolName">Nombre de tu Escuela</label>
+                    <span class="helper-text" data-error="Ingresa el nombre de tu escuela."></span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="password" type="password" class="validate" formControlName="password">
+                    <input id="password" type="password" class="validate" formControlName="password" required>
                     <label for="password">Contraseña</label>
+                    <span class="helper-text" data-error="Ingresa una contraseña."></span>
                 </div>
                 <div class="input-field col s6">
-                    <input id="confirm_password" type="password" class="validate" formControlName="confirm_password">
+                    <input id="confirm_password" type="password" class="validate" formControlName="confirm_password" required>
                     <label for="confirm_password">Confirmar contraseña</label>
+                    <span class="helper-text" data-error="Ingresa una contraseña."></span>
                 </div>
             </div>
             

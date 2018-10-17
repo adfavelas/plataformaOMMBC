@@ -18,6 +18,13 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    // document.addEventListener('DOMContentLoaded', function() {
+    //    const elems = document.querySelectorAll('.datepicker');
+    //    const options = {
+    //        'format': 'mmm dd, yyyy'
+    //    };
+    //    const instances = M.Datepicker.init(elems, options);
+    // });
   }
 
   initForm() {
