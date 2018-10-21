@@ -13,8 +13,21 @@ export class AuthService {
     }
 
     login(body: any) {
-        return this.http.post<{ message: String, token: String, expresIn: String, userId: String}>(
+        return this.http.post<{ message: String, token: string, expresIn: String, userId: String}>(
             'http://localhost:8080/api/auth/login', body
         );
+    }
+
+    setToken(token: string) {
+        sessionStorage.setItem('token', token);
+    }
+
+    isUserLoggedIn() {
+        const token = sessionStorage.getItem('token');
+        if (token) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -45,40 +45,52 @@ exports.loginUser = (req,res) => {
     User.findOne({ email: req.body.email })
         .then(user => {
         if (!user) {
-            return res.status(401).json({
-            message: "failed"
+            return res.json({
+            message: "Usuario no existe "
             });
+        } else{
+            fetchedUser = user;
+            bcrypt.compare(req.body.password, user.password).then(
+                result => {
+                    if (!result) {
+                        return res.json({
+                        message: "Contraseña Invalida"
+                        });
+                    }
+                    const token = jwt.sign(
+                        { email: fetchedUser.email, userId: fetchedUser._id },
+                        "OMMBC SECRET KEY",
+                        { expiresIn: "3h" }
+                    );
+                    res.status(200).json({
+                        token: token,
+                        message: 'success',
+                        expiresIn: '3h',
+                        userId: fetchedUser._id
+                    });
+                });
         }
-        fetchedUser = user;
-        return bcrypt.compare(req.body.password, user.password);
-        })
-        .then(result => {
-        if (!result) {
-            return res.status(401).json({
-            message: "failed"
-            });
-        }
-        const token = jwt.sign(
-            { email: fetchedUser.email, userId: fetchedUser._id },
-            "OMMBC SECRET KEY",
-            { expiresIn: "3h" }
-        );
-        res.status(200).json({
-            token: token,
-            message: 'success',
-            expiresIn: '3h',
-            userId: fetchedUser._id
-        });
-    }).catch(err => {
-        return res.status(401).json({
-            message: "Invalid authentication credentials!"
-        });
     });
 }
 
 exports.getAllUsers = (req,res)=> {
-    // User.find({}, (err, result) => {
+    let fetchedUser = {}
+    User.findOne({email: ""}, (err, result) => {
+        fetchedUser.user = result;
+        console.log(result.email);
+        // res.send(result);
+        Student.find({email: result.email}, (err,student )=> {
+            console.log(student);
+            fetchedUser.student = student;
+            res.send(fetchedUser);
+        })
+    })
+
+    // let email = "antonio@gmail.com";
+    // Student.deleteOne({email: email}, (err,result) => {
     //     console.log(result);
-    //     res.json(result);
-    // })
+    //     User.deleteOne({email: email}, (err, response)=> {
+    //         res.send({result, response});
+    //     })
+    // });
 }
