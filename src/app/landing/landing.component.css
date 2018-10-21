@@ -1,0 +1,7 @@
+main {
+    background-image: url("../../assets/img/landingBg.jpg");
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+    color: #ffffff;
+}

@@ -10,6 +10,9 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LandingComponent } from './landing/landing.component';
+import { HomeComponent } from './home/home.component';
+import { FaqComponent } from './faq/faq.component';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { AppRoutingModule } from './app-routing.module';
     LoginComponent,
     SignupComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LandingComponent,
+    HomeComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

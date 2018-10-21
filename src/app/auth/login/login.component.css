@@ -15,17 +15,12 @@
     border-bottom: 1px solid #0693BE;
     box-shadow: 0 1px 0 0 #0693BE;
 }
-/* Check boxes color */
-.checkbox-span {
-    color: #000;
-}
 /* Buttons color */
-.btn {
+.btn-large   {
     background-color: #0693BE;
 }
-/* links */
-a {
-    color: #14C9D2;
+.btn-large:hover {
+    background-color: #14C9D2;
 }
 /* Titles */
 .title-text {
