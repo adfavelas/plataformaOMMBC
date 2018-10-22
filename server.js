@@ -1,5 +1,13 @@
 const app = require("./backend/app");
+const path = require('path');
+const express = require('express');
 const http = require("http");
+
+app.use(express.static('angular'));
+
+app.get('*', (req,res,next)=>{
+  res.sendFile(path.resolve('./angular/index.html'));
+})
 
 const normalizePort = val => {
   var port = parseInt(val, 10);

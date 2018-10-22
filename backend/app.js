@@ -19,7 +19,7 @@ mongoose.connect(
   console.log("Connection failed!");
 });
 
-app.use(express.static('angular'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use((req, res, next) => {
@@ -36,8 +36,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/auth', userRoutes);
-// app.get('*', (req,res,next)=>{
-//     res.sendFile('index.html');
-// })
+
 
 module.exports = app;

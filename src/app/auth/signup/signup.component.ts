@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import $ from 'jquery';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
+declare var $: any;
 
 
 @Component({
@@ -17,16 +17,7 @@ export class SignupComponent implements OnInit {
   form: FormGroup;
   constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
-    this.initForm();
-    // document.addEventListener('DOMContentLoaded', function() {
-    //    const elems = document.querySelectorAll('.datepicker');
-    //    const options = {
-    //        'format': 'mmm dd, yyyy'
-    //    };
-    //    const instances = M.Datepicker.init(elems, options);
-    // });
-  }
+  ngOnInit() {}
 
   initForm() {
     this.form = new FormGroup({
