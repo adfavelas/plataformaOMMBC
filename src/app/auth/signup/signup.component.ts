@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import $ from 'jquery';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 
 
@@ -14,7 +15,7 @@ import { AuthService } from '../auth.service';
 export class SignupComponent implements OnInit {
 
   form: FormGroup;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.initForm();
@@ -69,7 +70,7 @@ export class SignupComponent implements OnInit {
       this.authService.createUser(authData).subscribe( res => {
         console.log(res);
         if ( res.message === 'success' ) {
-          alert('yay');
+          this.router.navigate(['']);
         } else {
           alert(res.message);
           this.form.reset();

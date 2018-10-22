@@ -93,11 +93,5 @@ exports.getAllUsers = (req,res)=> {
     //     })
     // })
 
-    // let email = "d@gmail.com";
-    // Student.deleteOne({email: email}, (err,result) => {
-    //     console.log(result);
-    //     User.deleteOne({email: email}, (err, response)=> {
-    //         res.send({result, response});
-    //     })
-    // });
+
 }
