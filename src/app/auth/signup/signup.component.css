@@ -26,12 +26,9 @@
 label {
     color: #000;
 }
-select:focus {
-    color: #0693BE;
-}
 /*  */
 /* Buttons color */
-.btn-large   {
+.btn-large {
     background-color: #0693BE;
 }
 .btn-large:hover {

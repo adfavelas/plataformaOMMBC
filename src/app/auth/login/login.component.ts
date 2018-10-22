@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   form: FormGroup;
   constructor(private authService: AuthService, private router: Router) { }
+  error: String = null;
 
   ngOnInit() {
     this.initForm();
@@ -38,7 +39,8 @@ export class LoginComponent implements OnInit {
           this.authService.setToken(response.token);
           this.router.navigate(['home']);
         } else {
-          alert(response.message);
+            this.error = response.message;
+        //   alert(response.message);
         }
       });
     }
