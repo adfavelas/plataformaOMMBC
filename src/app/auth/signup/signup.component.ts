@@ -68,6 +68,12 @@ export class SignupComponent implements OnInit {
       const authData = this.buildUserObject();
       this.authService.createUser(authData).subscribe( res => {
         console.log(res);
+        if ( res.message === 'success' ) {
+          alert('yay');
+        } else {
+          alert(res.message);
+          this.form.reset();
+        }
       }, err => {
         console.log(err);
       });
