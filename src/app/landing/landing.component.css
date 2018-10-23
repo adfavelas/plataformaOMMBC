@@ -6,3 +6,12 @@
     background-size: cover;
     color: #ffffff;
 }
+/* Buttons color */
+.btn-large   {
+    background-color: #0693BE;
+}
+.btn-large:hover {
+    background-color: #14C9D2;
+}
+/*  */
+
