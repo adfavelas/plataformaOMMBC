@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import $ from 'jquery';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
+declare var $: any;
 
 
 @Component({
@@ -14,18 +15,9 @@ import { AuthService } from '../auth.service';
 export class SignupComponent implements OnInit {
 
   form: FormGroup;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
-    this.initForm();
-    // document.addEventListener('DOMContentLoaded', function() {
-    //    const elems = document.querySelectorAll('.datepicker');
-    //    const options = {
-    //        'format': 'mmm dd, yyyy'
-    //    };
-    //    const instances = M.Datepicker.init(elems, options);
-    // });
-  }
+  ngOnInit() {}
 
   initForm() {
     this.form = new FormGroup({
@@ -68,6 +60,12 @@ export class SignupComponent implements OnInit {
       const authData = this.buildUserObject();
       this.authService.createUser(authData).subscribe( res => {
         console.log(res);
+        if ( res.message === 'success' ) {
+          this.router.navigate(['']);
+        } else {
+          alert(res.message);
+          this.form.reset();
+        }
       }, err => {
         console.log(err);
       });

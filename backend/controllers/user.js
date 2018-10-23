@@ -1,16 +1,22 @@
-const bcrypt        = require('bcrypt');
+const bcrypt        = require('bcrypt-nodejs');
 const User          = require('../models/User');
 const jwt           = require('jsonwebtoken');
 const Student       = require('../models/Student');
 
 exports.createUser = (req,res,next) => {
-    bcrypt.hash(req.body.password,10).then(hash => {
+    bcrypt.hash(req.body.password,bcrypt.genSaltSync(10), null ,(err, hash) => {
+        
+        if (err){  
+            console.log(err);
+            return res.json({message: "Usuario Ya existente", errorCode:1});
+        }
         const user = new User({
           email: req.body.email,
           password: hash,
           status: 'active',
           role: 'student'
         });
+        
         user.save().then( result => {
             console.log(result);
             const student = new Student({
@@ -27,15 +33,16 @@ exports.createUser = (req,res,next) => {
             });
             student.save().then( response => {
                 console.log(response);
-                res.json({message: "success", errorCode: 0});
+                return res.json({message: "success", errorCode: 0});
             }).catch( err => {
-                User.deleteOne({_id: result._id});
-                if (err) console.log(err);
-                res.json({message: "failed", errorCode: 1});
-            })
-        }).catch(err => {
-            if( err ) console.log(err);
-            res.json({message: "failed", errorCode: 1});
+                User.deleteOne({_id: result._id},function() {
+                    return res.json({message: "Usuario ya existente", errorCode: 1});
+                });
+                if (err) console.log('catch student');
+            });
+        }).catch( err => {
+            console.log(err);
+            return res.json({message: "Usuario ya existente", errorCode: 1});
         })
     });
 }
@@ -50,47 +57,41 @@ exports.loginUser = (req,res) => {
             });
         } else{
             fetchedUser = user;
-            bcrypt.compare(req.body.password, user.password).then(
-                result => {
-                    if (!result) {
-                        return res.json({
-                        message: "Contraseña Invalida"
-                        });
-                    }
-                    const token = jwt.sign(
-                        { email: fetchedUser.email, userId: fetchedUser._id },
-                        "OMMBC SECRET KEY",
-                        { expiresIn: "3h" }
-                    );
-                    res.status(200).json({
-                        token: token,
-                        message: 'success',
-                        expiresIn: '3h',
-                        userId: fetchedUser._id
+            bcrypt.compare(req.body.password,user.password, (err, result) => {
+            if(err) console.log(err);
+                if (!result) {
+                    return res.json({
+                    message: "Contraseña Invalida"
                     });
+                }
+                const token = jwt.sign(
+                    { email: fetchedUser.email, userId: fetchedUser._id },
+                    "OMMBC SECRET KEY",
+                    { expiresIn: "3h" }
+                );
+                res.status(200).json({
+                    token: token,
+                    message: 'success',
+                    expiresIn: '3h',
+                    userId: fetchedUser._id
                 });
+            });
         }
     });
 }
 
 exports.getAllUsers = (req,res)=> {
-    let fetchedUser = {}
-    User.findOne({email: ""}, (err, result) => {
-        fetchedUser.user = result;
-        console.log(result.email);
-        // res.send(result);
-        Student.find({email: result.email}, (err,student )=> {
-            console.log(student);
-            fetchedUser.student = student;
-            res.send(fetchedUser);
-        })
-    })
-
-    // let email = "antonio@gmail.com";
-    // Student.deleteOne({email: email}, (err,result) => {
-    //     console.log(result);
-    //     User.deleteOne({email: email}, (err, response)=> {
-    //         res.send({result, response});
+    // let fetchedUser = {}
+    // User.findOne({email: "d@gmail.com"}, (err, result) => {
+    //     fetchedUser.user = result;
+    //     console.log(result.email);
+    //     // res.send(result);
+    //     Student.find({email: result.email}, (err,student )=> {
+    //         console.log(student);
+    //         fetchedUser.student = student;
+    //         res.send(fetchedUser);
     //     })
-    // });
+    // })
+
+
 }

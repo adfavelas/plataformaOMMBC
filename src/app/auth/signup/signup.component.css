@@ -13,7 +13,7 @@
 /* label underline focus color */
 .input-field input[type=text]:focus,
 .input-field input[type=email]:focus,
-.input-field input[type=password]:focus {
+.input-field input[type=password]:focus , input:not([type]:focus){
     border-bottom: 1px solid #0693BE;
     box-shadow: 0 1px 0 0 #0693BE;
 }
@@ -44,4 +44,5 @@ a {
 .title-text {
     color: #0767A4;
 }
+ 
 /*  */
