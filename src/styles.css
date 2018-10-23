@@ -1,12 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
-html, body { height: 100%; }
+/*  */
 body { 
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    margin: 0; 
     font-family: 'Roboto', sans-serif;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: 'Roboto', sans-serif; }
+main {
+    flex: 1 0 auto;
+}
+/*  */
+/*  */
+footer.page-footer {
+    background: #003e5e;
+    color: #fff;
+}
+
+footer .footer-copyright .row {
+    margin: 0;
+}
+/*  */

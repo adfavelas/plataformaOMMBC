@@ -8,51 +8,62 @@ declare var $: any;
 
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+    selector: 'app-signup',
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+    birthDate: String;
+    form: FormGroup;
+    constructor(private authService: AuthService, private router: Router) { }
 
-  form: FormGroup;
-  constructor(private authService: AuthService, private router: Router) { }
+    ngOnInit() {
+        this.initForm();
 
-  ngOnInit() {}
+        $(document).ready(function() {
+            const options = {
+                'format': 'dd/mm/yyyy'
+            };
+            $('.datepicker').datepicker(options);
+            $('select').formSelect();
+        });
+    }
 
-  initForm() {
-    this.form = new FormGroup({
-      name: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      firstLastName: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      secondLastName: new FormControl(null , {
-        validators: [Validators.required]
-      }),
-      birthDate: new FormControl(null , {
-        validators: [Validators.required]
-      }),
-      email: new FormControl(null , {
-        validators: [Validators.required]
-      }),
-      city: new FormControl(null , {
-        validators: [Validators.required]
-      }),
-      state: new FormControl(null , {
-        validators: [Validators.required]
-      }),
-      schoolName: new FormControl(null , {
-        validators: [Validators.required]
-      }),
-      password: new FormControl(null , {
-        validators: [Validators.required]
-      }),
-      confirm_password: new FormControl(null , {
-        validators: [Validators.required]
-      })
-    });
-  }
+    initForm() {
+        this.form = new FormGroup({
+            name: new FormControl(null, {
+                validators: [Validators.required]
+            }),
+            firstLastName: new FormControl(null, {
+                validators: [Validators.required]
+            }),
+            secondLastName: new FormControl(null , {
+                validators: [Validators.required]
+            }),
+            email: new FormControl(null , {
+                validators: [Validators.required]
+            }),
+            city: new FormControl(null , {
+                validators: [Validators.required]
+            }),
+            state: new FormControl(null , {
+                validators: [Validators.required]
+            }),
+            schoolName: new FormControl(null , {
+                validators: [Validators.required]
+            }),
+            password: new FormControl(null , {
+                validators: [Validators.required]
+            }),
+            confirm_password: new FormControl(null , {
+                validators: [Validators.required]
+            })
+        });
+    }
+
+    setDate(birthDate: HTMLInputElement) {
+        this.birthDate = birthDate.value;
+    }
 
   submit() {
     // Call Service for Post on Node
@@ -87,7 +98,7 @@ export class SignupComponent implements OnInit {
       name : this.form.get('name').value,
       firstLastName: this.form.get('firstLastName').value,
       secondLastName: this.form.get('secondLastName').value,
-      birthDate: this.form.get('birthDate').value,
+      birthDate: this.birthDate,
       email: this.form.get('email').value,
       city: this.form.get('city').value,
       state: this.form.get('state').value,

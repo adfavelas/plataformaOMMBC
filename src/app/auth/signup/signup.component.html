@@ -1,5 +1,3 @@
-
-<app-header></app-header>
 <div class="container">
     <h1 class="center-align title-text">Regístrate</h1>
     
@@ -25,13 +23,8 @@
             
             <div class="row">
                 <div class="input-field col s6">
-                    <!-- <input type="text" class="datepicker"> -->
-                    <!-- <input placeholder="dd/mm/yyyy" id="birthDate" formControlName="birthDate" type="text" class="validate datepicker"> -->
-                    <label for="birthDate">Birth Date</label> 
-
-                    <input type="text" [matDatepicker]="myDatepicker" id="birthDate" class="datepicker"  formControlName="birthDate">
-                    <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
-                    <mat-datepicker #myDatepicker></mat-datepicker>
+                    <label for="birthDate">Birth Date</label>
+                    <input id="birthDate" type="text" #birthDate class="datepicker" (change)="setDate(birthDate)">
                 </div>
                 <div class="input-field col s6">
                     <input id="email" type="email" formControlName="email" class="date" required>
@@ -43,7 +36,7 @@
             <div class="row">
                 <div class="col s6">
                     <label>Ciudad</label>
-                    <select  class="browser-default" id="ciudad" formControlName="city" required>
+                    <select id="city" formControlName="city" required>
                         <option value="" disabled selected>Ciudad</option>
                         <option value="1">Option 1</option>
                         <option value="2">Option 2</option>
@@ -53,7 +46,7 @@
                 </div>
                 <div class="col s6">
                     <label>Estado</label>
-                    <select class="browser-default" formControlName="state" required>
+                    <select id="state" formControlName="state" required>
                         <option value="" disabled selected>Estado</option>
                         <option value="1">Option 1</option>
                         <option value="2">Option 2</option>
@@ -98,5 +91,3 @@
 
     </div>
 </div>
-
-<app-footer></app-footer>

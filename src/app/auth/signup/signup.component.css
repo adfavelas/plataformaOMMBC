@@ -11,20 +11,28 @@
 }
 /*  */
 /* label underline focus color */
-.input-field input[type=text]:focus,
-.input-field input[type=email]:focus,
-.input-field input[type=password]:focus , input:not([type]:focus){
+.input-field input[type='text']:focus,
+.input-field input[type='email']:focus,
+.input-field input[type='password']:focus {
     border-bottom: 1px solid #0693BE;
     box-shadow: 0 1px 0 0 #0693BE;
 }
 /*  */
-/* Check boxes color */
-.checkbox-span {
-    color: #000;
-}
-/* Selectors */
+/* Selects */
 label {
     color: #000;
+}
+.select-wrapper input.select-dropdown:focus {
+    border-bottom: 1px solid #0693BE;
+}
+/*  */
+/* Date Picker */
+.datepicker-date-display {
+    flex: 1 auto;
+    background-color: #ffffff !important;
+    color: #fff;
+    padding: 20px 22px;
+    font-weight: 500;
 }
 /*  */
 /* Buttons color */

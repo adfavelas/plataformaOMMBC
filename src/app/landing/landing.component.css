@@ -1,10 +1,10 @@
 .landing {
-    background-image: url("/assets/img/landingBg.jpg") !important; 
-    position: relative;
+    background-image: url("/assets/img/landingBg.jpg"); 
     background-repeat: no-repeat;
     background-position: 50%;
     background-size: cover;
     color: #ffffff;
+    height: 100%;
 }
 /* Buttons color */
 .btn-large   {
@@ -14,4 +14,3 @@
     background-color: #14C9D2;
 }
 /*  */
-
