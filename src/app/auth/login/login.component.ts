@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
           this.authService.setToken(response.token);
           this.router.navigate(['home']);
         } else {
-            this.error = response.message;
+          this.error = response.message;
         //   alert(response.message);
         }
       });
