@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LandingComponent } from './landing/landing.component';
 import { HomeComponent } from './home/home.component';
 import { FaqComponent } from './faq/faq.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { FaqComponent } from './faq/faq.component';
     HeaderComponent,
     LandingComponent,
     HomeComponent,
-    FaqComponent
+    FaqComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

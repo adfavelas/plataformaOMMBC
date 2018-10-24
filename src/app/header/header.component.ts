@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -12,7 +13,7 @@ declare var $: any;
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
   private isLoggedInSub: Subscription;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     $(document).ready(function() {
@@ -27,6 +28,11 @@ export class HeaderComponent implements OnInit {
         this.isLoggedIn = false;
       }
     });
+  }
+
+  onLogout() {
+    this.authService.logout();
+    this.router.navigate(['']);
   }
 
 }

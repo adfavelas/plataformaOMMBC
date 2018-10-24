@@ -11,8 +11,13 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
-  constructor(private authService: AuthService, private router: Router) { }
   error: String = null;
+
+  constructor(private authService: AuthService, private router: Router) {
+    if (this.authService.isUserLoggedIn()) {
+      this.router.navigate(['home']);
+    }
+   }
 
   ngOnInit() {
     this.initForm();
@@ -37,6 +42,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(body).subscribe(response => {
         if (response.message === 'success') {
           this.authService.setToken(response.token);
+          sessionStorage.setItem('email', this.form.get('email').value);
           this.router.navigate(['home']);
         } else {
           this.error = response.message;

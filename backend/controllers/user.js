@@ -82,7 +82,7 @@ exports.loginUser = (req,res) => {
 
 exports.getAllUsers = (req,res)=> {
     let fetchedUser = {}
-    User.findOne({email: "abc@gmail.com"}, (err, result) => {
+    User.findOne({email: req.params.email}, (err, result) => {
         fetchedUser.user = result;
         console.log(result.email);
         // res.send(result);

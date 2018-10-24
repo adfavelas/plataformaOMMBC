@@ -12,9 +12,15 @@ declare var $: any;
     styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+
+    // TO DO : implement messagesx
     birthDate: String;
     form: FormGroup;
-    constructor(private authService: AuthService, private router: Router) { }
+    constructor(private authService: AuthService, private router: Router) {
+        if (this.authService.isUserLoggedIn()) {
+          this.router.navigate(['home']);
+        }
+       }
 
     ngOnInit() {
         this.initForm();
@@ -71,7 +77,7 @@ export class SignupComponent implements OnInit {
       this.authService.createUser(authData).subscribe( res => {
         console.log(res);
         if ( res.message === 'success' ) {
-          this.router.navigate(['']);
+          this.router.navigate(['login']);
         } else {
           alert(res.message);
           this.form.reset();

@@ -12,7 +12,7 @@ router.post('/login', (req,res,next) => {
     userFunctions.loginUser(req,res);
 });
 
-router.get('/users', (req,res,next) => {
+router.get('/user/:email', (req,res,next) => {
     // console.log('here');
     userFunctions.getAllUsers(req,res);
 });
