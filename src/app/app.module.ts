@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LandingComponent } from './landing/landing.component';
 import { HomeComponent } from './home/home.component';
@@ -21,7 +20,6 @@ import { FaqComponent } from './faq/faq.component';
     LoginComponent,
     SignupComponent,
     HeaderComponent,
-    FooterComponent,
     LandingComponent,
     HomeComponent,
     FaqComponent

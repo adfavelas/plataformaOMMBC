@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 
 declare var $: any;
 
-
 @Component({
     selector: 'app-signup',
     templateUrl: './signup.component.html',

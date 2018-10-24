@@ -81,17 +81,17 @@ exports.loginUser = (req,res) => {
 }
 
 exports.getAllUsers = (req,res)=> {
-    // let fetchedUser = {}
-    // User.findOne({email: "d@gmail.com"}, (err, result) => {
-    //     fetchedUser.user = result;
-    //     console.log(result.email);
-    //     // res.send(result);
-    //     Student.find({email: result.email}, (err,student )=> {
-    //         console.log(student);
-    //         fetchedUser.student = student;
-    //         res.send(fetchedUser);
-    //     })
-    // })
+    let fetchedUser = {}
+    User.findOne({email: "abc@gmail.com"}, (err, result) => {
+        fetchedUser.user = result;
+        console.log(result.email);
+        // res.send(result);
+        Student.find({email: result.email}, (err,student )=> {
+            console.log(student);
+            fetchedUser.student = student;
+            res.send(fetchedUser);
+        })
+    })
 
 
 }
