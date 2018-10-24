@@ -86,7 +86,7 @@ exports.getAllUsers = (req,res)=> {
         fetchedUser.user = result;
         console.log(result.email);
         // res.send(result);
-        Student.find({email: result.email}, (err,student )=> {
+        Student.findOne({email: result.email}, (err,student )=> {
             console.log(student);
             fetchedUser.student = student;
             res.send(fetchedUser);
