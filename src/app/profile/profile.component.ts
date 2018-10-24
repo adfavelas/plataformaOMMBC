@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
+import { ProfileService } from '../profile.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -8,10 +9,10 @@ import { AuthService } from '../auth/auth.service';
 })
 export class ProfileComponent implements OnInit {
   user;
-  constructor(private authService: AuthService) { }
+  constructor(private profileService: ProfileService ) { }
 
   ngOnInit() {
-    this.authService.getUserObject(sessionStorage.getItem('email')).subscribe(user => {
+    this.profileService.getUserObject(sessionStorage.getItem('email')).subscribe(user => {
       this.user = user;
       console.log(this.user);
     });

@@ -38,8 +38,4 @@ export class AuthService {
         sessionStorage.removeItem('token');
         this.isAuth.next(this.token);
     }
-
-    getUserObject(email: string) {
-        return this.http.get('http://localhost:8080/api/auth/user/' + email);
-    }
 }
