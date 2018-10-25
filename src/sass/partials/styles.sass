@@ -1,0 +1,25 @@
+// Buttons Style
+%button-style
+    background-color: $secondary-color
+    color: white
+
+    &:hover 
+        background-color: $primary-accent-color
+
+// Inputs Style
+%input-style
+    // underline focus color
+    &:focus
+        border-bottom: 1px solid $secondary-color
+        box-shadow: 0 1px 0 0 $secondary-color 
+        + label
+            color: $secondary-color
+
+// Labels Style
+%label-style
+    color: black
+
+// Title Style
+%title-style
+    color: $primary-color-light
+    
