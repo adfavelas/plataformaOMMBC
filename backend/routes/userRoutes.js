@@ -12,6 +12,11 @@ router.post('/login', (req,res,next) => {
     userFunctions.loginUser(req,res);
 });
 
+router.get('/verifyEmail/:token', (req,res,next)=> {
+    const token = req.params.token;
+    userFunctions.verifyEmail(token, res);
+})
+
 // router.get('/user/:email', (req,res,next) => {
 //     // console.log('here');
 //     userFunctions.getAllUsers(req,res);

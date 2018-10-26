@@ -16,6 +16,7 @@ export class SignupComponent implements OnInit {
 
     // TO DO : implement messagesx
     birthDate: String;
+    respuesta: String;
     form: FormGroup;
     constructor(private authService: AuthService, private router: Router) {
         if (this.authService.isUserLoggedIn()) {
@@ -71,17 +72,17 @@ export class SignupComponent implements OnInit {
 
   submit() {
     const modalInstance = M.Modal.getInstance($('#signUpModal'));
-
-    modalInstance.open();
-
-    if (!modalInstance.isOpen()) {
         // Call Service for Post on Node
         if ( this.form.valid && this.verifyFields() ) {
             const authData = this.buildUserObject();
             this.authService.createUser(authData).subscribe( res => {
             console.log(res);
-                if ( res.message === 'success' ) {
-                    this.router.navigate(['login']);
+                if ( res.message === 'Success' ) {
+                    modalInstance.open();
+                    this.respuesta = res.message;
+                    if (!modalInstance.isOpen) {
+                        this.router.navigate(['login']);
+                    }
                 } else {
                     alert(res.message);
                     this.form.reset();
@@ -90,9 +91,8 @@ export class SignupComponent implements OnInit {
                 console.log(err);
             });
         } else {
-        return;
+            return;
         }
-    }
   }
 
   verifyFields() {
