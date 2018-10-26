@@ -3,8 +3,7 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 const studentSchema = mongoose.Schema({
     name: { type: String, required: true },
-    firstLastName: { type: String, required: true },
-    secondLastName: { type: String, required: false },
+    lastName: { type: String, required: true },
     age: { type: Number },
     schoolName: { type: String, required: true },
     state: { type: String, required: true },

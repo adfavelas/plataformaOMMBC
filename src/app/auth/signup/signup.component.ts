@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
 declare var $: any;
+declare var M: any;
 
 @Component({
     selector: 'app-signup',
@@ -31,6 +32,7 @@ export class SignupComponent implements OnInit {
             };
             $('.datepicker').datepicker(options);
             $('select').formSelect();
+            $('.modal').modal();
         });
     }
 
@@ -39,10 +41,7 @@ export class SignupComponent implements OnInit {
             name: new FormControl(null, {
                 validators: [Validators.required]
             }),
-            firstLastName: new FormControl(null, {
-                validators: [Validators.required]
-            }),
-            secondLastName: new FormControl(null , {
+            lastName: new FormControl(null, {
                 validators: [Validators.required]
             }),
             email: new FormControl(null , {
@@ -71,22 +70,28 @@ export class SignupComponent implements OnInit {
     }
 
   submit() {
-    // Call Service for Post on Node
-    if ( this.form.valid && this.verifyFields() ) {
-      const authData = this.buildUserObject();
-      this.authService.createUser(authData).subscribe( res => {
-        console.log(res);
-        if ( res.message === 'success' ) {
-          this.router.navigate(['login']);
+    const modalInstance = M.Modal.getInstance($('#signUpModal'));
+
+    modalInstance.open();
+
+    if (!modalInstance.isOpen()) {
+        // Call Service for Post on Node
+        if ( this.form.valid && this.verifyFields() ) {
+            const authData = this.buildUserObject();
+            this.authService.createUser(authData).subscribe( res => {
+            console.log(res);
+                if ( res.message === 'success' ) {
+                    this.router.navigate(['login']);
+                } else {
+                    alert(res.message);
+                    this.form.reset();
+                }
+            }, err => {
+                console.log(err);
+            });
         } else {
-          alert(res.message);
-          this.form.reset();
+        return;
         }
-      }, err => {
-        console.log(err);
-      });
-    } else {
-      return;
     }
   }
 
@@ -101,8 +106,7 @@ export class SignupComponent implements OnInit {
   buildUserObject() {
     const body = {
       name : this.form.get('name').value,
-      firstLastName: this.form.get('firstLastName').value,
-      secondLastName: this.form.get('secondLastName').value,
+      lastName: this.form.get('lastName').value,
       birthDate: this.birthDate,
       email: this.form.get('email').value,
       city: this.form.get('city').value,

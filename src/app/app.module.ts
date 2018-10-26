@@ -13,6 +13,8 @@ import { LandingComponent } from './landing/landing.component';
 import { HomeComponent } from './home/home.component';
 import { FaqComponent } from './faq/faq.component';
 import { ProfileComponent } from './profile/profile.component';
+import { GuidedLearningComponent } from './guided-learning/guided-learning.component';
+import { Error404Component } from './error404/error404.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { ProfileComponent } from './profile/profile.component';
     LandingComponent,
     HomeComponent,
     FaqComponent,
-    ProfileComponent
+    ProfileComponent,
+    GuidedLearningComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,

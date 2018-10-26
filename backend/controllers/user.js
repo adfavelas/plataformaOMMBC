@@ -21,8 +21,7 @@ exports.createUser = (req,res,next) => {
             console.log(result);
             const student = new Student({
                 name: req.body.name,
-                firstLastName: req.body.firstLastName,
-                secondLastName: req.body.secondLastName,
+                lastName: req.body.lastName,
                 // age: req.body.age,
                 schoolName: req.body.schoolName,
                 state: req.body.state,
@@ -80,18 +79,18 @@ exports.loginUser = (req,res) => {
     });
 }
 
-exports.getAllUsers = (req,res)=> {
-    let fetchedUser = {}
-    User.findOne({email: req.params.email}, (err, result) => {
-        fetchedUser.user = result;
-        console.log(result.email);
-        // res.send(result);
-        Student.findOne({email: result.email}, (err,student )=> {
-            console.log(student);
-            fetchedUser.student = student;
-            res.send(fetchedUser);
-        })
-    })
+// exports.getAllUsers = (req,res)=> {
+//     let fetchedUser = {}
+//     User.findOne({email: req.params.email}, (err, result) => {
+//         fetchedUser.user = result;
+//         console.log(result.email);
+//         // res.send(result);
+//         Student.findOne({email: result.email}, (err,student )=> {
+//             console.log(student);
+//             fetchedUser.student = student;
+//             res.send(fetchedUser);
+//         })
+//     })
 
 
-}
+// }

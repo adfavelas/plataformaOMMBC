@@ -5,19 +5,15 @@
         <form [formGroup]="form" class="col s6 offset-s3">
 
             <div class="row">
-                <div class="input-field col s4">
-                    <input id="name" formControlName="name" type="text" class="validate" required>
-                    <label for="name">Nombre</label>
+                <div class="input-field col s6">
+                    <input id="firstName" formControlName="name" type="text" class="validate" required>
+                    <label for="firstName">Nombre</label>
                     <span class="helper-text" data-error="Ingresa tu nombre."></span>
                 </div>
-                <div class="input-field col s4">
-                    <input id="firstLastName" formControlName="firstLastName" type="text" class="validate" required>
-                    <label for="firstLastName">Apellido Paterno</label>
+                <div class="input-field col s6">
+                    <input id="lastName" formControlName="lastName" type="text" class="validate" required>
+                    <label for="lastName">Apellidos</label>
                     <span class="helper-text" data-error="Ingresa al menos un apellido."></span>
-                </div>
-                <div class="input-field col s4">
-                    <input id="secondLastName" formControlName="secondLastName" type="text" class="validate">
-                    <label for="secondLastName">Apellido Materno</label>
                 </div>
             </div>
             
@@ -88,6 +84,18 @@
                 <button class="waves-effect waves-light btn-large" (click)="submit()">Regístrate</button>
             </div>
         </form>
+
+        <!-- Modal Structure -->
+        <div id="signUpModal" class="modal">
+            <div class="modal-content">
+                <h4>¡Casi Listo!</h4>
+                <p>Tu registro se ha completado con éxito. Por favor revisa la bandeja de entrada del correo electrónico con el que te registraste para confirmar tu cuenta en nuestra plataforma.</p>
+                <p>OJO: No podrás acceder a la plataforma hasta que tu correo sea confirmado.</p>
+            </div>
+            <div class="modal-footer">
+                <a class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
+            </div>
+        </div>
 
     </div>
 </div>

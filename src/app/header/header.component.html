@@ -3,10 +3,10 @@
         <div class="nav-wrapper container">
             <a href="#" class="brand-logo">OMMBC</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <div *ngIf="!isLoggedIn">
+                <!-- <div *ngIf="!isLoggedIn">
                     <li><a href="/">Inicio</a></li>
                     <li><a href="/login">Accede</a></li>
-                </div>
+                </div> -->
 
                 <!-- Starts ng if -->
 
@@ -14,7 +14,7 @@
                     <li><a href="/home">Inicio</a></li>
                     <!-- Dropdown Trigger -->
                     <li><a class="dropdown-trigger" data-target="dropdownPractice">Practica<i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a href="/home">Ranking Global</a></li>
+                    <li><a href="/home">Ranking</a></li>
                     <li><a href="/home"><i class="material-icons left">notifications</i>Notificaciones</a></li>
                     <li><a href="/home"><i class="material-icons left">forum</i>Foro</a></li>
                     <li><a href="/home"><i class="material-icons left">inbox</i>Buzón</a></li>
@@ -24,11 +24,11 @@
 
                 <!-- Dropdown Structure -->
                 <ul id="dropdownPractice" class="dropdown-content">
-                    <li><a href="/home">Aprendizaje Guiado</a></li>
+                    <li><a href="/guidedLearning">Aprendizaje Guiado</a></li>
                     <li><a href="/home">Problemas</a></li>
                 </ul>
                 <ul id="dropdownProfile" class="dropdown-content">
-                    <li><a href="/home">Mi Perfil</a></li>
+                    <li><a href="/profile">Mi Perfil</a></li>
                     <li><a (click)="onLogout()">Cerrar Sesión</a></li>
                 </ul>
                 <!-- End ng if -->

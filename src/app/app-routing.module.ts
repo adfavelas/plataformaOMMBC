@@ -7,6 +7,8 @@ import { LandingComponent } from './landing/landing.component';
 import { HomeComponent } from './home/home.component';
 import { FaqComponent } from './faq/faq.component';
 import { ProfileComponent } from './profile/profile.component';
+import { GuidedLearningComponent } from './guided-learning/guided-learning.component';
+import { Error404Component } from './error404/error404.component';
 
 
 const routes: Routes = [
@@ -15,7 +17,9 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent},
   { path: 'home', component: HomeComponent},
   { path: 'faq', component: FaqComponent},
-  { path: 'profile', component: ProfileComponent}
+  { path: 'profile', component: ProfileComponent},
+  { path: 'guidedLearning', component: GuidedLearningComponent},
+  { path: '**', component: Error404Component}
 ];
 
 @NgModule({
