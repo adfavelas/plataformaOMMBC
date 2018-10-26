@@ -123,7 +123,7 @@ exports.loginUser = (req,res) => {
                 }
                 const token = jwt.sign(
                     { email: fetchedUser.email, userId: fetchedUser._id },
-                    "OMMBC SECRET KEY",
+                    process.env.JWTSECRET,
                     { expiresIn: "3h" }
                 );
                 res.status(200).json({
