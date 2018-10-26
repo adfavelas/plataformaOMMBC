@@ -110,15 +110,19 @@ exports.loginUser = (req,res) => {
         .then(user => {
         if (!user) {
             return res.json({
-            message: "Usuario no existe "
+                message: "Usuario no existe "
             });
-        } else{
+        } 
+        else if (user.status !== "active"){
+            return res.json({message: "No se ha verificado su correo porfavor revise su bandeja de correo"});
+        }
+        else{
             fetchedUser = user;
             bcrypt.compare(req.body.password,user.password, (err, result) => {
             if(err) console.log(err);
                 if (!result) {
                     return res.json({
-                    message: "Contraseña Invalida"
+                        message: "Usuario o Contraseña Incorrecto"
                     });
                 }
                 const token = jwt.sign(
@@ -138,27 +142,49 @@ exports.loginUser = (req,res) => {
 
 exports.verifyEmail = (token, res) => {
     const date = new Date();
-    const decoded = jwt.verify(token,process.env.JWTSECRET);
-    console.log(decoded);
-    User.findOne({email: decoded.email},(err, user)=>{
-        if(err) {
-            console.log(err);
-            res.redirect('http://localhost:4200/error');
-        }
-        else {
-            if(user.status === 'pending') {
-                user.status = 'active';
-                User.updateOne({email: decoded.email }, user).then(result => {
-                    res.redirect('http://localhost:4200/login');
-                }).catch(err => {
-                    if(err) {
-                        console.log(err);
-                        res.redirect('http://localhost:4200/error');
-                    }
-                })
+    jwt.verify(token,process.env.JWTSECRET, (err, decoded) => {
+        console.log(decoded);
+        User.findOne({email: decoded.email},(err, user)=>{
+            if(err) {
+                console.log(err);
+                res.redirect('http://localhost:4200/error');
             }
+            else {
+                if(user.status === 'pending') {
+                    user.status = 'active';
+                    User.updateOne({email: decoded.email }, user).then(result => {
+                        res.redirect('http://localhost:4200/login');
+                    }).catch(err => {
+                        if(err) {
+                            console.log(err);
+                            res.redirect('http://localhost:4200/error');
+                        }
+                    })
+                }
+            }
+        })    
+    });
+}
+
+
+exports.getProfile = (email,res) => {
+    let profile = {};
+    User.findOne({email: email}, (err,user) => {
+        if(err){ 
+            console.log(err); 
+            return res.json({errorCode:1, message:"Usuario no encontrado"});
         }
-    })
+        profile.email = user.email;
+        Student.findOne({email: email}, (err, student)=> {
+            if(err) { 
+                console.log(err); 
+                return res.json({errorCode:1, message:"Usuario no encontrado"});
+            }
+            profile.student = student;
+            return res.json({message: "success", user: profile});
+
+        })
+    });
 }
 
 // exports.getAllUsers = (req,res)=> {
