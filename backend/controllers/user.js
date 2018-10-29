@@ -51,7 +51,7 @@ sendVerificationEmail = (user, cb) => {
             // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
             // res.status(200).json({"msg": "mesage  has been sent"});
             //res.json({message: "Mensaje Enviado" , errorCode:0});
-            let message = "Success";
+            let message = "Tu registro se ha completado con éxito. Por favor revisa la bandeja de entrada del correo electrónico con el que te registraste para confirmar tu cuenta en nuestra plataforma\nOJO: No podrás acceder a la plataforma hasta que tu correo sea confirmado.";
             cb(message);
             // return message;
         }
@@ -89,7 +89,7 @@ exports.createUser = (req,res,next) => {
             student.save().then( response => {
                 console.log(response);
                 sendVerificationEmail(user, (message)=>{
-                    res.json({message});
+                    res.json({message, errorCode: 0});
                 });
                 // return res.json({successResponse});
             }).catch( err => {
@@ -102,8 +102,11 @@ exports.createUser = (req,res,next) => {
                 }
             });
         }).catch( err => {
-            console.log(err);
-            return res.json({message: "El correo electrónico que estás registrando ya se encuentra en uso.", errorCode: 1});
+            console.log(err.email);
+            // if(err.email) {
+            return res.json({message: "El correo electrónico que estas registrando ya se encuentra en uso", errorCode: 1});
+            // }
+            // return res.json({message: "Ha ocurrido un error porfavor intente mas tarde.", errorCode: 1});
         })
     });
 }

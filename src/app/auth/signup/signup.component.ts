@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit {
 
     // TO DO : implement messagesx
     birthDate: String;
-    respuesta: String;
+    serverResponse: String;
     form: FormGroup;
     uploading = false;
     constructor(private authService: AuthService, private router: Router) {
@@ -145,18 +145,19 @@ export class SignupComponent implements OnInit {
     if ( this.form.valid && this.verifyFields() ) {
         const authData = this.buildUserObject();
         this.authService.createUser(authData).subscribe( res => {
+            this.serverResponse = res.message;
             console.log(res);
-            if ( res.message === 'Success' ) {
-                modalInstance.open();
-                this.respuesta = res.message;
+            if ( res.errorCode === 0 ) {
                 this.uploading = false;
+                modalInstance.open();
                 $('.modal-close').on('click', function() {
-                    this.navigateToLogin();
+                    // No Funciono
                 });
             } else {
-                alert(res.message);
                 this.form.reset();
+                this.birthDate = '';
                 this.uploading = false;
+                modalInstance.open();
             }
         }, err => {
             console.log(err);
