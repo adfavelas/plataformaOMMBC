@@ -8,7 +8,7 @@ exports.createUser = (req,res,next) => {
         
         if (err){  
             console.log(err);
-            return res.json({message: "Usuario Ya existente", errorCode:1});
+            return res.json({message: "El correo electrónico que estás registrando ya se encuentra en uso.", errorCode:1});
         }
         const user = new User({
           email: req.body.email,
@@ -35,13 +35,13 @@ exports.createUser = (req,res,next) => {
                 return res.json({message: "success", errorCode: 0});
             }).catch( err => {
                 User.deleteOne({_id: result._id},function() {
-                    return res.json({message: "Usuario ya existente", errorCode: 1});
+                    return res.json({message: "El correo electrónico que estás registrando ya se encuentra en uso.", errorCode: 1});
                 });
                 if (err) console.log('catch student');
             });
         }).catch( err => {
             console.log(err);
-            return res.json({message: "Usuario ya existente", errorCode: 1});
+            return res.json({message: "El correo electrónico que estás registrando ya se encuentra en uso.", errorCode: 1});
         })
     });
 }
@@ -52,7 +52,7 @@ exports.loginUser = (req,res) => {
         .then(user => {
         if (!user) {
             return res.json({
-            message: "Usuario no existe "
+            message: "Usuario y/o contraseña incorrectos."
             });
         } else{
             fetchedUser = user;
@@ -60,7 +60,7 @@ exports.loginUser = (req,res) => {
             if(err) console.log(err);
                 if (!result) {
                     return res.json({
-                    message: "Contraseña Invalida"
+                    message: "Usuario y/o contraseña incorrectos."
                     });
                 }
                 const token = jwt.sign(

@@ -22,7 +22,9 @@
         <div class="col s6">
             <h2 class="center-align title-text">INICIA SESIÓN</h2>
 
-            <p class="*ngIf=error != null">{{ error }}</p>
+            <div class="container login-error *ngIf=error != null container">
+                <p class="center-align">{{ error }}</p>
+            </div>
 
             <div class="row">
                 <form [formGroup]="form" class="col s8 offset-s2">
