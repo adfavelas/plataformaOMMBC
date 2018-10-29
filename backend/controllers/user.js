@@ -23,15 +23,18 @@ sendVerificationEmail = (user, cb) => {
     let mailOptions = {
         from: '', // sender address
         to: `${user.email}`, // list of receivers
-        subject: 'Verifica Tu Correo', // Subject line
-        text: 'Correo de Verificacion', // plain text body
+        subject: 'OMMBC | Verifica Tu Correo', // Subject line
+        text: 'Verificación de correo electrónico', // plain text body
         html: `<html>
-        <body>
-            <h1>Gracias por registrarte al entrenamiento digital de la OMMBC</h1>
-            <p>Para continuar con tu registro haz click al link que se encuentra aqui abajo</p>
-            <a href="${url}${token}">${url}${token}</a>
-        </body>
-    </html>`
+                    <style>
+                        h1, p { color: black; }
+                    </style>
+                    <body>
+                        <h1>¡Gracias por registrarte a la plataforma de entrenamiento digital de la OMMBC!</h1>
+                        <p>Para acceder al contenido de la plataforma visita el enlace que se encuentra debajo:</p>
+                        <a href="${url}${token}">Verificar Correo</a>
+                    </body>
+                </html>`
  // html body
     };
     transporter.sendMail(mailOptions, (error, info) => {
@@ -91,14 +94,8 @@ exports.createUser = (req,res,next) => {
                 });
                 // return res.json({successResponse});
             }).catch( err => {
-<<<<<<< HEAD
                 User.deleteOne({_id: result._id},function() {
                     return res.json({message: "El correo electrónico que estás registrando ya se encuentra en uso.", errorCode: 1});
-=======
-                console.log(err);
-                User.deleteOne({email: req.body.email},function() {
-                    return res.json({message: "Usuario ya existente", errorCode: 1});
->>>>>>> 8534dc75c326053c4ccb2a4c357f361d7badf45a
                 });
                 if (err) console.log('catch student');
             });
@@ -115,11 +112,7 @@ exports.loginUser = (req,res) => {
         .then(user => {
         if (!user) {
             return res.json({
-<<<<<<< HEAD
             message: "Usuario y/o contraseña incorrectos."
-=======
-                message: "Usuario no existe "
->>>>>>> 8534dc75c326053c4ccb2a4c357f361d7badf45a
             });
         } 
         else if (user.status !== "active"){
@@ -131,11 +124,7 @@ exports.loginUser = (req,res) => {
             if(err) console.log(err);
                 if (!result) {
                     return res.json({
-<<<<<<< HEAD
                     message: "Usuario y/o contraseña incorrectos."
-=======
-                        message: "Usuario o Contraseña Incorrecto"
->>>>>>> 8534dc75c326053c4ccb2a4c357f361d7badf45a
                     });
                 }
                 const token = jwt.sign(
