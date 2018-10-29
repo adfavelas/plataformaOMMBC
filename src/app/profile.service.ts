@@ -9,7 +9,7 @@ export class ProfileService {
 
 
     getUserObject(email: string) {
-        return this.http.get('http://localhost:8080/api/auth/user/' + email);
+        return this.http.get('http://localhost:8080/api/auth/profile/' + email);
     }
 
 }
