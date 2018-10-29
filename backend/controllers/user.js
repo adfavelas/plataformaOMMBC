@@ -96,7 +96,10 @@ exports.createUser = (req,res,next) => {
                 User.deleteOne({_id: result._id},function() {
                     return res.json({message: "El correo electrónico que estás registrando ya se encuentra en uso.", errorCode: 1});
                 });
-                if (err) console.log('catch student');
+                if (err) {
+                    console.log(err);
+                    console.log('catch student');
+                }
             });
         }).catch( err => {
             console.log(err);

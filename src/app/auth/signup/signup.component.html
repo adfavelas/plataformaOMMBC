@@ -20,7 +20,7 @@
             <div class="row">
                 <div id="pickerField" class="input-field col s6">
                     <label for="birthDate">Birth Date</label>
-                    <input id="birthDate" type="text" class="datepicker" (change)="setDate(birthDate)">
+                    <input id="birthDate" #birthDate type="text" class="datepicker" (change)="setDate(birthDate)">
                 </div>
                 <div class="input-field col s6">
                     <input id="email" type="email" formControlName="email" class="date" required>
@@ -88,7 +88,7 @@
         <!-- Modal Structure -->
         <div id="signUpModal" class="modal">
             <div class="modal-content">
-                <div class="*ngIf=!sent container center-align">
+                <div *ngIf="uploading" class="container center-align">
                     <h4>Cargando...</h4>
                     <div class="preloader-wrapper big active">
                         <div class="spinner-layer">
@@ -103,7 +103,7 @@
                     </div>
                     <p>Por favor espera un momento.</p>
                 </div>
-                <div class="*ngIf=sent">
+                <div *ngIf="!uploading" class="">
                     <h4>¡Casi Listo!</h4>
                     <p>{{respuesta}}</p>
                     <p>Tu registro se ha completado con éxito. Por favor revisa la bandeja de entrada del correo electrónico con el que te registraste para confirmar tu cuenta en nuestra plataforma.</p>

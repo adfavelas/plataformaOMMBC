@@ -18,6 +18,7 @@ export class SignupComponent implements OnInit {
     birthDate: String;
     respuesta: String;
     form: FormGroup;
+    uploading = false;
     constructor(private authService: AuthService, private router: Router) {
         if (this.authService.isUserLoggedIn()) {
           this.router.navigate(['home']);
@@ -132,10 +133,12 @@ export class SignupComponent implements OnInit {
     }
 
     setDate(birthDate: HTMLInputElement) {
+        // console.log(birthDate.value);
         this.birthDate = birthDate.value;
     }
 
   submit() {
+    this.uploading = true;
     const modalInstance = M.Modal.getInstance($('#signUpModal'));
     modalInstance.open();
     // Call Service for Post on Node
@@ -146,17 +149,20 @@ export class SignupComponent implements OnInit {
             if ( res.message === 'Success' ) {
                 modalInstance.open();
                 this.respuesta = res.message;
+                this.uploading = false;
                 $('.modal-close').on('click', function() {
-                    this.router.navigate(['login']);
+                    this.navigateToLogin();
                 });
             } else {
                 alert(res.message);
                 this.form.reset();
+                this.uploading = false;
             }
         }, err => {
             console.log(err);
         });
     } else {
+        this.uploading = false;
         return;
     }
   }
@@ -181,5 +187,9 @@ export class SignupComponent implements OnInit {
       password: this.form.get('password').value,
     };
     return body;
+  }
+
+  navigateToLogin() {
+    this.router.navigate(['login']);
   }
 }
