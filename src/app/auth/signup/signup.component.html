@@ -88,13 +88,30 @@
         <!-- Modal Structure -->
         <div id="signUpModal" class="modal">
             <div class="modal-content">
-                <h4>¡Casi Listo!</h4>
-                <p>{{respuesta}}</p>
-                <p>Tu registro se ha completado con éxito. Por favor revisa la bandeja de entrada del correo electrónico con el que te registraste para confirmar tu cuenta en nuestra plataforma.</p>
-                <p>OJO: No podrás acceder a la plataforma hasta que tu correo sea confirmado.</p>
+                <div class="*ngIf=!sent container center-align">
+                    <h4>Cargando...</h4>
+                    <div class="preloader-wrapper big active">
+                        <div class="spinner-layer">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div><div class="gap-patch">
+                                <div class="circle"></div>
+                            </div><div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Por favor espera un momento.</p>
+                </div>
+                <div class="*ngIf=sent">
+                    <h4>¡Casi Listo!</h4>
+                    <p>{{respuesta}}</p>
+                    <p>Tu registro se ha completado con éxito. Por favor revisa la bandeja de entrada del correo electrónico con el que te registraste para confirmar tu cuenta en nuestra plataforma.</p>
+                    <p>OJO: No podrás acceder a la plataforma hasta que tu correo sea confirmado.</p>
+                </div>
             </div>
             <div class="modal-footer">
-                <a class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                <a class="modal-close waves-effect btn-flat">Aceptar</a>
             </div>
         </div>
 

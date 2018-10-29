@@ -137,27 +137,28 @@ export class SignupComponent implements OnInit {
 
   submit() {
     const modalInstance = M.Modal.getInstance($('#signUpModal'));
-        // Call Service for Post on Node
-        if ( this.form.valid && this.verifyFields() ) {
-            const authData = this.buildUserObject();
-            this.authService.createUser(authData).subscribe( res => {
+    modalInstance.open();
+    // Call Service for Post on Node
+    if ( this.form.valid && this.verifyFields() ) {
+        const authData = this.buildUserObject();
+        this.authService.createUser(authData).subscribe( res => {
             console.log(res);
-                if ( res.message === 'Success' ) {
-                    modalInstance.open();
-                    this.respuesta = res.message;
-                    if (!modalInstance.isOpen) {
-                        this.router.navigate(['login']);
-                    }
-                } else {
-                    alert(res.message);
-                    this.form.reset();
-                }
-            }, err => {
-                console.log(err);
-            });
-        } else {
-            return;
-        }
+            if ( res.message === 'Success' ) {
+                modalInstance.open();
+                this.respuesta = res.message;
+                $('.modal-close').on('click', function() {
+                    this.router.navigate(['login']);
+                });
+            } else {
+                alert(res.message);
+                this.form.reset();
+            }
+        }, err => {
+            console.log(err);
+        });
+    } else {
+        return;
+    }
   }
 
   verifyFields() {
