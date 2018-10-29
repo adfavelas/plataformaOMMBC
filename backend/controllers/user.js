@@ -35,7 +35,7 @@ sendVerificationEmail = (user, cb) => {
                         <a href="${url}${token}">Verificar Correo</a>
                     </body>
                 </html>`
- // html body
+        // html body
     };
     transporter.sendMail(mailOptions, (error, info) => {
         console.log("SENDING");
@@ -84,8 +84,7 @@ exports.createUser = (req,res,next) => {
                 state: req.body.state,
                 city: req.body.city,
                 birthDate: req.body.birthDate,
-                email: req.body.email,
-                password: user.password
+                email: req.body.email
             });
             student.save().then( response => {
                 console.log(response);
@@ -184,7 +183,6 @@ exports.getProfile = (email,res) => {
             }
             profile.student = student;
             return res.json({message: "success", profile: profile});
-
         })
     });
 }

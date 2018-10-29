@@ -13,7 +13,6 @@ const studentSchema = mongoose.Schema({
         { idAnswer: mongoose.Schema.Types.ObjectId ,idProblem: mongoose.Schema.Types.ObjectId, status: String, score: Number }
     ],
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
     totalScore: {type: Number}
 });
 
