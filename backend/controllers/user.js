@@ -183,7 +183,7 @@ exports.getProfile = (email,res) => {
                 return res.json({errorCode:1, message:"Usuario no encontrado"});
             }
             profile.student = student;
-            return res.json({message: "success", user: profile});
+            return res.json({message: "success", profile: profile});
 
         })
     });
