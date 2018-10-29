@@ -18,9 +18,9 @@
             </div>
             
             <div class="row">
-                <div class="input-field col s6">
+                <div id="pickerField" class="input-field col s6">
                     <label for="birthDate">Birth Date</label>
-                    <input id="birthDate" type="text" #birthDate class="datepicker" (change)="setDate(birthDate)">
+                    <input id="birthDate" type="text" class="datepicker" (change)="setDate(birthDate)">
                 </div>
                 <div class="input-field col s6">
                     <input id="email" type="email" formControlName="email" class="date" required>
