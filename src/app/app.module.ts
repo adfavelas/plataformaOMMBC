@@ -17,6 +17,7 @@ import { GuidedLearningComponent } from './guided-learning/guided-learning.compo
 import { Error404Component } from './error404/error404.component';
 import { SettingsComponent } from './settings/settings.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
     GuidedLearningComponent,
     Error404Component,
     SettingsComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
