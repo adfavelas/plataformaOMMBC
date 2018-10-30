@@ -13,6 +13,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'updateProfile', component: UpdateProfileComponent},
   { path: 'notifications', component: NotificationsComponent},
   { path: 'restorePassword', component: RestorePasswordComponent},
+  { path: 'updatePassword', component: UpdatePasswordComponent},
   { path: '**', component: Error404Component}
 ];
 
