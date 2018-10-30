@@ -15,6 +15,7 @@ import { FaqComponent } from './faq/faq.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GuidedLearningComponent } from './guided-learning/guided-learning.component';
 import { Error404Component } from './error404/error404.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { Error404Component } from './error404/error404.component';
     FaqComponent,
     ProfileComponent,
     GuidedLearningComponent,
-    Error404Component
+    Error404Component,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

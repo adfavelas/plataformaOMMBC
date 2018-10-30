@@ -9,6 +9,7 @@ import { FaqComponent } from './faq/faq.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GuidedLearningComponent } from './guided-learning/guided-learning.component';
 import { Error404Component } from './error404/error404.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'faq', component: FaqComponent},
   { path: 'profile', component: ProfileComponent},
   { path: 'guidedLearning', component: GuidedLearningComponent},
+  { path: 'settings', component: SettingsComponent},
   { path: '**', component: Error404Component}
 ];
 
