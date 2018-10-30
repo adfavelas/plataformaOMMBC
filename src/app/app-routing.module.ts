@@ -12,6 +12,7 @@ import { Error404Component } from './error404/error404.component';
 import { SettingsComponent } from './settings/settings.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { RestorePasswordComponent } from './restore-password/restore-password.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent},
   { path: 'updateProfile', component: UpdateProfileComponent},
   { path: 'notifications', component: NotificationsComponent},
+  { path: 'restorePassword', component: RestorePasswordComponent},
   { path: '**', component: Error404Component}
 ];
 

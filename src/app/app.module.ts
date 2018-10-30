@@ -18,6 +18,7 @@ import { Error404Component } from './error404/error404.component';
 import { SettingsComponent } from './settings/settings.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { RestorePasswordComponent } from './restore-password/restore-password.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
     Error404Component,
     SettingsComponent,
     UpdateProfileComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    RestorePasswordComponent
   ],
   imports: [
     BrowserModule,
