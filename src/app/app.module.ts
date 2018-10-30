@@ -19,6 +19,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { RestorePasswordComponent } from './restore-password/restore-password.co
     SettingsComponent,
     UpdateProfileComponent,
     NotificationsComponent,
-    RestorePasswordComponent
+    RestorePasswordComponent,
+    UpdatePasswordComponent
   ],
   imports: [
     BrowserModule,
