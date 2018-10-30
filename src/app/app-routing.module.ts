@@ -10,6 +10,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { GuidedLearningComponent } from './guided-learning/guided-learning.component';
 import { Error404Component } from './error404/error404.component';
 import { SettingsComponent } from './settings/settings.component';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'guidedLearning', component: GuidedLearningComponent},
   { path: 'settings', component: SettingsComponent},
+  { path: 'updateProfile', component: UpdateProfileComponent},
   { path: '**', component: Error404Component}
 ];
 

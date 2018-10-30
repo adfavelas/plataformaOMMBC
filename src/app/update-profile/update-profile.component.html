@@ -1,0 +1,103 @@
+<div class="container">
+    <h1 class="center-align title-text">Actualiza tu Información</h1>
+    
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s3"><a class="active" href="#account">Cuenta</a></li>
+                <li class="tab col s3"><a href="#profile">Perfil</a></li>
+                <li class="tab col s3"><a href="#school">Escuela </a></li>
+                <li class="tab col s3"><a href="#password">Cambiar Contraseña</a></li>
+            </ul>
+        </div>
+        
+        <div id="account" class="container">
+            <div class="row center-align">
+                <div class="input-field col s12">
+                    <input id="email" type="email" formControlName="email" class="date" required>
+                    <label for="email">Correo electrónico</label>
+                    <span class="helper-text" data-error="Ingresa un correo electrónico válido."></span>
+                </div>
+            </div>
+
+            <div class="row center-align">
+                <button class="waves-effect waves-light btn-large">Actualizar</button>
+            </div>
+        </div>
+
+        <div id="profile" class="container">
+            <div class="row">
+                <div class="input-field col s4">
+                    <input id="firstName" formControlName="name" type="text" class="validate" required>
+                    <label for="firstName">Nombre</label>
+                    <span class="helper-text" data-error="Ingresa tu nombre."></span>
+                </div>
+                <div class="input-field col s4">
+                    <input id="lastName" formControlName="lastName" type="text" class="validate" required>
+                    <label for="lastName">Apellidos</label>
+                    <span class="helper-text" data-error="Ingresa al menos un apellido."></span>
+                </div>
+                <div id="pickerField" class="input-field col s4">
+                    <label for="birthDate">Birth Date</label>
+                    <input id="birthDate" #birthDate type="text" class="datepicker" (change)="setDate(birthDate)">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <label>Ciudad</label>
+                    <select id="city" formControlName="city" required>
+                        <option value="" disabled selected>Ciudad</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <span class="helper-text" data-error="Selecciona una ciudad."></span>
+                </div>
+                <div class="col s6">
+                    <label>Estado</label>
+                    <select id="state" formControlName="state" required>
+                        <option value="" disabled selected>Estado</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <span class="helper-text" data-error="Selecciona un estado."></span>
+                </div>
+            </div>
+            <div class="row center-align">
+                <button class="waves-effect waves-light btn-large">Actualizar</button>
+            </div>
+        </div>
+
+        <div id="school" class="container">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="schoolName" type="text" class="validate" formControlName="schoolName" required>
+                    <label for="schoolName">Nombre de tu Escuela</label>
+                    <span class="helper-text" data-error="Ingresa el nombre de tu escuela."></span>
+                </div>
+            </div>
+            <div class="row center-align">
+                <button class="waves-effect waves-light btn-large">Actualizar</button>
+            </div>
+        </div>
+
+        <div id="password" class="container">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="password" type="password" class="validate" formControlName="password" required>
+                    <label for="password">Contraseña Nueva</label>
+                    <span class="helper-text" data-error="Ingresa una contraseña."></span>
+                </div>
+                <div class="input-field col s6">
+                    <input id="confirm_password" type="password" class="validate" formControlName="confirm_password" required>
+                    <label for="confirm_password">Confirmar contraseña</label>
+                    <span class="helper-text" data-error="Ingresa una contraseña."></span>
+                </div>
+            </div>
+            <div class="row center-align">
+                <button class="waves-effect waves-light btn-large">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>

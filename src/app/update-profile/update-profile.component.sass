@@ -1,0 +1,27 @@
+@import "~src/sass/main"
+
+.tabs 
+    .tab 
+        a
+            color: $secondary-color
+        a.active
+            color: $primary-color-light
+            background-color: rgba($secondary-color,0.1)
+            
+
+.input-field label 
+    @extend %label-style
+
+.input-field input[type=text],
+.input-field input[type=email],
+.input-field input[type=password] 
+    @extend %input-style
+
+.btn-large 
+    @extend %button-style
+
+.title-text 
+    @extend %title-style
+
+label 
+    @extend %label-style

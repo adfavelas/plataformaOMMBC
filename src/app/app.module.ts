@@ -16,6 +16,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { GuidedLearningComponent } from './guided-learning/guided-learning.component';
 import { Error404Component } from './error404/error404.component';
 import { SettingsComponent } from './settings/settings.component';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { SettingsComponent } from './settings/settings.component';
     ProfileComponent,
     GuidedLearningComponent,
     Error404Component,
-    SettingsComponent
+    SettingsComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,
