@@ -8,13 +8,13 @@ import { ProfileService } from '../profile.service';
   styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
-  profile;
+  student;
   constructor(private profileService: ProfileService ) { }
 
   ngOnInit() {
     this.profileService.getUserObject(sessionStorage.getItem('email')).subscribe(res => {
-        this.profile = res.profile;
-        console.log(this.profile);
+        this.student = res.student;
+        console.log(this.student);
     });
   }
 

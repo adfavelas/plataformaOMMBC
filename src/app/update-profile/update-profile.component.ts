@@ -15,7 +15,7 @@ export class UpdateProfileComponent implements OnInit {
 
     ngOnInit() {
         this.profileService.getUserObject(sessionStorage.getItem('email')).subscribe(res => {
-            this.profile = res.profile;
+            this.profile = res.student;
             console.log(this.profile);
         });
 
