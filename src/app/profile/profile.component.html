@@ -4,12 +4,13 @@
             <ul class="collection with-header">
                 <li class="collection-header center-align">
                     <div class="row">
-                        <a href=""><i class="left material-icons">edit</i></a>
-                        <a href=""><i class="right material-icons">settings</i></a>
+                        <img src="/src/assets/img/userDefault.png" alt="" class="circle"/> 
                     </div>
-                    <img src="/src/assets/img/userDefault.png" alt="" class="circle"/> <br>
-                    {{ profile.student.name }} <br>
-                    {{ profile.student.lastName }}
+
+                    <div class="row">
+                        {{ profile.student.name }} <br>
+                        {{ profile.student.lastName }}
+                    </div>
                 </li>
                 <li class="collection-item"><strong>Ranking:</strong> 1</li>
                 <li class="collection-item"><strong>Problemas Resueltos:</strong> 0</li>
