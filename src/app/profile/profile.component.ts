@@ -13,8 +13,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.profileService.getUserObject(sessionStorage.getItem('email')).subscribe(res => {
-      this.profile = res.profile;
-      console.log(this.profile);
+        this.profile = res.profile;
+        console.log(this.profile);
     });
   }
 
