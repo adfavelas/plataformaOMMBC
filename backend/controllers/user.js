@@ -84,7 +84,8 @@ exports.createUser = (req,res,next) => {
                 state: req.body.state,
                 city: req.body.city,
                 birthDate: req.body.birthDate,
-                email: req.body.email
+                email: req.body.email,
+                totalScore: 0
             });
             student.save().then( response => {
                 console.log(response);
@@ -175,24 +176,38 @@ exports.verifyEmail = (token, res) => {
 
 
 exports.getProfile = (email,res) => {
-    let profile = {};
-    User.findOne({email: email}, (err,user) => {
-        if(err){ 
+    Student.findOne({email: email}, (err, student)=> {
+        if(err) { 
             console.log(err); 
             return res.json({errorCode:1, message:"Usuario no encontrado"});
         }
-        profile.email = user.email;
-        Student.findOne({email: email}, (err, student)=> {
-            if(err) { 
-                console.log(err); 
-                return res.json({errorCode:1, message:"Usuario no encontrado"});
-            }
-            profile.student = student;
-            return res.json({message: "success", profile: profile});
-        })
+        return res.json({message: "success", student: student});
     });
 }
 
+
+exports.updateStudent = (req,res) => {
+    const student = new Student({
+        name: req.body.name,
+        lastName: req.body.lastName,
+        // age: req.body.age,
+        schoolName: req.body.schoolName,
+        state: req.body.state,
+        city: req.body.city,
+        birthDate: req.body.birthDate,
+        email: req.body.email
+    });
+    Student.updateOne({email: req.body.email}, student, (err, result)=>{
+        if(err) {
+            console.log(err);
+            return res.json({message: "Ha ocurrido un error intente mas tarde", errorCode: 1});
+        }
+        else {
+            console.log(result);
+            return res.json({message: "Sus datos han sido actualizados", errorCode: 0});
+        }
+    });
+}
 // exports.getAllUsers = (req,res)=> {
 //     let fetchedUser = {}
 //     User.findOne({email: req.params.email}, (err, result) => {
