@@ -25,6 +25,7 @@ router.get('/profile/:email', (req,res,next)=> {
 });
 
 router.put('/update', (req,res,next)=>{
+    console.log('Updating user...');
     userFunctions.updateStudent(req,res);
 });
 

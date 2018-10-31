@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 declare var $: any;
 declare var M: any;
@@ -11,13 +12,28 @@ declare var M: any;
 })
 export class UpdateProfileComponent implements OnInit {
     profile;
+    birthDate: String;
+    form: FormGroup;
+
+    student = {
+        name: 'Jose',
+        lastName: 'Rodriguez',
+        schoolName: 'CETYS Universidad',
+        state: 'Durango',
+        city: 'Tijuana',
+        birthDate: '20/10/2000',
+        email: sessionStorage.getItem('email')
+    };
     constructor(private profileService: ProfileService ) { }
 
     ngOnInit() {
+        this.initForm();
+
         this.profileService.getUserObject(sessionStorage.getItem('email')).subscribe(res => {
             this.profile = res.student;
             console.log(this.profile);
         });
+
         $(document).ready(function() {
             const primaryColorLight = '#0767A4';
             const secondaryColor = '#0693BE';
@@ -96,4 +112,52 @@ export class UpdateProfileComponent implements OnInit {
         });
     }
 
+    initForm() {
+        this.form = new FormGroup({
+            name: new FormControl(null, {
+                validators: [Validators.required]
+            }),
+            lastName: new FormControl(null, {
+                validators: [Validators.required]
+            }),
+            city: new FormControl(null , {
+                validators: [Validators.required]
+            }),
+            state: new FormControl(null , {
+                validators: [Validators.required]
+            }),
+            schoolName: new FormControl(null , {
+                validators: [Validators.required]
+            })
+        });
+    }
+
+    setDate(birthDate: HTMLInputElement) {
+        this.birthDate = birthDate.value;
+    }
+
+    submit() {
+        // Call Service for Post on Node
+        if (this.form.valid) {
+            const updatedStudent = this.buildUserObject();
+
+            this.profileService.updateStudent(updatedStudent).subscribe(res => {
+                console.log(res);
+            });
+        } else {
+            return;
+        }
+    }
+
+    buildUserObject() {
+        const body = {
+            name : this.form.get('name').value,
+            lastName: this.form.get('lastName').value,
+            birthDate: this.birthDate,
+            city: this.form.get('city').value,
+            state: this.form.get('state').value,
+            schoolName: this.form.get('schoolName').value
+        };
+        return body;
+    }
 }

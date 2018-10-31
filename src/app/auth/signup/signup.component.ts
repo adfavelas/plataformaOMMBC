@@ -137,60 +137,60 @@ export class SignupComponent implements OnInit {
         this.birthDate = birthDate.value;
     }
 
-  submit() {
-    this.uploading = true;
-    const modalInstance = M.Modal.getInstance($('#signUpModal'));
-    modalInstance.open();
-    // Call Service for Post on Node
-    if ( this.form.valid && this.verifyFields() ) {
-        const authData = this.buildUserObject();
-        this.authService.createUser(authData).subscribe( res => {
-            this.serverResponse = res.message;
-            console.log(res);
-            if ( res.errorCode === 0 ) {
-                this.uploading = false;
-                modalInstance.open();
-                $('.modal-close').on('click', function() {
-                    // No Funciono
-                });
-            } else {
-                this.form.reset();
-                this.birthDate = '';
-                this.uploading = false;
-                modalInstance.open();
-            }
-        }, err => {
-            console.log(err);
-        });
-    } else {
-        this.uploading = false;
-        return;
+    submit() {
+        this.uploading = true;
+        const modalInstance = M.Modal.getInstance($('#signUpModal'));
+        modalInstance.open();
+        // Call Service for Post on Node
+        if ( this.form.valid && this.verifyFields() ) {
+            const authData = this.buildUserObject();
+            this.authService.createUser(authData).subscribe( res => {
+                this.serverResponse = res.message;
+                console.log(res);
+                if ( res.errorCode === 0 ) {
+                    this.uploading = false;
+                    modalInstance.open();
+                    $('.modal-close').on('click', function() {
+                        // No Funciono
+                    });
+                } else {
+                    this.form.reset();
+                    this.birthDate = '';
+                    this.uploading = false;
+                    modalInstance.open();
+                }
+            }, err => {
+                console.log(err);
+            });
+        } else {
+            this.uploading = false;
+            return;
+        }
     }
-  }
 
-  verifyFields() {
-    if (this.form.get('password').value !== this.form.get('confirm_password').value ) {
-      return false;
-    } else {
-      return true;
+    verifyFields() {
+        if (this.form.get('password').value !== this.form.get('confirm_password').value ) {
+        return false;
+        } else {
+        return true;
+        }
     }
-  }
 
-  buildUserObject() {
-    const body = {
-      name : this.form.get('name').value,
-      lastName: this.form.get('lastName').value,
-      birthDate: this.birthDate,
-      email: this.form.get('email').value,
-      city: this.form.get('city').value,
-      state: this.form.get('state').value,
-      schoolName: this.form.get('schoolName').value,
-      password: this.form.get('password').value,
-    };
-    return body;
-  }
+    buildUserObject() {
+        const body = {
+        name : this.form.get('name').value,
+        lastName: this.form.get('lastName').value,
+        birthDate: this.birthDate,
+        email: this.form.get('email').value,
+        city: this.form.get('city').value,
+        state: this.form.get('state').value,
+        schoolName: this.form.get('schoolName').value,
+        password: this.form.get('password').value,
+        };
+        return body;
+    }
 
-  navigateToLogin() {
-    this.router.navigate(['login']);
-  }
+    navigateToLogin() {
+        this.router.navigate(['login']);
+    }
 }

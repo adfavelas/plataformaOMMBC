@@ -194,8 +194,7 @@ exports.updateStudent = (req,res) => {
         schoolName: req.body.schoolName,
         state: req.body.state,
         city: req.body.city,
-        birthDate: req.body.birthDate,
-        email: req.body.email
+        birthDate: req.body.birthDate
     });
     Student.updateOne({email: req.body.email}, student, (err, result)=>{
         if(err) {

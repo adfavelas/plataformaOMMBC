@@ -12,4 +12,8 @@ export class ProfileService {
         return this.http.get<{student: Object}>('http://localhost:8080/api/auth/profile/' + email);
     }
 
+    updateStudent(body: Object) {
+        return this.http.put<{message: String, errorCode: Number}>('http://localhost:8080/api/auth/update', body);
+    }
+
 }
