@@ -16,14 +16,14 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    $(document).ready(function() {
-        $('.dropdown-trigger').dropdown();
-    });
 
     this.isLoggedIn = this.authService.isUserLoggedIn();
     this.authService.isAuth$.subscribe( res => {
       if ( res ) {
         this.isLoggedIn = true;
+        $(document).ready(function() {
+          $('.dropdown-trigger').dropdown();
+      });
       } else {
         this.isLoggedIn = false;
       }

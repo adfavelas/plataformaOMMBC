@@ -8,14 +8,14 @@
                     </div>
 
                     <div class="row">
-                        {{ profile.student.name }} <br>
-                        {{ profile.student.lastName }}
+                        {{ student?.name }} <br>
+                        {{ student?.lastName }}
                     </div>
                 </li>
                 <li class="collection-item"><strong>Ranking:</strong> 1</li>
                 <li class="collection-item"><strong>Problemas Resueltos:</strong> 0</li>
                 <li class="collection-item"><strong>Problemas Correctos:</strong> 0</li>
-                <li class="collection-item"><strong>Puntos:</strong> {{ profile.student.totalScore }}</li>
+                <li class="collection-item"><strong>Puntos:</strong> {{ student?.totalScore }}</li>
             </ul>
         </div>
         <div class="col s7 offset-s1">

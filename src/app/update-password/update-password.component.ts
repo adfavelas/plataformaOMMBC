@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-password',
@@ -8,7 +9,7 @@ import { ProfileService } from '../profile.service';
 })
 export class UpdatePasswordComponent implements OnInit {
 
-    constructor(private profileService: ProfileService) { }
+    constructor(private profileService: ProfileService, private router: Router) { }
 
     ngOnInit() {
     }
@@ -21,6 +22,9 @@ export class UpdatePasswordComponent implements OnInit {
             };
             this.profileService.updatePassword(body).subscribe(res => {
                 console.log(res);
+                if (res.errorCode === 0 ) {
+                    this.router.navigate(['home']);
+                }
             });
         }
 
