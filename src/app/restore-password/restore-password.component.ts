@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./restore-password.component.sass']
 })
 export class RestorePasswordComponent implements OnInit {
-
+  email: string;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  setEmail() {
+    console.log('email.value');
+    // this.email = email;
   }
 
 }
