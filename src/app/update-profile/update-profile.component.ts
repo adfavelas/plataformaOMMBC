@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 declare var $: any;
 declare var M: any;
@@ -24,13 +25,16 @@ export class UpdateProfileComponent implements OnInit {
         birthDate: '20/10/2000',
         email: sessionStorage.getItem('email')
     };
-    constructor(private profileService: ProfileService ) {
+    constructor(private profileService: ProfileService, private router: Router) {
         this.initForm();
     }
 
     ngOnInit() {
 
         this.profileService.getUserObject(sessionStorage.getItem('email')).subscribe(res => {
+            if (res.errorCode ===  3) {
+                this.router.navigate(['login']);
+            }
             this.profile = res.student;
             console.log(this.profile);
             this.fillForm(res.student);
@@ -161,6 +165,10 @@ export class UpdateProfileComponent implements OnInit {
             const updatedStudent = this.buildUserObject();
 
             this.profileService.updateStudent(updatedStudent).subscribe(res => {
+                if ( res.errorCode === 3) {
+                    console.log(res);
+                    this.router.navigate(['login']);
+                }
                 console.log(res);
             });
         } else {

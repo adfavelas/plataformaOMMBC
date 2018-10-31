@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Injectable({providedIn: 'root'})
@@ -8,6 +9,7 @@ export class AuthService {
     token;
     isAuth = new BehaviorSubject(sessionStorage.getItem('token'));
     isAuth$ = this.isAuth.asObservable();
+    jwtHelper = new JwtHelperService();
     constructor(private http: HttpClient ) {}
 
     createUser(body: any) {
@@ -27,8 +29,15 @@ export class AuthService {
     }
 
     isUserLoggedIn() {
-        if (sessionStorage.getItem('token')) {
-            return true;
+        const token  = sessionStorage.getItem('token');
+        if (token) {
+            const isExpired = this.jwtHelper.isTokenExpired(token);
+            console.log(isExpired);
+            if (!isExpired) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }

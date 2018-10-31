@@ -7,23 +7,23 @@ module.exports = (req,res,next) => {
     if (token){
         jwt.verify(token, process.env.JWTSECRET, (err, decoded)=>{
             if(err){
-                return res.json({erroCode:1 , message: "Token expired"});
+                return res.json({errorCode:3 , message: "Token expired"});
             }
             else {
                 console.log(decoded);
                 User.findOne({email: decoded.email}, (errorUser, user)=> {
                     if(errorUser) {
                         console.log(err);
-                        return res.json({erroCode:1 , message: "usuario no valido"})
+                        return res.json({errorCode:1 , message: "usuario no valido"})
                     } 
                     else {
-                        next()
+                        next();
                     }
                 })
             }
         });   
     }
     else {
-        res.json({erroCode: 1, message: "No se encontro token"});
+        res.json({errorCode: 3, message: "No se encontro token"});
     }
 }

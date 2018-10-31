@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-update-password',
@@ -9,9 +10,12 @@ import { Router } from '@angular/router';
 })
 export class UpdatePasswordComponent implements OnInit {
 
-    constructor(private profileService: ProfileService, private router: Router) { }
+    constructor(private profileService: ProfileService, private router: Router, private authService: AuthService) {}
 
     ngOnInit() {
+        if (!this.authService.isUserLoggedIn()) {
+            this.router.navigate(['login']);
+        }
     }
 
     updatePassword(password: HTMLInputElement, confirmPassword: HTMLInputElement) {

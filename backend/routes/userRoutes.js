@@ -25,13 +25,12 @@ router.get('/profile/:email', checkToken ,(req,res,next)=> {
     userFunctions.getProfile(email, res);
 });
 
-router.put('/update', (req,res,next)=>{
+router.put('/update', checkToken,(req,res,next)=>{
     console.log(req.body);
     userFunctions.updateStudent(req,res);
 });
 
-router.put('/changePassword', (req,res,next)=>{
-    console.log('holis');
+router.put('/changePassword', checkToken,(req,res,next)=>{
     userFunctions.changePassword(req,res);
 });
 // router.get('/user/:email', (req,res,next) => {

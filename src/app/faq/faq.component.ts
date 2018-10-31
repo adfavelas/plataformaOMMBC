@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -9,9 +11,12 @@ declare var $: any;
 })
 export class FaqComponent implements OnInit {
 
-    constructor() { }
+    constructor(private authService: AuthService, private router: Router) { }
 
     ngOnInit() {
+        if (!this.authService.isUserLoggedIn()) {
+            this.router.navigate(['login']);
+        }
         $(document).ready(function() {
             $('.collapsible').collapsible();
         });
