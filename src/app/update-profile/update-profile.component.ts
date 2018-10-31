@@ -18,7 +18,6 @@ export class UpdateProfileComponent implements OnInit {
             this.profile = res.student;
             console.log(this.profile);
         });
-
         $(document).ready(function() {
             const primaryColorLight = '#0767A4';
             const secondaryColor = '#0693BE';
@@ -87,10 +86,11 @@ export class UpdateProfileComponent implements OnInit {
                 }
             };
             $('.datepicker').datepicker(datePickerOptions);
-            $('select').formSelect({ classes: 'holis'});
+            $('select').formSelect();
             $('.modal').modal();
             $('.tabs').tabs();
 
+            $('label').addClass('active');
             $('.tabs .indicator').css('background-color', primaryColorLight);
             $('.dropdown-content li:not(.disabled) > a, .dropdown-content li:not(.disabled) > span').css('color', secondaryColor);
         });
