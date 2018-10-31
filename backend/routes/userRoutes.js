@@ -30,6 +30,7 @@ router.put('/update', (req,res,next)=>{
 });
 
 router.put('/changePassword', (req,res,next)=>{
+    console.log('holis');
     userFunctions.changePassword(req,res);
 });
 // router.get('/user/:email', (req,res,next) => {

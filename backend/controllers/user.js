@@ -239,6 +239,7 @@ exports.changePassword = (req,res)=> {
                     return res.json({message: "Ha ocurrido un error porfavor intente mas tarde", errorCode:1});
                 }
                 else {
+                    console.log(hash);
                     user.password = hash;
                     User.updateOne({email: user.email}, user, (err, response)=>{
                         if(err){

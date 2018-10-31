@@ -16,4 +16,8 @@ export class ProfileService {
         return this.http.put<{message: String, errorCode: Number}>('http://localhost:8080/api/auth/update', body);
     }
 
+    updatePassword(body: Object) {
+        return this.http.put<{message: String, errorCode: Number}>('http://localhost:8080/api/auth/changePassword', body);
+    }
+
 }
