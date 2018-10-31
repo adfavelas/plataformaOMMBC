@@ -34,6 +34,10 @@ export class AuthService {
         }
     }
 
+    getToken() {
+        return sessionStorage.getItem('token');
+    }
+
     logout() {
         sessionStorage.removeItem('token');
         this.isAuth.next(this.token);

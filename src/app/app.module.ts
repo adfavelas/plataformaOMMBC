@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
 import { NotificationsComponent } from './notifications/notifications.component';
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
+import { TokenInterceptor } from './token-interceptor';
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

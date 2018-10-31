@@ -2,6 +2,7 @@ const express           = require('express');
 const User              = require('../models/User');
 const Student           = require('../models/Student');
 const userFunctions     = require('../controllers/user');
+const checkToken        = require('../middleware/checkToken');
 const router = express.Router();
 
 router.post('/signup', (req,res,next) => {
@@ -17,7 +18,7 @@ router.get('/verifyEmail/:token', (req,res,next)=> {
     userFunctions.verifyEmail(token, res);
 });
 
-router.get('/profile/:email', (req,res,next)=> {
+router.get('/profile/:email', checkToken ,(req,res,next)=> {
     // console.log(req.params);
     const email = req.params.email;
     // console.log(email);
