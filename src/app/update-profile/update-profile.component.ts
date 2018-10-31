@@ -24,14 +24,16 @@ export class UpdateProfileComponent implements OnInit {
         birthDate: '20/10/2000',
         email: sessionStorage.getItem('email')
     };
-    constructor(private profileService: ProfileService ) { }
+    constructor(private profileService: ProfileService ) {
+        this.initForm();
+    }
 
     ngOnInit() {
-        this.initForm();
 
         this.profileService.getUserObject(sessionStorage.getItem('email')).subscribe(res => {
             this.profile = res.student;
             console.log(this.profile);
+            this.fillForm(res.student);
         });
 
         $(document).ready(function() {
@@ -115,7 +117,7 @@ export class UpdateProfileComponent implements OnInit {
     initForm() {
         this.form = new FormGroup({
             name: new FormControl(null, {
-                validators: [Validators.required]
+                validators: [Validators.required],
             }),
             lastName: new FormControl(null, {
                 validators: [Validators.required]
@@ -132,6 +134,23 @@ export class UpdateProfileComponent implements OnInit {
         });
     }
 
+    fillForm(profile) {
+        this.form.patchValue({name: profile.name});
+        this.form.get('name').updateValueAndValidity();
+
+        this.form.patchValue({lastName: profile.lastName});
+        this.form.get('lastName').updateValueAndValidity();
+
+        this.form.patchValue({city: profile.city});
+        this.form.get('city').updateValueAndValidity();
+
+        this.form.patchValue({state: profile.state});
+        this.form.get('state').updateValueAndValidity();
+
+        this.form.patchValue({schoolName: profile.schoolName});
+        this.form.get('schoolName').updateValueAndValidity();
+    }
+
     setDate(birthDate: HTMLInputElement) {
         this.birthDate = birthDate.value;
     }
@@ -145,6 +164,7 @@ export class UpdateProfileComponent implements OnInit {
                 console.log(res);
             });
         } else {
+            console.log(this.form);
             return;
         }
     }
