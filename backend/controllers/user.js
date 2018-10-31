@@ -208,6 +208,37 @@ exports.updateStudent = (req,res) => {
         }
     });
 }
+
+exports.changePassword = (req,res)=> {
+    const email = req.body.email;
+    const newPassword = req.body.password;
+    User.findOne({email: email}, (err, result)=> {
+        if(err){
+            console.log(err);
+            res.json({message: "No se ha podido encontrar al usuario", errorCode: 1});
+        }
+        else {
+            let user = result;
+            bcrypt.hash(newPassword, bcrypt.genSaltSync(10), null , (errHash, hash)=> {
+                if(errHash) {
+                    return res.json({message: "Ha ocurrido un error porfavor intente mas tarde", errorCode:1});
+                }
+                else {
+                    user.password = hash;
+                    User.updateOne({email: user.email}, user, (err, response)=>{
+                        if(err){
+                            return res.json({message: "No se han podido actualizar los campos intente mas tarde", errorCode: 1});
+                        }
+                        else {
+                            return res.json({message: "Usuario actualizado correctamente", errorCode: 0});
+                        }
+                    });
+                } 
+            });
+        }
+
+    })
+}
 // exports.getAllUsers = (req,res)=> {
 //     let fetchedUser = {}
 //     User.findOne({email: req.params.email}, (err, result) => {
