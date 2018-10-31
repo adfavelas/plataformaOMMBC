@@ -20,12 +20,12 @@ router.get('/verifyEmail/:token', (req,res,next)=> {
 router.get('/profile/:email', (req,res,next)=> {
     // console.log(req.params);
     const email = req.params.email;
-    console.log(email);
+    // console.log(email);
     userFunctions.getProfile(email, res);
 });
 
 router.put('/update', (req,res,next)=>{
-    console.log('Updating user...');
+    console.log(req.body);
     userFunctions.updateStudent(req,res);
 });
 

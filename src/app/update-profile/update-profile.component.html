@@ -6,12 +6,12 @@
 
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="firstName" formControlName="name" type="text" class="validate" value="{{ profile?.name }}" required>
+                    <input id="firstName" formControlName="name" type="text" class="validate" [value]="profile?.name" required>
                     <label for="firstName" class="active">Nombre</label>
                     <span class="helper-text" data-error="Ingresa tu nombre."></span>
                 </div>
                 <div class="input-field col s6">
-                    <input id="lastName" formControlName="lastName" type="text" class="validate" value="{{ profile?.lastName }}" required>
+                    <input id="lastName" formControlName="lastName" type="text" class="validate" [value]="profile?.lastName" required>
                     <label for="lastName" class="active">Apellidos</label>
                     <span class="helper-text" data-error="Ingresa tu apellido."></span>
                 </div>
@@ -20,7 +20,7 @@
             <div class="row">
                 <div id="pickerField" class="input-field col s12">
                     <label for="birthDate" class="active">Birth Date</label>
-                    <input id="birthDate" #birthDate type="text" class="datepicker" (change)="setDate(birthDate)" value="{{ profile?.birthDate }}">
+                    <input id="birthDate" #birthDate type="text" class="datepicker" (change)="setDate(birthDate)" [value]="profile?.birthDate">
                 </div>
             </div>
             
@@ -49,7 +49,7 @@
             
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="schoolName" type="text" class="validate" formControlName="schoolName" value="{{ profile?.schoolName }}" required>
+                    <input id="schoolName" type="text" class="validate" formControlName="schoolName" [value]="profile?.schoolName" required>
                     <label for="schoolName" class="active">Nombre de tu Escuela</label>
                     <span class="helper-text" data-error="Ingresa el nombre de tu escuela."></span>
                 </div>

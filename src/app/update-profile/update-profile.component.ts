@@ -156,7 +156,8 @@ export class UpdateProfileComponent implements OnInit {
             birthDate: this.birthDate,
             city: this.form.get('city').value,
             state: this.form.get('state').value,
-            schoolName: this.form.get('schoolName').value
+            schoolName: this.form.get('schoolName').value,
+            email: sessionStorage.getItem('email')
         };
         return body;
     }

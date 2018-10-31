@@ -187,10 +187,14 @@ exports.getProfile = (email,res) => {
 
 
 exports.updateStudent = (req,res) => {
+    console.log(req.body.email)
     Student.findOne({email: req.body.email}, (err, fetchedStudent)=>{
         if(err){
             return res.json({message: "Usuario no encontrado", errorCode: 1});
         } else{
+            console.log(fetchedStudent);
+            // fetchedStudent.name  = req.body.name;
+            // fetchedStudent.lastName = req.body.lastName
             const student = new Student({
                 _id: fetchedStudent._id,
                 name: req.body.name,
