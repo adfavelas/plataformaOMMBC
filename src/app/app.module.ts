@@ -21,6 +21,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 import { TokenInterceptor } from './token-interceptor';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { TokenInterceptor } from './token-interceptor';
     UpdateProfileComponent,
     NotificationsComponent,
     RestorePasswordComponent,
-    UpdatePasswordComponent
+    UpdatePasswordComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
