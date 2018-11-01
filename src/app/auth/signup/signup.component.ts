@@ -3,6 +3,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { type } from 'os';
+import { timeout } from 'q';
+
+// import * as mexGeo from 'src/jsons/mexStatesCities.json';
 
 declare var $: any;
 declare var M: any;
@@ -13,8 +17,9 @@ declare var M: any;
     styleUrls: ['./signup.component.sass']
 })
 export class SignupComponent implements OnInit {
-
-    // TO DO : implement messagesx
+    // TO DO : implement messages
+    selectedCountry: String;
+    mexican = true;
     birthDate: String;
     serverResponse: String;
     form: FormGroup;
@@ -96,8 +101,8 @@ export class SignupComponent implements OnInit {
                 }
             };
             $('.datepicker').datepicker(datePickerOptions);
-            $('select').formSelect({ classes: 'holis'});
-            $('.modal').modal();
+            $('select').formSelect();
+            $('.modal').modal({ dismissible: false });
 
             $('.dropdown-content li:not(.disabled) > a, .dropdown-content li:not(.disabled) > span').css('color', secondaryColor);
         });
@@ -114,12 +119,10 @@ export class SignupComponent implements OnInit {
             email: new FormControl(null , {
                 validators: [Validators.required]
             }),
-            city: new FormControl(null , {
+            country: new FormControl(null , {
                 validators: [Validators.required]
             }),
-            state: new FormControl(null , {
-                validators: [Validators.required]
-            }),
+            state: new FormControl(null),
             schoolName: new FormControl(null , {
                 validators: [Validators.required]
             }),
@@ -133,16 +136,24 @@ export class SignupComponent implements OnInit {
     }
 
     setDate(birthDate: HTMLInputElement) {
-        // console.log(birthDate.value);
         this.birthDate = birthDate.value;
     }
 
+    setCountry(event: Event) {
+        const value = event + '';
+        if (value === 'México') {
+            this.mexican = false;
+        }
+    }
+
     submit() {
-        this.uploading = true;
         const modalInstance = M.Modal.getInstance($('#signUpModal'));
-        modalInstance.open();
+        // this.uploading = true;
+        // modalInstance.open();
         // Call Service for Post on Node
         if ( this.form.valid && this.verifyFields() ) {
+            this.uploading = true;
+            modalInstance.open();
             const authData = this.buildUserObject();
             this.authService.createUser(authData).subscribe( res => {
                 this.serverResponse = res.message;
@@ -150,9 +161,6 @@ export class SignupComponent implements OnInit {
                 if ( res.errorCode === 0 ) {
                     this.uploading = false;
                     modalInstance.open();
-                    $('.modal-close').on('click', function() {
-                        // No Funciono
-                    });
                 } else {
                     this.form.reset();
                     this.birthDate = '';
@@ -163,29 +171,29 @@ export class SignupComponent implements OnInit {
                 console.log(err);
             });
         } else {
-            this.uploading = false;
+            // this.uploading = false;
             return;
         }
     }
 
     verifyFields() {
         if (this.form.get('password').value !== this.form.get('confirm_password').value ) {
-        return false;
+            return false;
         } else {
-        return true;
+            return true;
         }
     }
 
     buildUserObject() {
         const body = {
-        name : this.form.get('name').value,
-        lastName: this.form.get('lastName').value,
-        birthDate: this.birthDate,
-        email: this.form.get('email').value,
-        city: this.form.get('city').value,
-        state: this.form.get('state').value,
-        schoolName: this.form.get('schoolName').value,
-        password: this.form.get('password').value,
+            name : this.form.get('name').value,
+            lastName: this.form.get('lastName').value,
+            birthDate: this.birthDate,
+            email: this.form.get('email').value,
+            city: this.form.get('city').value,
+            state: this.form.get('state').value,
+            schoolName: this.form.get('schoolName').value,
+            password: this.form.get('password').value,
         };
         return body;
     }
