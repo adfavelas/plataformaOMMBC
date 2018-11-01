@@ -22,10 +22,11 @@
         <div class="col s6">
             <h2 class="center-align title-text">INICIA SESIÓN</h2>
 
-            <div class="container ">
+            <div *ngIf="error != null" class="container ">
                 <ul class="collection">
                     <li class="collection-item center-align collection-item-error">{{ error }}</li>
                 </ul>
+                <p class="center-align"></p>
             </div>
 
             <div class="row">
@@ -46,6 +47,10 @@
                         </div>
                     </div>
             
+                    <div class="row center-align">
+                        <a href="/forgotPassword">Olvidé mi contraseña</a>
+                    </div>
+
                     <div class="row center-align">
                         <button class="waves-effect btn-large" (click)="login()">INICIAR SESIÓN</button>
                     </div>
