@@ -22,8 +22,10 @@
         <div class="col s6">
             <h2 class="center-align title-text">INICIA SESIÓN</h2>
 
-            <div class="container login-error *ngIf=error != null container">
-                <p class="center-align">{{ error }}</p>
+            <div class="container ">
+                <ul class="collection">
+                    <li class="collection-item center-align collection-item-error">{{ error }}</li>
+                </ul>
             </div>
 
             <div class="row">
