@@ -3,10 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { type } from 'os';
-import { timeout } from 'q';
-
-// import * as mexGeo from 'src/jsons/mexStatesCities.json';
 
 declare var $: any;
 declare var M: any;
@@ -17,18 +13,19 @@ declare var M: any;
     styleUrls: ['./signup.component.sass']
 })
 export class SignupComponent implements OnInit {
-    // TO DO : implement messages
     selectedCountry: String;
     mexican = true;
     birthDate: String;
     serverResponse: String;
     form: FormGroup;
     uploading = false;
+    error: String = null;
+
     constructor(private authService: AuthService, private router: Router) {
         if (this.authService.isUserLoggedIn()) {
           this.router.navigate(['home']);
         }
-       }
+    }
 
     ngOnInit() {
         this.initForm();
@@ -147,6 +144,7 @@ export class SignupComponent implements OnInit {
     }
 
     submit() {
+        this.error = null;
         const modalInstance = M.Modal.getInstance($('#signUpModal'));
         // this.uploading = true;
         // modalInstance.open();
@@ -171,6 +169,7 @@ export class SignupComponent implements OnInit {
                 console.log(err);
             });
         } else {
+            this.error = 'Verifica que todos los campos estén correctamente llenos.';
             // this.uploading = false;
             return;
         }

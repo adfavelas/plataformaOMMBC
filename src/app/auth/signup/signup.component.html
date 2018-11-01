@@ -1,6 +1,13 @@
 <div class="container">
     <h1 class="center-align title-text">Regístrate</h1>
     
+    <div *ngIf="error != null" class="container ">
+        <ul class="collection">
+            <li class="collection-item center-align collection-item-error">{{ error }}</li>
+        </ul>
+        <p class="center-align"></p>
+    </div>
+
     <div class="row">
         <form [formGroup]="form" class="col s6 offset-s3">
 
