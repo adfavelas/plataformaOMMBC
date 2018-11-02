@@ -15,6 +15,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ProblemsComponent } from './problems/problems.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'restorePassword', component: RestorePasswordComponent},
   { path: 'updatePassword', component: UpdatePasswordComponent},
   { path: 'forgotPassword', component: ForgotPasswordComponent},
+  { path: 'problems', component: ProblemsComponent},
   { path: '**', component: Error404Component}
 ];
 

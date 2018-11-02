@@ -22,6 +22,7 @@ import { RestorePasswordComponent } from './restore-password/restore-password.co
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 import { TokenInterceptor } from './token-interceptor';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ProblemsComponent } from './problems/problems.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     NotificationsComponent,
     RestorePasswordComponent,
     UpdatePasswordComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ProblemsComponent
   ],
   imports: [
     BrowserModule,
