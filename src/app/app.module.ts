@@ -23,6 +23,7 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
 import { TokenInterceptor } from './token-interceptor';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ProblemsComponent } from './problems/problems.component';
+import { ProblemComponent } from './problem/problem.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ProblemsComponent } from './problems/problems.component';
     RestorePasswordComponent,
     UpdatePasswordComponent,
     ForgotPasswordComponent,
-    ProblemsComponent
+    ProblemsComponent,
+    ProblemComponent
   ],
   imports: [
     BrowserModule,

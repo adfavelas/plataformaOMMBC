@@ -16,6 +16,7 @@ import { RestorePasswordComponent } from './restore-password/restore-password.co
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ProblemsComponent } from './problems/problems.component';
+import { ProblemComponent } from './problem/problem.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'updatePassword', component: UpdatePasswordComponent},
   { path: 'forgotPassword', component: ForgotPasswordComponent},
   { path: 'problems', component: ProblemsComponent},
+  { path: 'problem', component: ProblemComponent},
   { path: '**', component: Error404Component}
 ];
 
