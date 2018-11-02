@@ -17,24 +17,26 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ProblemsComponent } from './problems/problems.component';
 import { ProblemComponent } from './problem/problem.component';
+import { RankingComponent } from './ranking/ranking.component';
 
 
 const routes: Routes = [
   { path: '', component: LandingComponent},
+  { path: 'faq', component: FaqComponent},
+  { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
-  { path: 'home', component: HomeComponent},
-  { path: 'faq', component: FaqComponent},
-  { path: 'profile', component: ProfileComponent},
-  { path: 'guidedLearning', component: GuidedLearningComponent},
-  { path: 'settings', component: SettingsComponent},
-  { path: 'updateProfile', component: UpdateProfileComponent},
-  { path: 'notifications', component: NotificationsComponent},
-  { path: 'restorePassword', component: RestorePasswordComponent},
-  { path: 'updatePassword', component: UpdatePasswordComponent},
-  { path: 'forgotPassword', component: ForgotPasswordComponent},
-  { path: 'problems', component: ProblemsComponent},
   { path: 'problem', component: ProblemComponent},
+  { path: 'profile', component: ProfileComponent},
+  { path: 'ranking', component: RankingComponent},
+  { path: 'problems', component: ProblemsComponent},
+  { path: 'settings', component: SettingsComponent},
+  { path: 'notifications', component: NotificationsComponent},
+  { path: 'updateProfile', component: UpdateProfileComponent},
+  { path: 'guidedLearning', component: GuidedLearningComponent},
+  { path: 'forgotPassword', component: ForgotPasswordComponent},
+  { path: 'updatePassword', component: UpdatePasswordComponent},
+  { path: 'restorePassword', component: RestorePasswordComponent},
   { path: '**', component: Error404Component}
 ];
 
