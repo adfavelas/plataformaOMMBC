@@ -6,8 +6,8 @@ const studentSchema = mongoose.Schema({
     lastName: { type: String, required: true },
     age: { type: Number },
     schoolName: { type: String, required: true },
-    state: { type: String, required: true },
-    city: { type: String, required: true },
+    state: { type: String},
+    country: { type: String, required: true },
     birthDate: { type: String, required: true },
     solvedProblems: [
         { idAnswer: mongoose.Schema.Types.ObjectId ,idProblem: mongoose.Schema.Types.ObjectId, status: String, score: Number }

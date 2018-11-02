@@ -33,10 +33,10 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent},
   { path: 'notifications', component: NotificationsComponent},
   { path: 'updateProfile', component: UpdateProfileComponent},
-  { path: 'guidedLearning', component: GuidedLearningComponent},
   { path: 'forgotPassword', component: ForgotPasswordComponent},
   { path: 'updatePassword', component: UpdatePasswordComponent},
-  { path: 'restorePassword', component: RestorePasswordComponent},
+  { path: 'guidedLearning', component: GuidedLearningComponent},
+  { path: 'restorePassword/:token', component: RestorePasswordComponent},
   { path: '**', component: Error404Component}
 ];
 
