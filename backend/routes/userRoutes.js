@@ -33,6 +33,20 @@ router.put('/update', checkToken,(req,res,next)=>{
 router.put('/changePassword', checkToken,(req,res,next)=>{
     userFunctions.changePassword(req,res);
 });
+
+router.get('/sendRestoreEmail/:email', (req,res,next)=>{
+    console.log(req.params);
+    // res.json({message: "Here"});
+    userFunctions.sendRestoreEmail(req,res);
+});
+
+router.get('/restorePassword/:token', (req,res,next)=>{
+    userFunctions.restorePasswordAccess(req,res);
+    // let token = req.params.token;
+    // res.redirect('http://localhost:4200/restorePassword/'+ token);
+});
+
+
 // router.get('/user/:email', (req,res,next) => {
 //     // console.log('here');
 //     userFunctions.getAllUsers(req,res);

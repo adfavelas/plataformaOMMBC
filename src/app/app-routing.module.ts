@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent},
   { path: 'updateProfile', component: UpdateProfileComponent},
   { path: 'notifications', component: NotificationsComponent},
-  { path: 'restorePassword', component: RestorePasswordComponent},
+  { path: 'restorePassword/:token', component: RestorePasswordComponent},
   { path: 'updatePassword', component: UpdatePasswordComponent},
   { path: 'forgotPassword', component: ForgotPasswordComponent},
   { path: '**', component: Error404Component}

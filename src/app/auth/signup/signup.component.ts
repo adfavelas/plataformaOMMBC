@@ -189,7 +189,7 @@ export class SignupComponent implements OnInit {
             lastName: this.form.get('lastName').value,
             birthDate: this.birthDate,
             email: this.form.get('email').value,
-            city: this.form.get('city').value,
+            country: this.form.get('country').value,
             state: this.form.get('state').value,
             schoolName: this.form.get('schoolName').value,
             password: this.form.get('password').value,
