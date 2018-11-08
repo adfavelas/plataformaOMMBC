@@ -140,14 +140,14 @@ export class SignupComponent implements OnInit {
         const value = event + '';
         if (value === 'México') {
             this.mexican = false;
+        } else {
+            this.mexican = true;
         }
     }
 
     submit() {
         this.error = null;
         const modalInstance = M.Modal.getInstance($('#signUpModal'));
-        // this.uploading = true;
-        // modalInstance.open();
         // Call Service for Post on Node
         if ( this.form.valid && this.verifyFields() ) {
             this.uploading = true;
@@ -170,7 +170,6 @@ export class SignupComponent implements OnInit {
             });
         } else {
             this.error = 'Verifica que todos los campos estén correctamente llenos.';
-            // this.uploading = false;
             return;
         }
     }

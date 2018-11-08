@@ -81,7 +81,7 @@ exports.createUser = (req,res,next) => {
                 // age: req.body.age,
                 schoolName: req.body.schoolName,
                 state: req.body.state,
-                country: req.body.state,
+                country: req.body.country,
                 birthDate: req.body.birthDate,
                 email: req.body.email,
                 totalScore: 0
@@ -104,7 +104,7 @@ exports.createUser = (req,res,next) => {
         }).catch( err => {
             console.log(err.email);
             // if(err.email) {
-            return res.json({message: "El correo electrónico que estas registrando ya se encuentra en uso", errorCode: 1});
+            return res.json({message: "El correo electrónico que estas registrando ya se encuentra en uso.", errorCode: 1});
             // }
             // return res.json({message: "Ha ocurrido un error porfavor intente mas tarde.", errorCode: 1});
         })
@@ -121,7 +121,7 @@ exports.loginUser = (req,res) => {
             });
         } 
         else if (user.status !== "active"){
-            return res.json({message: "No se ha verificado su correo porfavor revise su bandeja de correo"});
+            return res.json({message: "No se ha verificado su correo porfavor revise su bandeja de correo."});
         }
         else{
             fetchedUser = user;
@@ -178,7 +178,7 @@ exports.getProfile = (email,res) => {
     Student.findOne({email: email}, (err, student)=> {
         if(err) { 
             console.log(err); 
-            return res.json({errorCode:1, message:"Usuario no encontrado"});
+            return res.json({errorCode:1, message:"Usuario no encontrado."});
         }
         return res.json({message: "success", student: student});
     });
@@ -189,7 +189,7 @@ exports.updateStudent = (req,res) => {
     console.log(req.body.email)
     Student.findOne({email: req.body.email}, (err, fetchedStudent)=>{
         if(err){
-            return res.json({message: "Usuario no encontrado", errorCode: 1});
+            return res.json({message: "Usuario no encontrado.", errorCode: 1});
         } else{
             console.log(fetchedStudent);
             // fetchedStudent.name  = req.body.name;
@@ -201,7 +201,7 @@ exports.updateStudent = (req,res) => {
                 // age: req.body.age,
                 schoolName: req.body.schoolName,
                 state: req.body.state,
-                city: req.body.city,
+                country: req.body.country,
                 birthDate: req.body.birthDate,
                 email: req.body.email,
                 solvedProblems: fetchedStudent.solvedProblems,
@@ -210,11 +210,11 @@ exports.updateStudent = (req,res) => {
             Student.updateOne({email: req.body.email}, student, (err, result)=>{
                 if(err) {
                     console.log(err);
-                    return res.json({message: "Ha ocurrido un error intente mas tarde", errorCode: 1});
+                    return res.json({message: "Ha ocurrido un error intente mas tarde.", errorCode: 1});
                 }
                 else {
                     console.log(result);
-                    return res.json({message: "Sus datos han sido actualizados", errorCode: 0});
+                    return res.json({message: "Sus datos han sido actualizados.", errorCode: 0});
                 }
             });
         }
@@ -229,23 +229,23 @@ exports.changePassword = (req,res)=> {
     User.findOne({email: email}, (err, result)=> {
         if(err){
             console.log(err);
-            res.json({message: "No se ha podido encontrar al usuario", errorCode: 1});
+            res.json({message: "No se ha podido encontrar al usuario.", errorCode: 1});
         }
         else {
             let user = result;
             bcrypt.hash(newPassword, bcrypt.genSaltSync(10), null , (errHash, hash)=> {
                 if(errHash) {
-                    return res.json({message: "Ha ocurrido un error porfavor intente mas tarde", errorCode:1});
+                    return res.json({message: "Ha ocurrido un error, por favor intente mas tarde.", errorCode:1});
                 }
                 else {
                     console.log(hash);
                     user.password = hash;
                     User.updateOne({email: user.email}, user, (err, response)=>{
                         if(err){
-                            return res.json({message: "No se han podido actualizar los campos intente mas tarde", errorCode: 1});
+                            return res.json({message: "No se han podido actualizar los campos, intente mas tarde.", errorCode: 1});
                         }
                         else {
-                            return res.json({message: "Usuario actualizado correctamente", errorCode: 0});
+                            return res.json({message: "Usuario actualizado correctamente.", errorCode: 0});
                         }
                     });
                 } 
@@ -291,7 +291,7 @@ exports.sendRestoreEmail = (req,res) => {
     };
     User.findOne({email : req.params.email}, (err , user)=> {
         if(err){
-            return res.json({message: "No se ha encontrado usuario", errorCode: 1});
+            return res.json({message: "No se ha encontrado usuario.", errorCode: 1});
         } else {
             if(user && user !== null) {
                 transporter.sendMail(mailOptions, (error, info) => {
@@ -299,20 +299,20 @@ exports.sendRestoreEmail = (req,res) => {
                     if (error) {
                         console.log(error);
                         // res.send({error, message: "Error Interno porfavor intente mas tarde"});
-                        return res.json({ error, message: "Ha Ocurrido Un Error Porfavor Intente Mas Tarde", errorCode: 1});
+                        return res.json({ error, message: "Ha ocurrido un error, por favor intente mas tarde.", errorCode: 1});
                         // return message;
                     } else {
                         console.log('Message sent: %s'+ info.messageId);   
                         // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
                         // res.status(200).json({"msg": "mesage  has been sent"});
-                        return res.json({message: "Mensaje Enviado" , errorCode:0});
+                        return res.json({message: "Mensaje enviado.", errorCode:0});
             
                     }
     
                 });
             }
             else {
-                return res.json({message: "No se ha encontrado usuario", errorCode: 1});
+                return res.json({message: "No se ha encontrado usuario.", errorCode: 1});
             }
         }
     })
@@ -323,13 +323,13 @@ exports.restorePasswordAccess = (req,res) => {
     
     jwt.verify(token, process.env.JWTSECRET, (err, decoded)=> {
         if(err){
-            return res.json({message: "Ha ocurrido un error ", errorCode: 1});
+            return res.json({message: "Ha ocurrido un error.", errorCode: 1});
         }
         else {
             const email = decoded.email;
             User.findOne({email: email}, (err, user)=> {
                 if ( err ){
-                    return res.json({message: "Ha ocurrido un error ", errorCode: 1});
+                    return res.json({message: "Ha ocurrido un error.", errorCode: 1});
                 } else {
                     return res.redirect('http://localhost:4200/restorePassword/'+ token);
                 }

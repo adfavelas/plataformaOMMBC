@@ -13,18 +13,13 @@ declare var M: any;
 })
 export class UpdateProfileComponent implements OnInit {
     profile;
+    mexican = true;
     birthDate: String;
+    serverResponse: String;
     form: FormGroup;
+    uploading = false;
+    error: string = null;
 
-    student = {
-        name: 'Jose',
-        lastName: 'Rodriguez',
-        schoolName: 'CETYS Universidad',
-        state: 'Durango',
-        city: 'Tijuana',
-        birthDate: '20/10/2000',
-        email: sessionStorage.getItem('email')
-    };
     constructor(private profileService: ProfileService, private router: Router) {
         this.initForm();
     }
@@ -108,7 +103,6 @@ export class UpdateProfileComponent implements OnInit {
                 }
             };
             $('.datepicker').datepicker(datePickerOptions);
-            $('select').formSelect();
             $('.modal').modal();
             $('.tabs').tabs();
 
@@ -126,12 +120,10 @@ export class UpdateProfileComponent implements OnInit {
             lastName: new FormControl(null, {
                 validators: [Validators.required]
             }),
-            city: new FormControl(null , {
+            country: new FormControl(null , {
                 validators: [Validators.required]
             }),
-            state: new FormControl(null , {
-                validators: [Validators.required]
-            }),
+            state: new FormControl(null),
             schoolName: new FormControl(null , {
                 validators: [Validators.required]
             })
@@ -145,34 +137,53 @@ export class UpdateProfileComponent implements OnInit {
         this.form.patchValue({lastName: profile.lastName});
         this.form.get('lastName').updateValueAndValidity();
 
-        this.form.patchValue({city: profile.city});
-        this.form.get('city').updateValueAndValidity();
+        this.form.patchValue({country: profile.country});
+        this.form.get('country').updateValueAndValidity();
 
         this.form.patchValue({state: profile.state});
         this.form.get('state').updateValueAndValidity();
 
         this.form.patchValue({schoolName: profile.schoolName});
         this.form.get('schoolName').updateValueAndValidity();
+
+        if (profile.country === 'México') {
+            this.mexican = false;
+        }
+
+        $('select').formSelect();
     }
 
     setDate(birthDate: HTMLInputElement) {
         this.birthDate = birthDate.value;
     }
 
+    setCountry(event: Event) {
+        const value = event + '';
+        if (value === 'México') {
+            this.mexican = false;
+        } else {
+            this.mexican = true;
+        }
+    }
+
     submit() {
+        this.error = null;
+        const modalInstance = M.Modal.getInstance($('#updateProfileModal'));
         // Call Service for Post on Node
         if (this.form.valid) {
+            this.uploading = true;
+            modalInstance.open();
             const updatedStudent = this.buildUserObject();
-
             this.profileService.updateStudent(updatedStudent).subscribe(res => {
+                this.serverResponse = res.message;
                 if ( res.errorCode === 3) {
-                    console.log(res);
-                    this.router.navigate(['login']);
+                    this.uploading = false;
+                } else {
+                    this.uploading = false;
                 }
-                console.log(res);
             });
         } else {
-            console.log(this.form);
+            this.error = 'Ha ocurrido un error, por favor intenta más tarde.';
             return;
         }
     }
@@ -182,11 +193,15 @@ export class UpdateProfileComponent implements OnInit {
             name : this.form.get('name').value,
             lastName: this.form.get('lastName').value,
             birthDate: this.birthDate,
-            city: this.form.get('city').value,
+            country: this.form.get('country').value,
             state: this.form.get('state').value,
             schoolName: this.form.get('schoolName').value,
             email: sessionStorage.getItem('email')
         };
         return body;
+    }
+
+    navigateToLogin() {
+        this.router.navigate(['home']);
     }
 }
