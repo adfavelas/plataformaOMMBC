@@ -22,7 +22,7 @@ const problemSchema = mongoose.Schema({
     solution : {type: String, required: true},
     tip: {type: String, required: true},
     origin: {type: String, required: true},
-    problemNumber: {type: String, required: true}
+    problemNumber: {type: Number, required: true}
 });
 
 module.exports = mongoose.model("Problem", problemSchema);

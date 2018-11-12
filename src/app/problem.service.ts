@@ -4,7 +4,7 @@ import { environment } from '../environments/environment';
 
 
 @Injectable({providedIn: 'root'})
-export class ProfileService {
+export class ProblemService {
     APIURL = environment.APIURL;
     constructor(private http: HttpClient ) {}
 
