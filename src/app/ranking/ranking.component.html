@@ -17,85 +17,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="center-align">1</td>
-                        <td class="center-align"><a href="/ranking">Eclair</a></td>  
-                        <td class="center-align">Mexico</td>
-                        <td class="center-align">Baja California</td>
-                        <td class="center-align">500</td>
-                        <td class="center-align">10000</td>
-                    </tr>
-                    <tr>
-                        <td class="center-align">1</td>
-                        <td class="center-align"><a href="/ranking">Eclair</a></td>  
-                        <td class="center-align">Mexico</td>
-                        <td class="center-align">Baja California</td>
-                        <td class="center-align">500</td>
-                        <td class="center-align">10000</td>
-                    </tr>
-                    <tr>
-                        <td class="center-align">1</td>
-                        <td class="center-align"><a href="/ranking">Eclair</a></td>  
-                        <td class="center-align">Mexico</td>
-                        <td class="center-align">Baja California</td>
-                        <td class="center-align">500</td>
-                        <td class="center-align">10000</td>
-                    </tr>
-                    <tr>
-                        <td class="center-align">1</td>
-                        <td class="center-align"><a href="/ranking">Eclair</a></td>  
-                        <td class="center-align">Mexico</td>
-                        <td class="center-align">Baja California</td>
-                        <td class="center-align">500</td>
-                        <td class="center-align">10000</td>
-                    </tr>
-                    <tr>
-                        <td class="center-align">1</td>
-                        <td class="center-align"><a href="/ranking">Eclair</a></td>  
-                        <td class="center-align">Mexico</td>
-                        <td class="center-align">Baja California</td>
-                        <td class="center-align">500</td>
-                        <td class="center-align">10000</td>
-                    </tr>
-                    <tr>
-                        <td class="center-align">1</td>
-                        <td class="center-align"><a href="/ranking">Eclair</a></td>  
-                        <td class="center-align">Mexico</td>
-                        <td class="center-align">Baja California</td>
-                        <td class="center-align">500</td>
-                        <td class="center-align">10000</td>
-                    </tr>
-                    <tr>
-                        <td class="center-align">1</td>
-                        <td class="center-align"><a href="/ranking">Eclair</a></td>  
-                        <td class="center-align">Mexico</td>
-                        <td class="center-align">Baja California</td>
-                        <td class="center-align">500</td>
-                        <td class="center-align">10000</td>
-                    </tr>
-                    <tr>
-                        <td class="center-align">1</td>
-                        <td class="center-align"><a href="/ranking">Eclair</a></td>  
-                        <td class="center-align">Mexico</td>
-                        <td class="center-align">Baja California</td>
-                        <td class="center-align">500</td>
-                        <td class="center-align">10000</td>
-                    </tr>
-                    <tr>
-                        <td class="center-align">1</td>
-                        <td class="center-align"><a href="/ranking">Eclair</a></td>  
-                        <td class="center-align">Mexico</td>
-                        <td class="center-align">Baja California</td>
-                        <td class="center-align">500</td>
-                        <td class="center-align">10000</td>
-                    </tr>
-                    <tr>
-                        <td class="center-align">1</td>
-                        <td class="center-align"><a href="/ranking">Eclair</a></td>  
-                        <td class="center-align">Mexico</td>
-                        <td class="center-align">Baja California</td>
-                        <td class="center-align">500</td>
-                        <td class="center-align">10000</td>
+                    <tr *ngFor="let student of students; let i = index">
+                        <td class="center-align">{{student?.ranking}} {{i+1}}</td>
+                        <td class="center-align"><a href="/ranking">{{student?.name}}</a></td>  
+                        <td class="center-align">{{student?.country}}</td>
+                        <td class="center-align">{{student?.state}}</td>
+                        <td class="center-align">{{student?.solvedProblems.length}}</td>
+                        <td class="center-align">{{student?.totalScore}}</td>
                     </tr>
                 </tbody>
             </table>
