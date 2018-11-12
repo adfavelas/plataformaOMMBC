@@ -7,79 +7,24 @@ const Answer    = require('../models/Answer');
 
 exports.getProblems = (req,res)=> {
     console.log(req.query);
-    if ( req.query.area  && req.query.topic && req.query.level) {
-        Problem.find({area: req.query.area, topic: req.query.topic, level: req.query.level}, (err,fetchedProblems)=>{
-            if (err) {
-                console.log(err);
-                return res.json({message: "ha ocurrido un error intentalo mas tarde", errorCode: 1})
-            } else {
-                return res.json({message: "Success", problems: fetchedProblems, errorCode: 1});
-            }
-        }); 
-    } else if (req.query.area  && req.query.topic) {
-        Problem.find({area: req.query.area, topic: req.query.topic}, (err,fetchedProblems)=>{
-            if (err) {
-                console.log(err);
-                return res.json({message: "ha ocurrido un error intentalo mas tarde", errorCode: 1})
-            } else {
-                return res.json({message: "Success", problems: fetchedProblems, errorCode: 1});
-            }
-        }); 
-    } else if ( req.query.area && req.query.level) {
-        Problem.find({ area: req.query.area, level: req.query.level}, (err,fetchedProblems)=>{
-            if (err) {
-                console.log(err);
-                return res.json({message: "ha ocurrido un error intentalo mas tarde", errorCode: 1})
-            } else {
-                return res.json({message: "Success", problems: fetchedProblems, errorCode: 1});
-            }
-        }); 
-    } else if (req.query.area ) {
-        Problem.find({area: req.query.area}, (err,fetchedProblems)=>{
-            if (err) {
-                console.log(err);
-                return res.json({message: "ha ocurrido un error intentalo mas tarde", errorCode: 1})
-            } else {
-                return res.json({message: "Success", problems: fetchedProblems, errorCode: 1});
-            }
-        }); 
-    }  else if ( req.query.topic && req.query.level) {
-        Problem.find({ topic: req.query.topic, level: req.query.level}, (err,fetchedProblems)=>{
-            if (err) {
-                console.log(err);
-                return res.json({message: "ha ocurrido un error intentalo mas tarde", errorCode: 1})
-            } else {
-                return res.json({message: "Success", problems: fetchedProblems, errorCode: 1});
-            }
-        }); 
-    }  else if ( req.query.topic ) {
-        Problem.find({ topic: req.query.topic}, (err,fetchedProblems)=>{
-            if (err) {
-                console.log(err);
-                return res.json({message: "ha ocurrido un error intentalo mas tarde", errorCode: 1})
-            } else {
-                return res.json({message: "Success", problems: fetchedProblems, errorCode: 1});
-            }
-        }); 
-    } else if ( req.query.level ) {
-        Problem.find({ level: req.query.level}, (err,fetchedProblems)=>{
-            if (err) {
-                console.log(err);
-                return res.json({message: "ha ocurrido un error intentalo mas tarde", errorCode: 1})
-            } else {
-                return res.json({message: "Success", problems: fetchedProblems, errorCode: 1});
-            }
-        }); 
-    } else {
-        Problem.find({}, (err,fetchedProblems)=>{
-            if (err) {
-                console.log(err);
-                return res.json({message: "ha ocurrido un error intentalo mas tarde", errorCode: 1})
-            } else {
-                return res.json({message: "Success", problems: fetchedProblems, errorCode: 1});
-            }
-        }); 
+    const query = {};
+    if ( req.query.area) {
+        query.area = req.query.area
     }
+    if( req.query.topic) {
+        query.topic = req.query.topic
+    } 
+    if ( req.query.level) {
+        query.level = req.query.level;
+    } 
+    Problem.find(query, (err,fetchedProblems)=>{
+        if (err) {
+            console.log(err);
+            return res.json({message: "ha ocurrido un error intentalo mas tarde", errorCode: 1})
+        } else {
+            return res.json({message: "Success", problems: fetchedProblems, errorCode: 1});
+        }
+    }); 
 }
 
 exports.findProblemById = (req,res)=>{
