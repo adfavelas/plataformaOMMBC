@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
-  { path: 'problem', component: ProblemComponent},
+  { path: 'problem/:id', component: ProblemComponent},
   { path: 'profile', component: ProfileComponent},
   { path: 'ranking', component: RankingComponent},
   { path: 'problems', component: ProblemsComponent},

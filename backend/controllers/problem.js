@@ -13,7 +13,8 @@ exports.getProblems = (req,res)=> {
 }
 
 exports.findProblemById = (req,res)=>{
-    const id = req.params.id;
+    // console.log('---> ' + req.params.id);
+    const id = req.params.problemId;
     Problem.findById({_id: id}, (err, problem)=>{
         if( err ){
             console.log(err);

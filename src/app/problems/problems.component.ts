@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProblemService } from '../problem.service';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -10,7 +11,7 @@ declare var $: any;
 })
 export class ProblemsComponent implements OnInit {
     problems;
-    constructor(private problemService: ProblemService) { }
+    constructor(private problemService: ProblemService, private router: Router) { }
 
     ngOnInit() {
         this.problemService.getProblems().subscribe(res => {
@@ -30,6 +31,8 @@ export class ProblemsComponent implements OnInit {
 
     viewProblem(problemId) {
         console.log(problemId);
+        this.router.navigate([`problem/${problemId}`]);
+
     }
 
 }
