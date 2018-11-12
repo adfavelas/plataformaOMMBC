@@ -8,8 +8,12 @@ export class ProblemService {
     APIURL = environment.APIURL;
     constructor(private http: HttpClient ) {}
 
-    getProblems() {
-        return this.http.get<{message: String, problems: Object, errorCode: Number}>(this.APIURL + '/api/problems');
+    getProblems(query: String | null) {
+        if ( query) {
+            return this.http.get<{message: String, problems: Object, errorCode: Number}>(this.APIURL + '/api/problems' + query);
+        } else {
+            return this.http.get<{message: String, problems: Object, errorCode: Number}>(this.APIURL + '/api/problems');
+        }
     }
 
     getProblemById(id: String) {
