@@ -49,9 +49,10 @@ router.get('/restorePassword/:token', (req,res,next)=>{
 router.put('/changePasswordFromRestore', (req,res,next) => {
     userFunctions.changePassword(req,res);
 });
-// router.get('/user/:email', (req,res,next) => {
-//     // console.log('here');
-//     userFunctions.getAllUsers(req,res);
-// });
+
+
+router.get('/getStudents', (req,res,next)=> {
+    userFunctions.getAllStudents(req,res);
+})
 
 module.exports = router;

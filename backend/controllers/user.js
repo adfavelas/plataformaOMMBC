@@ -339,18 +339,13 @@ exports.restorePasswordAccess = (req,res) => {
     });
 }
 
-// exports.getAllUsers = (req,res)=> {
-//     let fetchedUser = {}
-//     User.findOne({email: req.params.email}, (err, result) => {
-//         fetchedUser.user = result;
-//         console.log(result.email);
-//         // res.send(result);
-//         Student.findOne({email: result.email}, (err,student )=> {
-//             console.log(student);
-//             fetchedUser.student = student;
-//             res.send(fetchedUser);
-//         })
-//     })
-
-
-// }
+exports.getAllStudents = (req,res)=> {
+    Student.find({}, (err, fetchedStudents)=> {
+        if( err ) {
+            console.log(err);
+            return res.json({message: "No se ha encontrado", errorCode: 1 });
+        } else {
+            return res.json({message: "Success", students: fetchedStudents, errorCode: 0});
+        }
+    });
+}
