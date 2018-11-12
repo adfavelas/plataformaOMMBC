@@ -11,4 +11,8 @@ export class ProblemService {
     getProblems() {
         return this.http.get<{message: String, problems: Object, errorCode: Number}>(this.APIURL + '/api/problems');
     }
+
+    getProblemById(id: String) {
+        return this.http.get(this.APIURL + '/api/problems/' + id);
+    }
 }
