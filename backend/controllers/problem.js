@@ -1,4 +1,5 @@
 const jwt       = require('jsonwebtoken');
+const Buffer    = require('buffer').Buffer;
 
 const Problem   = require('../models/Problem');
 const Student   = require("../models/Student");
@@ -38,9 +39,10 @@ exports.submitProblem = (req,res)=> {
             const answer = new Answer({
                 problemId: req.body.problemId,
                 studentId: student._id,
-                answer: req.body.answer,
+                answer: Buffer.from(req.body.answer, 'utf8').toString('base64'),
                 status: 'pending'
             });
+            console.log('Bytes to strin g' + Buffer.from(answer.answer, 'base64').toString('utf8'));
             answer.save().then(response => {
                 console.log(response);
                 return res.json({message: "Success", errorCode: 0});
