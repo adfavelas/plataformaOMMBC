@@ -10,7 +10,7 @@ const studentSchema = mongoose.Schema({
     country: { type: String, required: true },
     birthDate: { type: String, required: true },
     solvedProblems: [
-        { idAnswer: mongoose.Schema.Types.ObjectId ,idProblem: mongoose.Schema.Types.ObjectId, status: String, score: Number }
+        { answerId: mongoose.Schema.Types.ObjectId }
     ],
     email: { type: String, required: true, unique: true },
     totalScore: {type: Number}
