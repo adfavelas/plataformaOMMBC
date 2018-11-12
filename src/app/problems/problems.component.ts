@@ -27,4 +27,8 @@ export class ProblemsComponent implements OnInit {
         });
     }
 
+    viewProblem(problemId) {
+        console.log(problemId);
+    }
+
 }
