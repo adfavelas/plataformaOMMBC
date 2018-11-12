@@ -11,6 +11,9 @@ declare var M: any;
   styleUrls: ['./problem.component.sass']
 })
 export class ProblemComponent implements OnInit {
+        uploading = false;
+        serverResponse = null;
+        error = null;
         problemId: String;
         problem;
         empty = true;
@@ -28,13 +31,18 @@ export class ProblemComponent implements OnInit {
            }
         });
 
-        $('.modal').modal();
+        $('.modal').modal({ dismissible: false });
     }
 
     submitProblem(answerInput: HTMLInputElement) {
+        this.error = null;
         const answer = answerInput.value;
         this.clicked = true;
+
+        const modalInstance = M.Modal.getInstance($('#submitModal'));
         if ( answer )  {
+            this.uploading = true;
+            modalInstance.open();
             this.empty = false;
             const body = {
                 problemId: this.problemId,
@@ -42,9 +50,17 @@ export class ProblemComponent implements OnInit {
                 email : sessionStorage.getItem('email')
             };
             this.problemService.submitProblem(body).subscribe( res => {
+                if (res.errorCode === 0) {
+                    this.uploading = false;
+                    modalInstance.open();
+                } else {
+                    this.uploading = false;
+                    modalInstance.open();
+                }
                 console.log(res);
             });
         } else {
+            this.error = 'La respuesta no puede estar vacía. Por favor envía una respuesta válida.';
             this.empty = true;
             return;
         }

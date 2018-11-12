@@ -15,6 +15,13 @@
             
             <h5 class="left-align">Respuesta</h5>
 
+            <div *ngIf="error != null" class="container ">
+                <ul class="collection">
+                    <li class="collection-item center-align collection-item-error">{{ error }}</li>
+                </ul>
+                <p class="center-align"></p>
+            </div>
+
             <div class="row">
                 <form class="col s12">
                     <div class="row">
@@ -44,11 +51,38 @@
                 </a>
             </div>
 
-            <!-- Modal Structure -->
+            <!-- Modal Structures -->
             <div id="tipsModal" class="modal">
                 <div class="modal-content">
                     <h4>Tips</h4>
                     <p>{{problem?.tip}}</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="modal-close waves-effect btn-flat">Aceptar</a>
+                </div>
+            </div>
+
+            <div id="submitModal" class="modal">
+                <div class="modal-content">
+                    <div *ngIf="uploading" class="container center-align">
+                        <h4>Cargando...</h4>
+                        <div class="preloader-wrapper big active">
+                            <div class="spinner-layer">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div><div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Por favor espera un momento.</p>
+                    </div>
+                    <div *ngIf="!uploading" class="">
+                        <h4>¡Listo!</h4>
+                        <p>{{serverResponse}}</p>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <a class="modal-close waves-effect btn-flat">Aceptar</a>
