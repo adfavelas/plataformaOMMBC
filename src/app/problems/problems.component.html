@@ -48,66 +48,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let problem of problems">
+                    <tr *ngFor="let problem of problems" (click)="viewProblem(problem._id)">
                         <td>{{problem.area}}</td>
                         <td>{{problem.topic}}</td>
                         <td>{{problem.problemDescription}}</td>
                         <td>{{problem.level}}</td>
                     </tr>
-                    <!-- <tr>
-                        <td>Alvin</td>
-                        <td>Eclair</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, saepe nam. Tenetur, odit eum. Totam expedita doloremque repudiandae cumque veniam!</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>Alvin</td>
-                        <td>Eclair</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, saepe nam. Tenetur, odit eum. Totam expedita doloremque repudiandae cumque veniam!</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Alvin</td>
-                        <td>Eclair</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, saepe nam. Tenetur, odit eum. Totam expedita doloremque repudiandae cumque veniam!</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>Alvin</td>
-                        <td>Eclair</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, saepe nam. Tenetur, odit eum. Totam expedita doloremque repudiandae cumque veniam!</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Alvin</td>
-                        <td>Eclair</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, saepe nam. Tenetur, odit eum. Totam expedita doloremque repudiandae cumque veniam!</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>Alvin</td>
-                        <td>Eclair</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, saepe nam. Tenetur, odit eum. Totam expedita doloremque repudiandae cumque veniam!</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>Alvin</td>
-                        <td>Eclair</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, saepe nam. Tenetur, odit eum. Totam expedita doloremque repudiandae cumque veniam!</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>Alvin</td>
-                        <td>Eclair</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, saepe nam. Tenetur, odit eum. Totam expedita doloremque repudiandae cumque veniam!</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Alvin</td>
-                        <td>Eclair</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, saepe nam. Tenetur, odit eum. Totam expedita doloremque repudiandae cumque veniam!</td>
-                        <td>2</td>
-                    </tr> -->
                 </tbody>
             </table>
         </div>
