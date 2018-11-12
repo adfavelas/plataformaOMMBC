@@ -13,6 +13,8 @@ declare var M: any;
 export class ProblemComponent implements OnInit {
         problemId: String;
         problem;
+        empty = true;
+        clicked = false;
         constructor(private activatedRoute: ActivatedRoute, private problemService: ProblemService) {
         this.activatedRoute.paramMap.subscribe( (paramMap: ParamMap) => {
             this.problemId = paramMap.get('id');
@@ -29,5 +31,22 @@ export class ProblemComponent implements OnInit {
         $('.modal').modal();
     }
 
-
+    submitProblem(answerInput: HTMLInputElement) {
+        const answer = answerInput.value;
+        this.clicked = true;
+        if ( answer )  {
+            this.empty = false;
+            const body = {
+                problemId: this.problemId,
+                answer: answerInput.value,
+                email : sessionStorage.getItem('email')
+            };
+            this.problemService.submitProblem(body).subscribe( res => {
+                console.log(res);
+            });
+        } else {
+            this.empty = true;
+            return;
+        }
+    }
 }

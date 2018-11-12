@@ -15,4 +15,8 @@ export class ProblemService {
     getProblemById(id: String) {
         return this.http.get<{message: String, problem: Object, errorCode: Number}>(this.APIURL + '/api/problems/' + id);
     }
+
+    submitProblem(body: Object) {
+        return this.http.post<{message: String, errorCode: Number}>(this.APIURL + '/api/problems/submitProblem', body);
+    }
 }

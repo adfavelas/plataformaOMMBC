@@ -20,9 +20,10 @@
                     <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">insert_comment</i>
-                        <textarea id="answer" class="materialize-textarea"></textarea>
+                        <textarea #answer id="answer" class="materialize-textarea"></textarea>
                         <label for="answer">Respuesta</label>
                     </div>
+                    <span style="font-size: 15px; color:red;" *ngIf="empty && clicked"><sup>*</sup>  Respuesta no puede estar vacía</span>
                     </div>
                 </form>
             </div>
@@ -32,7 +33,7 @@
                     <button class="waves-effect waves-light btn-large">Cancelar</button>
                 </div>
                 <div class="col s6 center-align">
-                    <button class="waves-effect waves-light btn-large">Responder</button>
+                    <button class="waves-effect waves-light btn-large" (click)="submitProblem(answer)">Responder</button>
                 </div>
             </div>
 

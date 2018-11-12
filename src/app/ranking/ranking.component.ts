@@ -14,7 +14,6 @@ export class RankingComponent implements OnInit {
         this.studentsService.getUsers().subscribe(res => {
             if (res.errorCode === 0) {
                 this.students = res.students;
-
             }
         });
     }
