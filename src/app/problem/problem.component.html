@@ -35,6 +35,25 @@
                     <button class="waves-effect waves-light btn-large">Responder</button>
                 </div>
             </div>
+
+            <!-- Modal Trigger -->
+            <div class="fixed-action-btn">
+                <a class="btn-floating btn-large modal-trigger" href="#tipsModal">
+                    <i class="large material-icons">help</i>
+                </a>
+            </div>
+
+            <!-- Modal Structure -->
+            <div id="tipsModal" class="modal">
+                <div class="modal-content">
+                    <h4>Tips</h4>
+                    <p>{{problem.tip}}</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="modal-close waves-effect btn-flat">Aceptar</a>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

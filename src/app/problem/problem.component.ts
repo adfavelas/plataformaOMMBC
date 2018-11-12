@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ProblemService } from '../problem.service';
-import { reserveSlots } from '@angular/core/src/render3/instructions';
+
+declare var $: any;
+declare var M: any;
 
 @Component({
   selector: 'app-problem',
@@ -23,6 +25,8 @@ export class ProblemComponent implements OnInit {
                this.problem = res.problem;
            }
         });
+
+        $('.modal').modal();
     }
 
 
