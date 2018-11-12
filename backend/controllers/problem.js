@@ -1,5 +1,5 @@
 const Problem   = require('../models/Problem');
-
+const Student   = require("../models/Answer");
 
 exports.getProblems = (req,res)=> {
     Problem.find({}, (err,fetchedProblems)=>{
@@ -26,5 +26,5 @@ exports.findProblemById = (req,res)=>{
 }
 
 exports.submitProblem = (req,res)=>{
-    
+
 }

@@ -340,7 +340,8 @@ exports.restorePasswordAccess = (req,res) => {
 }
 
 exports.getAllStudents = (req,res)=> {
-    Student.find({}, (err, fetchedStudents)=> {
+    let query = Student.find({}).sort({'totalScore': 'descending'});
+    query.exec((err, fetchedStudents) => {
         if( err ) {
             console.log(err);
             return res.json({message: "No se ha encontrado", errorCode: 1 });
