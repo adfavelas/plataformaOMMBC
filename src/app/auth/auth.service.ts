@@ -33,7 +33,7 @@ export class AuthService {
         const token  = sessionStorage.getItem('token');
         if (token) {
             const isExpired = this.jwtHelper.isTokenExpired(token);
-            console.log(isExpired);
+            // console.log(isExpired);
             if (!isExpired) {
                 return true;
             } else {

@@ -11,3 +11,15 @@ exports.getProblems = (req,res)=> {
         }
     }); 
 }
+
+exports.findProblemById = (req,res)=>{
+    const id = req.params.id;
+    Problem.findById({_id: id}, (err, problem)=>{
+        if( err ){
+            console.log(err);
+            return res.json({message: "No se ha encontrado el problema", errorCode: 1});
+        } else {
+            return res.json({message: "Success", problem: problem, errorCode: 0});
+        }
+    })
+}

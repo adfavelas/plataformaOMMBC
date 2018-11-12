@@ -7,5 +7,8 @@ router.get('', checkToken, (req,res,next)=> {
     problemFunctions.getProblems(req,res);
 })
 
+router.get('/:problemId', checkToken, (req,res,next)=>{
+    problemFunctions.findProblemById(req,res);
+});
 
 module.exports = router;

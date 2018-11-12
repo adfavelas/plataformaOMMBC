@@ -15,6 +15,7 @@ export class ProblemsComponent implements OnInit {
     ngOnInit() {
         this.problemService.getProblems().subscribe(res => {
             if (res.message === 'Success' && res.problems) {
+                console.log(res);
                 this.problems = res.problems;
             }
         });
