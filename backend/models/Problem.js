@@ -17,6 +17,7 @@ const problemSchema = mongoose.Schema({
     area: {type: String, required: true},
     topic: {type: String, required: true},
     level: {type: Number, required: true},
+    title: {type: String, required: true},
     problemDescription: {type: String, required: true},
     image: {type: String},
     solution : {type: String, required: true},

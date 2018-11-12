@@ -1,17 +1,17 @@
 <div class="container">
     <div class="row">
-        <h1 class="title-text center-align">Titulo del Problema</h1>
+        <h1 class="title-text center-align">{{problem?.title}}</h1>
     </div>
     
     <div class="row">
-        <h5 class="center-align">Area <b>|</b> Tema <b>|</b> Nivel</h5>
+        <h5 class="center-align">{{problem?.area}} <b>|</b> {{problem?.topic}} <b>|</b> Nivel {{problem?.level}}</h5>
     </div>
 
     <div class="row">
         <div class="col s12">
             <h5 class="left-align">Problema</h5>
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque fugiat ipsum, beatae pariatur modi, animi voluptates voluptate sint quis provident tenetur, ea harum eveniet consequuntur officiis perferendis sit non cum quia dolorem voluptatem? Officiis laborum voluptate explicabo, harum beatae necessitatibus mollitia quasi quo aut molestias reprehenderit? Beatae delectus quos maxime nemo officiis, nisi sunt illo expedita, aliquid commodi modi iusto dolore eius veniam ipsam! Laboriosam ducimus architecto, eveniet eaque quae eligendi libero repellat sapiente obcaecati porro voluptatibus eius modi ab harum. Beatae dolores doloribus blanditiis consequuntur quod aliquid veritatis tenetur corporis tempore repellat perferendis modi atque, maxime nobis culpa eum.</p>
+            <p>{{problem?.problemDescription}}</p>
             
             <h5 class="left-align">Respuesta</h5>
 
