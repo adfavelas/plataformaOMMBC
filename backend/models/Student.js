@@ -9,9 +9,6 @@ const studentSchema = mongoose.Schema({
     state: { type: String},
     country: { type: String, required: true },
     birthDate: { type: String, required: true },
-    solvedProblems: [
-        { answerId: mongoose.Schema.Types.ObjectId }
-    ],
     email: { type: String, required: true, unique: true },
     totalScore: {type: Number}
 });
