@@ -11,7 +11,7 @@ router.get('/:problemId', checkToken, (req,res,next)=>{
     problemFunctions.findProblemById(req,res);
 });
 
-router.post('/submitProbblem', checkToken, (req,res,next)=> {
+router.post('/submitProblem', checkToken, (req,res,next)=> {
     problemFunctions.submitProblem(req,res);
 });
 

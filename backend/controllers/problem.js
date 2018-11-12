@@ -22,5 +22,9 @@ exports.findProblemById = (req,res)=>{
         } else {
             return res.json({message: "Success", problem: problem, errorCode: 0});
         }
-    })
+    });
+}
+
+exports.submitProblem = (req,res)=>{
+    
 }
