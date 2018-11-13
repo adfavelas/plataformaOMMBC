@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import { ProblemService } from '../problem.service';
 
 
 @Component({
@@ -11,7 +12,8 @@ import { AuthService } from '../auth/auth.service';
 })
 export class ProfileComponent implements OnInit {
   student;
-  constructor(private profileService: ProfileService,  private router: Router, private authService: AuthService) {
+  pendingProblems;
+  constructor(private profileService: ProfileService,  private router: Router, private authService: AuthService, private problemService: ProblemService) {
    }
 
   ngOnInit() {
@@ -21,7 +23,15 @@ export class ProfileComponent implements OnInit {
         sessionStorage.removeItem('token');
       }
         this.student = res.student;
+        
+        this.problemService.getPendingProblems(this.student._id).subscribe(res => {
+          if (res.errorCode === 0) {
+            this.pendingProblems = res.problems;
+            console.log(this.pendingProblems);
+          }
+        })
     });
+
   }
 
 }

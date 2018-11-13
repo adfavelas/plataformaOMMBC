@@ -64,3 +64,37 @@ exports.submitProblem = (req,res)=> {
         }
     });
 }
+
+exports.getPendingProblems = (req, res) => {
+    // const studentId = req.params.studentId;
+    let answersRetrieved;
+    let problemsId = [];
+    //Search answers from given student
+    Answer.find({ studentId: req.params.studentId }, (err, answers) =>{
+        if (err) {
+            console.log(err);
+            return res.json({ message: "No se encontraron respuestas.", errorCode: 1});
+        } else {
+            answersRetrieved = answers;
+            //Get problemid from all answers
+
+            for(let i = 0; i < answers.length; i++) {
+                if (!(problemsId.includes(answers[i].problemId))) {
+                    problemsId.push(answers[i].problemId);
+                } 
+            }
+
+            //Retrieve all problems
+            Problem.find({ _id: problemsId}, (err, problems) => {
+                if (err) {
+                    console.log(err);
+                    return res.json({ message: "No se encontraron problemas.", errorCode: 1});
+                } else {
+                    return res.json({ message: "Success", problems: problems, errorCode: 0});
+                }
+            });
+        }
+    });
+
+
+}

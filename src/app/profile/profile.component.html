@@ -25,27 +25,19 @@
                 <table class="highlight">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Item Name</th>
-                            <th>Item Price</th>
+                            <th>Area</th>
+                            <th>Tema</th>
+                            <th>Nivel</th>
+                            <th>Descripción</th>
                         </tr>
                     </thead>
                 
                     <tbody>
-                        <tr>
-                            <td>Alvin</td>
-                            <td>Eclair</td>
-                            <td>$0.87</td>
-                        </tr>
-                        <tr>
-                            <td>Alan</td>
-                            <td>Jellybean</td>
-                            <td>$3.76</td>
-                        </tr>
-                        <tr>
-                            <td>Jonathan</td>
-                            <td>Lollipop</td>
-                            <td>$7.00</td>
+                        <tr *ngFor="let problem of pendingProblems">
+                            <td>{{problem?.area}}</td>
+                            <td>{{problem?.topic}}</td>
+                            <td>{{problem?.level}}</td>
+                            <td>{{problem?.problemDescription}}</td>
                         </tr>
                     </tbody>
                 </table>

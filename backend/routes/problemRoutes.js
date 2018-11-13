@@ -15,5 +15,8 @@ router.post('/submitProblem', checkToken, (req,res,next)=> {
     problemFunctions.submitProblem(req,res);
 });
 
+router.get('/pendingProblems/:studentId', checkToken, (req, res, next) => {
+    problemFunctions.getPendingProblems(req,res);
+});
 
 module.exports = router;

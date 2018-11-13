@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
+import { StudentsService } from './students.service';
 
 
 @Injectable({providedIn: 'root'})
@@ -22,5 +23,9 @@ export class ProblemService {
 
     submitProblem(body: Object) {
         return this.http.post<{message: String, errorCode: Number}>(this.APIURL + '/api/problems/submitProblem', body);
+    }
+
+    getPendingProblems(studentId: String) {
+        return this.http.get<{ message: String, problems: Object, errorCode: Number }>(this.APIURL + '/api/problems/pendingProblems/' + studentId);
     }
 }
