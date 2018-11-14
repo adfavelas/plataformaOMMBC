@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col s4">
             <label>Area</label>
-            <select id="area" #area (change)="queryProblems(area, topic, level)" required>
+            <select id="area" #area (change)="queryArea(area)" required>
                 <option value="null" disabled selected>Area</option>
                 <option value="1">Area 1</option>
                 <option value="2">Area 2</option>
@@ -16,7 +16,7 @@
         </div>
         <div class="col s4">
             <label>Tema</label>
-            <select #topic id="category" (change)="queryProblems(area, topic, level)" required>
+            <select #topic id="category" (change)="queryTopic(topic)" required>
                 <option value="null" disabled selected>Categoria</option>
                 <option value="1">Categoría 1</option>
                 <option value="2">Categoría 2</option>
@@ -26,7 +26,7 @@
         </div>
         <div class="col s4">
             <label>Nivel</label>
-            <select #level id="level" (change)="queryProblems(area, topic, level)" required>
+            <select #level id="level" (change)="queryLevel(level)" required>
                 <option value="null" disabled selected>Nivel</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
