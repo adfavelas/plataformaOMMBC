@@ -40,6 +40,14 @@ export class ProblemsComponent implements OnInit {
 
     }
 
+    queryProblems(area: HTMLInputElement, topic: HTMLInputElement, level: HTMLInputElement) {
+        const query = `?area=${area.value}&?topic=${topic.value}&?level=${level.value}`;
+
+        this.problemService.getProblems(query).subscribe(res => {
+            this.problems = res.problems;
+        });
+    }
+
     queryArea(area: HTMLInputElement) {
         console.log(area.value);
         this.area = area.value;
@@ -108,8 +116,8 @@ export class ProblemsComponent implements OnInit {
         }
     }
 
-    resetFilters(areaRef: HTMLInputElement) {
-        // console.log(this.areaRef.nativeElement[0]);
-        // this.areaRef.nativeElement[0].h
+    resetFilters() {
+        $('select').val('null');
+        $('select').formSelect();
     }
 }
