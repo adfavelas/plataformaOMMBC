@@ -26,9 +26,10 @@ export class UpdatePasswordComponent implements OnInit {
                 password: password.value
             };
             this.profileService.updatePassword(body).subscribe(res => {
-                console.log(res);
                 if (res.errorCode === 0 ) {
                     this.router.navigate(['home']);
+                } else {
+                    this.error = res.message;
                 }
             });
         } else {

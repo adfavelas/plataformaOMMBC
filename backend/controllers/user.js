@@ -224,7 +224,6 @@ exports.changePassword = (req,res)=> {
     const newPassword = req.body.password;
     User.findOne({email: email}, (err, result)=> {
         if(err){
-            console.log(err);
             res.json({message: "No se ha podido encontrar al usuario.", errorCode: 1});
         }
         else {
@@ -232,19 +231,25 @@ exports.changePassword = (req,res)=> {
             bcrypt.hash(newPassword, bcrypt.genSaltSync(10), null , (errHash, hash)=> {
                 if(errHash) {
                     return res.json({message: "Ha ocurrido un error, por favor intente mas tarde.", errorCode:1});
-                }
-                else {
-                    console.log(hash);
-                    user.password = hash;
-                    User.updateOne({email: user.email}, user, (err, response)=>{
-                        if(err){
-                            return res.json({message: "No se han podido actualizar los campos, intente mas tarde.", errorCode: 1});
-                        }
-                        else {
-                            return res.json({message: "Usuario actualizado correctamente.", errorCode: 0});
+                } else {
+                    bcrypt.compare(req.body.password,user.password, (err, equal) => {
+                        if(err) {
+                            console.log(err);
+                        } else if (equal) {
+                            return res.json({ message: "La contraseña seleccionada es igual a la contraseña actual. Por favor, selecciona una nueva.", errorCode: 2 })
+                        } else {
+                            user.password = hash;
+                            User.updateOne({email: user.email}, user, (err, response)=>{
+                                if(err){
+                                    return res.json({message: "Ha ocurrido un error, intente mas tarde.", errorCode: 1});
+                                }
+                                else {
+                                    return res.json({message: "Usuario actualizado correctamente.", errorCode: 0});
+                                }
+                            });
                         }
                     });
-                } 
+                }
             });
         }
 

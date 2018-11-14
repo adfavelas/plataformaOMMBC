@@ -48,8 +48,10 @@ export class RestorePasswordComponent implements OnInit {
 
             if (res.errorCode === 0) {
                 modalInstance.open();
+            } else if (res.errorCode === 2) {
+                this.error = res.message;
             } else {
-                modalInstance.open();
+                this.error = res.message;
             }
         }, err => {
             if (err) {
