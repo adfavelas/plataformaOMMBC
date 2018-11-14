@@ -12,10 +12,7 @@ declare var $: any;
 export class ProblemsComponent implements OnInit {
     @ViewChild('area') areaRef: ElementRef;
     problems;
-    area;
-    topic;
-    level;
-    reseted = false;
+
     constructor(private problemService: ProblemService, private router: Router) { }
 
     ngOnInit() {
@@ -48,80 +45,10 @@ export class ProblemsComponent implements OnInit {
         });
     }
 
-    queryArea(area: HTMLInputElement) {
-        console.log(area.value);
-        this.area = area.value;
-        let query = `?area=${this.area}`;
-        if (this.topic  && this.level) {
-            query += `&topic=${this.topic}&level=${this.level}`;
-        } else if (this.topic) {
-            query += `&topic=${this.topic}`;
-        } else if (this.topic) {
-            query += `&level=${this.level}`;
-        }
-
-        this.problemService.getProblems(query).subscribe(res => {
-            this.problems = res.problems;
-        });
-    }
-
-    queryTopic(topic: HTMLInputElement) {
-        this.topic = topic.value;
-        let query = `?topic=${this.topic}`;
-        if (this.area  && this.level) {
-            query += `&area=${this.area}&level=${this.level}`;
-            this.problemService.getProblems(query).subscribe(res => {
-                this.problems = res.problems;
-            });
-        } else if (this.area) {
-            query += `&area=${this.area}`;
-            this.problemService.getProblems(query).subscribe(res => {
-                this.problems = res.problems;
-            });
-        } else if (this.level) {
-            query += `&level=${this.level}`;
-            this.problemService.getProblems(query).subscribe(res => {
-                this.problems = res.problems;
-            });
-        } else {
-            this.problemService.getProblems(query).subscribe(res => {
-                this.problems = res.problems;
-            });
-        }
-    }
-
-    queryLevel(level: HTMLInputElement) {
-        this.level = level.value;
-        let query = `?level=${this.level}`;
-        console.log(this.level);
-        if (this.area  && this.topic) {
-            query += `&area=${this.area}&topic=${this.topic}`;
-            this.problemService.getProblems(query).subscribe(res => {
-                this.problems = res.problems;
-            });
-        } else if (this.area) {
-            query += `&area=${this.area}`;
-            this.problemService.getProblems(query).subscribe(res => {
-                this.problems = res.problems;
-            });
-        } else if (this.area) {
-            query += `&level=${this.level}`;
-            this.problemService.getProblems(query).subscribe(res => {
-                this.problems = res.problems;
-            });
-        } else {
-            this.problemService.getProblems(query).subscribe(res => {
-                this.problems = res.problems;
-            });
-        }
-    }
 
     resetFilters() {
         $('select').val('null');
         $('select').formSelect();
-        this.area = undefined;
-        this.topic = undefined;
-        this.level = undefined;
         this.problemService.getProblems(null).subscribe( res => {
             this.problems = res.problems;
         });

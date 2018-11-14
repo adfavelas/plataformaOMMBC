@@ -8,17 +8,18 @@ const Answer    = require('../models/Answer');
 exports.getProblems = (req,res)=> {
     console.log(req.query);
     const query = {};
-    if ( req.query.area) {
-        query.area = req.query.area
+    if ( req.query.area && req.query.area != 'null') {
+        query.area = req.query.area;
     }
-    if(req.query.topic) {
-        query.topic = req.query.topic
+    if(req.query.topic && req.query.topic != 'null') {
+        query.topic = req.query.topic;
     } 
-    if (req.query.level) {
+    if (req.query.level && req.query.level != 'null') {
         query.level = req.query.level;
     } 
+
     Problem.find(query, (err,fetchedProblems)=>{
-        console.log(fetchedProblems);
+        // console.log(fetchedProblems);
         if (err) {
             console.log(err);
             return res.json({message: "ha ocurrido un error intentalo mas tarde", errorCode: 1})
