@@ -13,6 +13,7 @@ declare var M: any;
 })
 export class RestorePasswordComponent implements OnInit {
   email: String;
+  error: String = null;
   invalidPassword = true;
   uploading = false;
   serverResponse: String;
@@ -30,35 +31,34 @@ export class RestorePasswordComponent implements OnInit {
     });
   }
 
-  restorePassword(passwordReference: HTMLInputElement) {
+  restorePassword(password: HTMLInputElement, confirmPassword: HTMLInputElement) {
     this.uploading = true;
+    this.error = null;
     const modalInstance = M.Modal.getInstance($('#signUpModal'));
-    this.invalidPassword = true;
-    const password = passwordReference.value;
     modalInstance.open();
-    if (password) {
-      const body = {
-        email: this.email,
-        password: password
-      };
-      this.profileService.restorePassword(body).subscribe(res => {
-        this.uploading = false;
-        this.serverResponse = res.message;
-        if (res.errorCode === 0) {
-          modalInstance.open();
-        } else {
-          modalInstance.open();
-        }
-        console.log(res);
-      }, err => {
-        if (err) {
-          console.log(err);
-        }
-      });
-      console.log('here');
+
+    if (password.value && password.value === confirmPassword.value) {
+        const body = {
+            email: this.email,
+            password: password.value
+        };
+        this.profileService.restorePassword(body).subscribe(res => {
+            this.uploading = false;
+            this.serverResponse = res.message;
+
+            if (res.errorCode === 0) {
+                modalInstance.open();
+            } else {
+                modalInstance.open();
+            }
+        }, err => {
+            if (err) {
+                console.log(err);
+            }
+        });
     } else {
-      this.uploading = false;
-      this.invalidPassword = false;
+        this.uploading = false;
+        this.error = 'Las contraseñas no coinciden o se encuentran vacías.';
     }
   }
   navigateToLogin() {

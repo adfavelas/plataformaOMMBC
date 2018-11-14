@@ -9,7 +9,7 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./update-password.component.sass']
 })
 export class UpdatePasswordComponent implements OnInit {
-
+    error: String = null;
     constructor(private profileService: ProfileService, private router: Router, private authService: AuthService) {}
 
     ngOnInit() {
@@ -19,6 +19,7 @@ export class UpdatePasswordComponent implements OnInit {
     }
 
     updatePassword(password: HTMLInputElement, confirmPassword: HTMLInputElement) {
+        this.error = null;
         if (password.value === confirmPassword.value) {
             const body = {
                 email: sessionStorage.getItem('email'),
@@ -30,6 +31,8 @@ export class UpdatePasswordComponent implements OnInit {
                     this.router.navigate(['home']);
                 }
             });
+        } else {
+            this.error = 'Las contraseñas no coinciden.';
         }
 
     }

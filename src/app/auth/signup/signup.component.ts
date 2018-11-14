@@ -160,10 +160,11 @@ export class SignupComponent implements OnInit {
                     this.uploading = false;
                     modalInstance.open();
                 } else {
+                    modalInstance.close();
+                    this.error = res.message;
                     this.form.reset();
                     this.birthDate = '';
                     this.uploading = false;
-                    modalInstance.open();
                 }
             }, err => {
                 console.log(err);

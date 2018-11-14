@@ -91,7 +91,6 @@ exports.createUser = (req,res,next) => {
                 sendVerificationEmail(user, (message)=>{
                     res.json({message, errorCode: 0});
                 });
-                // return res.json({successResponse});
             }).catch( err => {
                 User.deleteOne({_id: result._id},function() {
                     return res.json({message: "El correo electrónico que estás registrando ya se encuentra en uso.", errorCode: 1});
@@ -103,10 +102,7 @@ exports.createUser = (req,res,next) => {
             });
         }).catch( err => {
             console.log(err.email);
-            // if(err.email) {
             return res.json({message: "El correo electrónico que estas registrando ya se encuentra en uso.", errorCode: 1});
-            // }
-            // return res.json({message: "Ha ocurrido un error porfavor intente mas tarde.", errorCode: 1});
         })
     });
 }
@@ -305,7 +301,7 @@ exports.sendRestoreEmail = (req,res) => {
                         console.log('Message sent: %s'+ info.messageId);   
                         // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
                         // res.status(200).json({"msg": "mesage  has been sent"});
-                        return res.json({message: "Mensaje enviado.", errorCode:0});
+                        return res.json({message: "Correo de Restauración de Contraseña Enviado.", errorCode:0});
             
                     }
     
