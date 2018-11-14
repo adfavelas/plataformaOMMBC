@@ -4,6 +4,7 @@ import { ProblemService } from '../problem.service';
 
 declare var $: any;
 declare var M: any;
+declare var MathJax: any;
 
 @Component({
   selector: 'app-problem',
@@ -18,6 +19,7 @@ export class ProblemComponent implements OnInit {
         problem;
         empty = true;
         clicked = false;
+
         constructor(private activatedRoute: ActivatedRoute, private problemService: ProblemService) {
         this.activatedRoute.paramMap.subscribe( (paramMap: ParamMap) => {
             this.problemId = paramMap.get('id');
@@ -32,6 +34,8 @@ export class ProblemComponent implements OnInit {
         });
 
         $('.modal').modal({ dismissible: false });
+        $('.tabs').tabs();
+        $('.tabs .indicator').css('background-color', 'rgb(7,103,164)');
     }
 
     submitProblem(answerInput: HTMLInputElement) {
@@ -64,5 +68,10 @@ export class ProblemComponent implements OnInit {
             this.empty = true;
             return;
         }
+    }
+
+    preview(area: HTMLInputElement) {
+        $('#preview').text(area.value);
+        MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'preview']);
     }
 }

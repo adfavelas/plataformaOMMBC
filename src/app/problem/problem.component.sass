@@ -17,3 +17,18 @@
 
 .collection-item-error
     @extend %error-style
+
+.tabs
+    .tab 
+        a
+            color: $primary-color-light
+        a:hover, a:focus, a.active
+            color: $primary-color-light
+            // background-color: rgba(7,103,164,0.1)
+            background-color: transparent
+    .indicator
+        background-color: $primary-color-light
+
+#preview
+    padding: 20px
+    background-color: rgba(7,103,164,0.05)

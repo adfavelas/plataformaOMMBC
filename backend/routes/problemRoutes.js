@@ -7,7 +7,7 @@ router.get('', checkToken, (req,res,next)=> {
     problemFunctions.getProblems(req,res);
 })
 
-router.get('/:problemId', checkToken, (req,res,next)=>{
+router.get('/:problemId', (req,res,next)=>{
     problemFunctions.findProblemById(req,res);
 });
 

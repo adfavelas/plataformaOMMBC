@@ -23,15 +23,30 @@
             </div>
 
             <div class="row">
-                <form class="col s12">
+                <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s2"><a class="active" href="#answerTab">Respuesta</a></li>
+                        <li class="tab col s2"><a href="#previewAnswerTab" (click)="preview(answer)">Vista Previa</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="answerTab">
                     <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">insert_comment</i>
-                        <textarea #answer id="answer" class="materialize-textarea"></textarea>
-                        <label for="answer">Respuesta</label>
-                    </div> 
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">insert_comment</i>
+                            <textarea #answer id="answer" class="materialize-textarea"></textarea>
+                            <label for="answer">Respuesta</label>
+                        </div> 
                     </div>
-                </form>
+                </div>
+
+                <div id="previewAnswerTab">
+                    <div class="row">
+                        <p id="preview"></p>
+                    </div>
+                </div>
             </div>
             
             <div class="row">
