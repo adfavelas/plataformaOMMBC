@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ProblemService } from '../problem.service';
 import { Router } from '@angular/router';
 
@@ -10,10 +10,12 @@ declare var $: any;
   styleUrls: ['./problems.component.sass']
 })
 export class ProblemsComponent implements OnInit {
+    @ViewChild('area') areaRef: ElementRef;
     problems;
     area;
     topic;
     level;
+    reseted = false;
     constructor(private problemService: ProblemService, private router: Router) { }
 
     ngOnInit() {
@@ -104,5 +106,10 @@ export class ProblemsComponent implements OnInit {
                 this.problems = res.problems;
             });
         }
+    }
+
+    resetFilters(areaRef: HTMLInputElement) {
+        // console.log(this.areaRef.nativeElement[0]);
+        // this.areaRef.nativeElement[0].h
     }
 }
