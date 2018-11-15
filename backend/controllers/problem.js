@@ -118,6 +118,5 @@ exports.getAnsweredProblems = (req, res) =>{
                 }
             });
         }
-
     });
 }
