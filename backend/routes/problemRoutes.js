@@ -19,4 +19,8 @@ router.get('/pendingProblems/:studentId', checkToken, (req, res, next) => {
     problemFunctions.getPendingProblems(req,res);
 });
 
+router.get('/answeredProblems/:studentId', checkToken, (req,res,next)=>{
+
+});
+
 module.exports = router;
