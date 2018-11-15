@@ -28,14 +28,12 @@ export class ProfileComponent implements OnInit {
             this.problemService.getPendingProblems(this.student._id).subscribe(res => {
                 if (res.errorCode === 0) {
                     this.pendingProblems = res.problems;
-                    console.log('Pending -> ' + res.problems);
                 }
             });
 
             this.problemService.getCorrectProblems(this.student._id).subscribe(res => {
                 if (res.errorCode === 0) {
                     this.correctProblems = res.problems;
-                    console.log('Correct -> ' + res.problems);
                 }
             });
         });
