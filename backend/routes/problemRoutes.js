@@ -20,7 +20,7 @@ router.get('/pendingProblems/:studentId', checkToken, (req, res, next) => {
 });
 
 router.get('/answeredProblems/:studentId', checkToken, (req,res,next)=>{
-
+    problemFunctions.getAnsweredProblems(req,res);
 });
 
 module.exports = router;
