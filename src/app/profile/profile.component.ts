@@ -11,34 +11,34 @@ import { ProblemService } from '../problem.service';
   styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
-  student;
-  pendingProblems;
-  correctProblems;
-  constructor(private profileService: ProfileService,  private router: Router, private authService: AuthService, private problemService: ProblemService) {
-   }
+    student;
+    pendingProblems;
+    correctProblems;
 
-  ngOnInit() {
-    this.profileService.getUserObject(sessionStorage.getItem('email')).subscribe(res => {
-      if (res.errorCode === 3) {
-        this.router.navigate(['login']);
-        sessionStorage.removeItem('token');
-      }
-        this.student = res.student;
-        this.problemService.getPendingProblems(this.student._id).subscribe(res => {
-          if (res.errorCode === 0) {
-            this.pendingProblems = res.problems;
-            console.log(this.pendingProblems);
-          }
+    constructor(private profileService: ProfileService,  private router: Router, private authService: AuthService, private problemService: ProblemService) {
+    }
+
+    ngOnInit() {
+        this.profileService.getUserObject(sessionStorage.getItem('email')).subscribe(res => {
+            if (res.errorCode === 3) {
+                this.router.navigate(['login']);
+                sessionStorage.removeItem('token');
+            }
+            this.student = res.student;
+            // this.problemService.getPendingProblems(this.student._id).subscribe(res => {
+            //     if (res.errorCode === 0) {
+            //         this.pendingProblems = res.problems;
+            //         console.log('Pending -> ' + res.problems);
+            //     }
+            // });
+
+            this.problemService.getCorrectProblems(this.student._id).subscribe(res => {
+                if (res.errorCode === 0) {
+                    this.correctProblems = res.problems;
+                    console.log('Correct -> ' + res.problems);
+                }
+            });
         });
-
-        this.problemService.getCorrectProblems(this.student._id).subscribe(res => {
-          console.log(res);
-          if (res.errorCode === 0) {
-            this.correctProblems = res.problems;
-          }
-        });
-    });
-
-  }
+    }
 
 }

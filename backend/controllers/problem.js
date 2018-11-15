@@ -6,7 +6,6 @@ const Student   = require("../models/Student");
 const Answer    = require('../models/Answer');
 
 exports.getProblems = (req,res)=> {
-    console.log(req.query);
     const query = {};
     if ( req.query.area && req.query.area != 'null') {
         query.area = req.query.area;
@@ -19,7 +18,6 @@ exports.getProblems = (req,res)=> {
     } 
 
     Problem.find(query, (err,fetchedProblems)=>{
-        // console.log(fetchedProblems);
         if (err) {
             console.log(err);
             return res.json({message: "ha ocurrido un error intentalo mas tarde", errorCode: 1})
@@ -68,18 +66,14 @@ exports.submitProblem = (req,res)=> {
 }
 
 exports.getPendingProblems = (req, res) => {
-    // const studentId = req.params.studentId;
-    let answersRetrieved;
     let problemsId = [];
     //Search answers from given student
-    Answer.find({ studentId: req.params.studentId }, (err, answers) =>{
+    Answer.find({ $and: [ {studentId: req.params.studentId }, {$or: [{status: 'pending'}, {status: 'incorrect'}] } ]}, (err, answers) =>{
         if (err) {
             console.log(err);
             return res.json({ message: "No se encontraron respuestas.", errorCode: 1});
         } else {
-            answersRetrieved = answers;
             //Get problemid from all answers
-
             for(let i = 0; i < answers.length; i++) {
                 if (!(problemsId.includes(answers[i].problemId))) {
                     problemsId.push(answers[i].problemId);
@@ -87,7 +81,7 @@ exports.getPendingProblems = (req, res) => {
             }
 
             //Retrieve all problems
-            Problem.find({ _id: problemsId}, (err, problems) => {
+            Problem.find({_id: problemsId}, (err, problems) => {
                 if (err) {
                     console.log(err);
                     return res.json({ message: "No se encontraron problemas.", errorCode: 1});
@@ -101,32 +95,29 @@ exports.getPendingProblems = (req, res) => {
 }
 
 exports.getAnsweredProblems = (req, res) =>{
-    let answersRetrieved;
     let problemsId = [];
-    Answer.find({studentId: req.params.studentId}, (err, answers) => {
+    Answer.find({ $and: [ {studentId: req.params.studentId }, {status: 'correct'} ]}, (err, answers) => {
         if(err){
             console.log(err);
             return res.json({ message: "No se encontraron respuestas.", errorCode: 1})
         }else{
-            answersRetrieved = answers;
-        }
-
-        //Get problemid from all answers
-        for(let i = 0; i < answers.length; i++) {
-            if (!(problemsId.includes(answers[i].problemId))) {
-                problemsId.push(answers[i].problemId);
-            } 
-        }
-
-        //Retrieve all problems
-        Problem.find({$and: [{_id: problemsId}, {status: "correct"}]}, (err, problems) => {
-            if (err) {
-                console.log(err);
-                return res.json({ message: "No se encontraron problemas.", errorCode: 1});
-            } else {
-                return res.json({ message: "Success", problems: problems, errorCode: 0});
+            //Get problemid from all answers
+            for(let i = 0; i < answers.length; i++) {
+                if (!(problemsId.includes(answers[i].problemId))) {
+                    problemsId.push(answers[i].problemId);
+                } 
             }
-        });
-        console.log("------> animo");
+
+            //Retrieve all problems
+            Problem.find({_id: problemsId}, (err, problems) => {
+                if (err) {
+                    console.log(err);
+                    return res.json({ message: "No se encontraron problemas.", errorCode: 1});
+                } else {
+                    return res.json({ message: "Success", problems: problems, errorCode: 0});
+                }
+            });
+        }
+
     });
 }
