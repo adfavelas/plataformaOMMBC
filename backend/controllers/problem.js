@@ -103,7 +103,8 @@ exports.getPendingProblems = (req, res) => {
 exports.getAnsweredProblems = (req, res) =>{
     let answersRetrieved;
     let problemsId = [];
-    Answer.find({studentId: req.params.studentId}, (err, answers) => {
+    
+    Answer.find({$and: [{studentId: req.params.studentId}, {status: "correct"}]}, (err, answers) => {
         if(err){
             console.log(err);
             return res.json({ message: "No se encontraron respuestas.", errorCode: 1})
@@ -119,7 +120,7 @@ exports.getAnsweredProblems = (req, res) =>{
         }
 
         //Retrieve all problems
-        Problem.find({$and: [{_id: problemsId}, {status: "correct"}]}, (err, problems) => {
+        Problem.find({ _id: problemsId}, (err, problems) => {
             if (err) {
                 console.log(err);
                 return res.json({ message: "No se encontraron problemas.", errorCode: 1});
@@ -127,6 +128,5 @@ exports.getAnsweredProblems = (req, res) =>{
                 return res.json({ message: "Success", problems: problems, errorCode: 0});
             }
         });
-        console.log("------> animo");
     });
 }
