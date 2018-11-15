@@ -13,6 +13,7 @@ import { ProblemService } from '../problem.service';
 export class ProfileComponent implements OnInit {
   student;
   pendingProblems;
+  correctProblems;
   constructor(private profileService: ProfileService,  private router: Router, private authService: AuthService, private problemService: ProblemService) {
    }
 
@@ -23,13 +24,19 @@ export class ProfileComponent implements OnInit {
         sessionStorage.removeItem('token');
       }
         this.student = res.student;
-        
         this.problemService.getPendingProblems(this.student._id).subscribe(res => {
           if (res.errorCode === 0) {
             this.pendingProblems = res.problems;
             console.log(this.pendingProblems);
           }
-        })
+        });
+
+        this.problemService.getCorrectProblems(this.student._id).subscribe(res => {
+          console.log(res);
+          if (res.errorCode === 0) {
+            this.correctProblems = res.problems;
+          }
+        });
     });
 
   }

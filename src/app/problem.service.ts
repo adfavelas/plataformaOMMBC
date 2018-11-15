@@ -28,4 +28,8 @@ export class ProblemService {
     getPendingProblems(studentId: String) {
         return this.http.get<{ message: String, problems: Object, errorCode: Number }>(this.APIURL + '/api/problems/pendingProblems/' + studentId);
     }
+
+    getCorrectProblems(studentId: String) {
+        return this.http.get<{message: String, problems: Object, errorCode: Number}>(this.APIURL + '/api/problems/answeredProblems' + studentId);
+    }
 }
