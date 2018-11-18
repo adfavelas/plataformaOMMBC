@@ -299,13 +299,10 @@ exports.sendRestoreEmail = (req,res) => {
                     console.log("SENDING");
                     if (error) {
                         console.log(error);
-                        // res.send({error, message: "Error Interno porfavor intente mas tarde"});
                         return res.json({ error, message: "Ha ocurrido un error, por favor intente mas tarde.", errorCode: 1});
                         // return message;
                     } else {
                         console.log('Message sent: %s'+ info.messageId);   
-                        // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-                        // res.status(200).json({"msg": "mesage  has been sent"});
                         return res.json({message: "Correo de Restauración de Contraseña Enviado.", errorCode:0});
             
                     }
@@ -345,7 +342,7 @@ exports.getAllStudents = (req,res)=> {
     query.exec((err, fetchedStudents) => {
         if( err ) {
             console.log(err);
-            return res.json({message: "No se ha encontrado", errorCode: 1 });
+            return res.json({message: "No se ha encontrado ningún usuario.", errorCode: 1 });
         } else {
             return res.json({message: "Success", students: fetchedStudents, errorCode: 0});
         }

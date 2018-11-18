@@ -20,7 +20,7 @@ exports.getProblems = (req,res)=> {
     Problem.find(query, (err,fetchedProblems)=>{
         if (err) {
             console.log(err);
-            return res.json({message: "ha ocurrido un error intentalo mas tarde", errorCode: 1})
+            return res.json({message: "Ha ocurrido un error, por favor intentalo mas tarde.", errorCode: 1})
         } else {
             return res.json({message: "Success", problems: fetchedProblems, errorCode: 1});
         }
@@ -28,7 +28,6 @@ exports.getProblems = (req,res)=> {
 }
 
 exports.findProblemById = (req,res)=>{
-    // console.log('---> ' + req.params.id);
     const id = req.params.problemId;
     Problem.findById({_id: id}, (err, problem)=>{
         if( err ){
@@ -39,13 +38,14 @@ exports.findProblemById = (req,res)=>{
         }
     });
 }
+
 // get token for Student id , make answer Object , transfer to bytes, save
 exports.submitProblem = (req,res)=> {
     Student.findOne({email: req.body.email}, (err, student)=> {
         console.log(student);
         if(err) {
             console.log(err);
-            return res.json({message: "No se ha podido encontrar su usuaio ",errorCode: 1});
+            return res.json({message: "No se ha encontrado al usuario.",errorCode: 1});
         } else {
             const answer = new Answer({
                 problemId: req.body.problemId,
@@ -59,7 +59,7 @@ exports.submitProblem = (req,res)=> {
                 return res.json({message: "Success", errorCode: 0});
             }).catch( errorResponse => {
                 console.log(errorResponse);
-                return res.json({message: "Ha ocurrido un error ",errorCode: 1});
+                return res.json({message: "Ha ocurrido un error, por favor intentalo mas tarde.",errorCode: 1});
             })
         }
     });
