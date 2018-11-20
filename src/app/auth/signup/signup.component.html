@@ -13,12 +13,12 @@
 
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="firstName" formControlName="name" type="text" class="validate" required>
+                    <input id="firstName" formControlName="name" type="text" class="validate" required tabindex="1">
                     <label for="firstName">Nombre</label>
                     <span class="helper-text" data-error="Ingresa tu nombre."></span>
                 </div>
                 <div class="input-field col s6">
-                    <input id="lastName" formControlName="lastName" type="text" class="validate" required>
+                    <input id="lastName" formControlName="lastName" type="text" class="validate" required tabindex="2">
                     <label for="lastName">Apellidos</label>
                     <span class="helper-text" data-error="Ingresa al menos un apellido."></span>
                 </div>
@@ -27,10 +27,10 @@
             <div class="row">
                 <div id="pickerField" class="input-field col s6">
                     <label for="birthDate">Birth Date</label>
-                    <input id="birthDate" #birthDate type="text" class="datepicker" (change)="setDate(birthDate)">
+                    <input id="birthDate" #birthDate type="text" class="datepicker" (change)="setDate(birthDate)" tabindex="3">
                 </div>
                 <div class="input-field col s6">
-                    <input id="email" type="email" formControlName="email" class="date" required>
+                    <input id="email" type="email" formControlName="email" class="date" required tabindex="4">
                     <label for="email">Correo electrónico</label>
                     <span class="helper-text" data-error="Ingresa un correo electrónico válido."></span>
                 </div>
@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col s12">
                     <label>País</label>
-                    <select name="country" id="country" formControlName="country" required #selectedCountry (change)="setCountry($event.target.value)">
+                    <select name="country" id="country" formControlName="country" required #selectedCountry (change)="setCountry($event.target.value)" tabindex="5">
                         <option value="0" disabled selected>País</option>
                         <option value="Afganistán">Afganistán</option>
                         <option value="Akrotiri">Akrotiri</option>
@@ -302,7 +302,7 @@
             <div [hidden]="mexican" class="row">                           
                 <div class="col s12">
                     <label>Estado</label>
-                    <select id="state" formControlName="state">
+                    <select id="state" formControlName="state" tabindex="6">
                         <option value="" disabled selected>Estado</option>
                         <option value="Aguascalientes">Aguascalientes</option>
                         <option value="Baja California">Baja California</option>
@@ -343,7 +343,7 @@
             
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="schoolName" type="text" class="validate" formControlName="schoolName" required>
+                    <input id="schoolName" type="text" class="validate" formControlName="schoolName" required tabindex="7">
                     <label for="schoolName">Nombre de tu Escuela</label>
                     <span class="helper-text" data-error="Ingresa el nombre de tu escuela."></span>
                 </div>
@@ -351,12 +351,12 @@
 
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="password" type="password" class="validate" formControlName="password" required>
+                    <input id="password" type="password" class="validate" formControlName="password" required tabindex="8">
                     <label for="password">Contraseña</label>
                     <span class="helper-text" data-error="Ingresa una contraseña."></span>
                 </div>
                 <div class="input-field col s6">
-                    <input id="confirm_password" type="password" class="validate" formControlName="confirm_password" required>
+                    <input id="confirm_password" type="password" class="validate" formControlName="confirm_password" required tabindex="9">
                     <label for="confirm_password">Confirmar contraseña</label>
                     <span class="helper-text" data-error="Ingresa una contraseña."></span>
                 </div>
@@ -365,12 +365,12 @@
 
             <div class="row">
                 <div class="col s12 center-align">
-                    ¿Ya tienes una cuenta? <a href='/login'>Inicia sesión</a>
+                    ¿Ya tienes una cuenta? <a href='/login' tabindex="10">Inicia sesión</a>
                 </div>
             </div>
     
             <div class="row center-align">
-                <button class="waves-effect waves-light btn-large" (click)="submit()">Regístrate</button>
+                <button class="waves-effect waves-light btn-large" (click)="submit()" tabindex="11">Regístrate</button>
             </div>
         </form>
 
