@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   form: FormGroup;
   error: String = null;
-
+  location: Location;
   constructor(private authService: AuthService, private router: Router) {
     if (this.authService.isUserLoggedIn()) {
       this.router.navigate(['home']);

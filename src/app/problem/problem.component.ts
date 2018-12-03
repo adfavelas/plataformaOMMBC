@@ -56,6 +56,7 @@ export class ProblemComponent implements OnInit {
             this.problemService.submitProblem(body).subscribe( res => {
                 if (res.errorCode === 0) {
                     this.uploading = false;
+                    answerInput.value = '';
                     modalInstance.open();
                 } else {
                     this.uploading = false;
