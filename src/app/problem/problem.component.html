@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <div id="submitModal" class="modal">
+            <div id="submitModal" class="modal" (click)="navigatetoProblems()">
                 <div class="modal-content">
                     <div *ngIf="uploading" class="container center-align">
                         <h4>Cargando...</h4>
@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a class="modal-close waves-effect btn-flat">Aceptar</a>
+                    <a class="modal-close waves-effect btn-flat" >Aceptar</a>
                 </div>
             </div>
 

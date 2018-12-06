@@ -31,7 +31,6 @@ export class ProfileComponent implements OnInit {
                                 this.pendingProblems = pendingProblemsResponse.problems;
                             }
                         });
-            
                         this.problemService.getCorrectProblems(this.student._id).subscribe(correctProblemsResponse => {
                             if (correctProblemsResponse.errorCode === 0) {
                                 this.correctProblems = correctProblemsResponse.problems;
@@ -51,7 +50,6 @@ export class ProfileComponent implements OnInit {
                             this.pendingProblems = pendingProblemsResponse.problems;
                         }
                     });
-        
                     this.problemService.getCorrectProblems(this.student._id).subscribe(correctProblemsResponse => {
                         if (correctProblemsResponse.errorCode === 0) {
                             this.correctProblems = correctProblemsResponse.problems;
@@ -60,7 +58,6 @@ export class ProfileComponent implements OnInit {
                 });
             }
         });
-        
     }
 
 }

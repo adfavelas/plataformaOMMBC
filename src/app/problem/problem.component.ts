@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ProblemService } from '../problem.service';
 
 declare var $: any;
@@ -20,7 +20,7 @@ export class ProblemComponent implements OnInit {
         empty = true;
         clicked = false;
 
-        constructor(private activatedRoute: ActivatedRoute, private problemService: ProblemService) {
+        constructor(private activatedRoute: ActivatedRoute, private problemService: ProblemService, private router: Router) {
         this.activatedRoute.paramMap.subscribe( (paramMap: ParamMap) => {
             this.problemId = paramMap.get('id');
         });
@@ -73,5 +73,10 @@ export class ProblemComponent implements OnInit {
     preview(area: HTMLInputElement) {
         $('#preview').text(area.value);
         MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'preview']);
+    }
+
+    navigatetoProblems() {
+        console.log('navifate');
+        this.router.navigate(['problems']);
     }
 }
