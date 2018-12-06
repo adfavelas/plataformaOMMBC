@@ -49,26 +49,19 @@ export class RestorePasswordComponent implements OnInit {
       };
 
       console.log(body);
-      this.profileService.restorePassword(body).subscribe(
-        res => {
+      this.profileService.restorePassword(body).subscribe(res => {
           console.log(res);
-          this.uploading = false;
-          this.serverResponse = res.message;
-          console.log(this.serverResponse);
-          if (res.errorCode === 0) {
-            this.uploading = true;
-            this.error = null;
-            const modalInstance = M.Modal.getInstance($('#signUpModal'));
+            this.uploading = false;
+            this.serverResponse = res.message;
+            const modalInstance = M.Modal.getInstance($('#restorePasswordModal'));
+            console.log(this.serverResponse);
+            if (res.errorCode === 0) {
+                this.uploading = true;
+                this.error = null;
+            } else {
+                this.error = res.message;
+            }
             modalInstance.open();
-          } else if (res.errorCode === 2) {
-            this.error = res.message;
-            const modalInstance = M.Modal.getInstance($('#signUpModal'));
-            modalInstance.open();
-          } else {
-            this.error = res.message;
-            const modalInstance = M.Modal.getInstance($('#signUpModal'));
-            modalInstance.open();
-          }
         },
         err => {
           if (err) {
