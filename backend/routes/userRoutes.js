@@ -47,7 +47,7 @@ router.get('/restorePassword/:token', (req,res,next)=>{
     // res.redirect('http://localhost:4200/restorePassword/'+ token);
 });
 
-router.put('/changePasswordFromRestore', (req,res,next) => {
+router.put('/changePasswordFromRestore',(req,res,next) => {
     userFunctions.changePassword(req,res);
 });
 

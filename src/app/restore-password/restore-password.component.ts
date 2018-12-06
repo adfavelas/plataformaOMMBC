@@ -17,8 +17,13 @@ export class RestorePasswordComponent implements OnInit {
   invalidPassword = true;
   uploading = false;
   serverResponse: String;
-  constructor( public route: ActivatedRoute, private authService: AuthService,
-               private router: Router, private profileService: ProfileService) { }
+  notMatch = false;
+  constructor(
+    public route: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router,
+    private profileService: ProfileService
+  ) {}
 
   ngOnInit() {
     $('.modal').modal({ dismissible: false });
@@ -31,40 +36,53 @@ export class RestorePasswordComponent implements OnInit {
     });
   }
 
-  restorePassword(password: HTMLInputElement, confirmPassword: HTMLInputElement) {
-    this.uploading = true;
-    this.error = null;
-    const modalInstance = M.Modal.getInstance($('#signUpModal'));
-    modalInstance.open();
-
+  restorePassword(
+    password: HTMLInputElement,
+    confirmPassword: HTMLInputElement
+  ) {
+    console.log(password.value);
+    console.log(confirmPassword.value);
     if (password.value && password.value === confirmPassword.value) {
-        const body = {
-            email: this.email,
-            password: password.value
-        };
-        this.profileService.restorePassword(body).subscribe(res => {
-            this.uploading = false;
-            this.serverResponse = res.message;
+      const body = {
+        email: this.email,
+        password: password.value
+      };
 
-            if (res.errorCode === 0) {
-                modalInstance.open();
-            } else if (res.errorCode === 2) {
-                this.error = res.message;
-            } else {
-                this.error = res.message;
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
+      console.log(body);
+      this.profileService.restorePassword(body).subscribe(
+        res => {
+          console.log(res);
+          this.uploading = false;
+          this.serverResponse = res.message;
+          console.log(this.serverResponse);
+          if (res.errorCode === 0) {
+            this.uploading = true;
+            this.error = null;
+            const modalInstance = M.Modal.getInstance($('#signUpModal'));
+            modalInstance.open();
+          } else if (res.errorCode === 2) {
+            this.error = res.message;
+            const modalInstance = M.Modal.getInstance($('#signUpModal'));
+            modalInstance.open();
+          } else {
+            this.error = res.message;
+            const modalInstance = M.Modal.getInstance($('#signUpModal'));
+            modalInstance.open();
+          }
+        },
+        err => {
+          if (err) {
+            console.log(err);
+          }
+        }
+      );
     } else {
-        this.uploading = false;
-        this.error = 'Las contraseñas no coinciden o se encuentran vacías.';
+      this.uploading = false;
+      this.notMatch = true;
+      this.error = 'Las contraseñas no coinciden o se encuentran vacías.';
     }
   }
   navigateToLogin() {
-      this.router.navigate(['login']);
+    this.router.navigate(['login']);
   }
-
 }

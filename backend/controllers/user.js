@@ -220,7 +220,10 @@ exports.updateStudent = (req,res) => {
 }
 
 exports.changePassword = (req,res)=> {
-    const email = req.user.email;
+    let email = req.body.email;
+    if ( !email ) {
+        email = req.user.email;
+    }
     const newPassword = req.body.password;
     User.findOne({email: email}, (err, result)=> {
         if(err){
@@ -318,13 +321,14 @@ exports.sendRestoreEmail = (req,res) => {
 
 exports.restorePasswordAccess = (req,res) => {
     let token = req.params.token;
-    
+    console.log('------?????HERE');
     jwt.verify(token, process.env.JWTSECRET, (err, decoded)=> {
         if(err){
             return res.json({message: "Ha ocurrido un error.", errorCode: 1});
         }
         else {
-            const email = decoded.email;
+            console.log('---------> ' +req.body.email);
+            const email = req.body.email;
             User.findOne({email: email}, (err, user)=> {
                 if ( err ){
                     return res.json({message: "Ha ocurrido un error.", errorCode: 1});
