@@ -27,7 +27,7 @@ export class UpdatePasswordComponent implements OnInit {
     updatePassword(password: HTMLInputElement, confirmPassword: HTMLInputElement) {
         this.uploading = true;
         this.error = null;
-        const modalInstance = M.Modal.getInstance($('#signUpModal'));
+        const modalInstance = M.Modal.getInstance($('#updatePasswordModal'));
         modalInstance.open();
 
         if (password.value === confirmPassword.value) {
