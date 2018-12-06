@@ -51,7 +51,6 @@ export class ProblemComponent implements OnInit {
             const body = {
                 problemId: this.problemId,
                 answer: answerInput.value,
-                email : sessionStorage.getItem('email')
             };
             this.problemService.submitProblem(body).subscribe( res => {
                 if (res.errorCode === 0) {

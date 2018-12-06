@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
       this.authService.login(body).subscribe(response => {
         if (response.message === 'success') {
           this.authService.setToken(response.token);
-          sessionStorage.setItem('email', this.form.get('email').value);
           this.router.navigate(['home']);
         } else {
           this.error = response.message;

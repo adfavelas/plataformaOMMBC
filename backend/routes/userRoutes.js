@@ -18,10 +18,10 @@ router.get('/verifyEmail/:token', (req,res,next)=> {
     userFunctions.verifyEmail(token, res);
 });
 
-router.get('/profile/:email', checkToken ,(req,res,next)=> {
+router.get('/profile', checkToken ,(req,res,next)=> {
     console.log(req.user);
     // console.log(req.params);
-    const email = req.params.email;
+    const email = req.user.email;
     // console.log(email);
     userFunctions.getProfile(email, res);
 });

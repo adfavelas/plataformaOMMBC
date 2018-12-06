@@ -26,7 +26,7 @@ export class UpdateProfileComponent implements OnInit {
 
     ngOnInit() {
 
-        this.profileService.getUserObject(sessionStorage.getItem('email')).subscribe(res => {
+        this.profileService.getUserObject().subscribe(res => {
             if (res.errorCode ===  3) {
                 this.router.navigate(['login']);
             }
@@ -195,8 +195,7 @@ export class UpdateProfileComponent implements OnInit {
             birthDate: this.birthDate,
             country: this.form.get('country').value,
             state: this.form.get('state').value,
-            schoolName: this.form.get('schoolName').value,
-            email: sessionStorage.getItem('email')
+            schoolName: this.form.get('schoolName').value
         };
         return body;
     }

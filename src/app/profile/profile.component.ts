@@ -19,21 +19,21 @@ export class ProfileComponent implements OnInit {
         private authService: AuthService, private problemService: ProblemService) {}
 
     ngOnInit() {
-        this.profileService.getUserObject(sessionStorage.getItem('email')).subscribe(res => {
+        this.profileService.getUserObject().subscribe(res => {
             if (res.errorCode === 3) {
                 this.router.navigate(['login']);
                 sessionStorage.removeItem('token');
             }
             this.student = res.student;
-            this.problemService.getPendingProblems(this.student._id).subscribe(res => {
-                if (res.errorCode === 0) {
-                    this.pendingProblems = res.problems;
+            this.problemService.getPendingProblems(this.student._id).subscribe(pendingProblemsResponse => {
+                if (pendingProblemsResponse.errorCode === 0) {
+                    this.pendingProblems = pendingProblemsResponse.problems;
                 }
             });
 
-            this.problemService.getCorrectProblems(this.student._id).subscribe(res => {
-                if (res.errorCode === 0) {
-                    this.correctProblems = res.problems;
+            this.problemService.getCorrectProblems(this.student._id).subscribe(correctProblemsResponse => {
+                if (correctProblemsResponse.errorCode === 0) {
+                    this.correctProblems = correctProblemsResponse.problems;
                 }
             });
         });

@@ -9,8 +9,8 @@ export class ProfileService {
     constructor(private http: HttpClient ) {}
 
 
-    getUserObject(email: string) {
-        return this.http.get<{student: Object, errorCode: number}>(this.APIURL + '/api/auth/profile/' + email);
+    getUserObject() {
+        return this.http.get<{student: Object, errorCode: number}>(this.APIURL + '/api/auth/profile');
     }
 
     updateStudent(body: Object) {

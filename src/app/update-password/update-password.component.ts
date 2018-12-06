@@ -22,7 +22,6 @@ export class UpdatePasswordComponent implements OnInit {
         this.error = null;
         if (password.value === confirmPassword.value) {
             const body = {
-                email: sessionStorage.getItem('email'),
                 password: password.value
             };
             this.profileService.updatePassword(body).subscribe(res => {

@@ -41,7 +41,7 @@ exports.findProblemById = (req,res)=>{
 
 // get token for Student id , make answer Object , transfer to bytes, save
 exports.submitProblem = (req,res)=> {
-    Student.findOne({email: req.body.email}, (err, student)=> {
+    Student.findOne({email: req.user.email}, (err, student)=> {
         console.log(student);
         if(err) {
             console.log(err);

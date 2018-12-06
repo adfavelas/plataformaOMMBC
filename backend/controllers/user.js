@@ -183,7 +183,7 @@ exports.getProfile = (email,res) => {
 
 exports.updateStudent = (req,res) => {
     console.log(req.body.email)
-    Student.findOne({email: req.body.email}, (err, fetchedStudent)=>{
+    Student.findOne({email: req.user.email}, (err, fetchedStudent)=>{
         if(err){
             return res.json({message: "Usuario no encontrado.", errorCode: 1});
         } else{
@@ -199,11 +199,11 @@ exports.updateStudent = (req,res) => {
                 state: req.body.state,
                 country: req.body.country,
                 birthDate: req.body.birthDate,
-                email: req.body.email,
+                email: req.user.email,
                 solvedProblems: fetchedStudent.solvedProblems,
                 totalScore: fetchedStudent.totalScore
             });
-            Student.updateOne({email: req.body.email}, student, (err, result)=>{
+            Student.updateOne({email: req.user.email}, student, (err, result)=>{
                 if(err) {
                     console.log(err);
                     return res.json({message: "Ha ocurrido un error intente mas tarde.", errorCode: 1});
@@ -220,7 +220,7 @@ exports.updateStudent = (req,res) => {
 }
 
 exports.changePassword = (req,res)=> {
-    const email = req.body.email;
+    const email = req.user.email;
     const newPassword = req.body.password;
     User.findOne({email: email}, (err, result)=> {
         if(err){
