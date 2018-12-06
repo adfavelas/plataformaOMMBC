@@ -19,6 +19,7 @@ router.get('/verifyEmail/:token', (req,res,next)=> {
 });
 
 router.get('/profile/:email', checkToken ,(req,res,next)=> {
+    console.log(req.user);
     // console.log(req.params);
     const email = req.params.email;
     // console.log(email);

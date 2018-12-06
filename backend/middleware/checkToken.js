@@ -10,13 +10,17 @@ module.exports = (req,res,next) => {
                 return res.json({errorCode:3 , message: "Token expired"});
             }
             else {
-                console.log(decoded);
+                // console.log(decoded);
                 User.findOne({email: decoded.email}, (errorUser, user)=> {
                     if(errorUser) {
                         console.log(err);
                         return res.json({errorCode:1 , message: "usuario no valido"})
                     } 
                     else {
+                        req.user = {
+                            email: decoded.email,
+                            userId: decoded.userId
+                        }
                         next();
                     }
                 })
