@@ -3,6 +3,9 @@ import { ProfileService } from '../profile.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 
+declare var $: any;
+declare var M: any;
+
 @Component({
   selector: 'app-update-password',
   templateUrl: './update-password.component.html',
@@ -10,6 +13,9 @@ import { AuthService } from '../auth/auth.service';
 })
 export class UpdatePasswordComponent implements OnInit {
     error: String = null;
+    uploading = false;
+    serverResponse: String;
+
     constructor(private profileService: ProfileService, private router: Router, private authService: AuthService) {}
 
     ngOnInit() {
@@ -19,14 +25,21 @@ export class UpdatePasswordComponent implements OnInit {
     }
 
     updatePassword(password: HTMLInputElement, confirmPassword: HTMLInputElement) {
+        this.uploading = true;
         this.error = null;
+        const modalInstance = M.Modal.getInstance($('#updatePasswordModal'));
+        modalInstance.open();
+
         if (password.value === confirmPassword.value) {
             const body = {
                 password: password.value
             };
             this.profileService.updatePassword(body).subscribe(res => {
+                this.uploading = false;
+                this.serverResponse = res.message;
+
                 if (res.errorCode === 0 ) {
-                    this.router.navigate(['home']);
+                    modalInstance.open();
                 } else {
                     this.error = res.message;
                 }
@@ -35,6 +48,10 @@ export class UpdatePasswordComponent implements OnInit {
             this.error = 'Las contraseñas no coinciden.';
         }
 
+    }
+
+    navigateToLogin() {
+        this.router.navigate(['login']);
     }
 
 }
