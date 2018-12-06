@@ -11,4 +11,8 @@ export class StudentsService {
     getUsers() {
         return this.http.get<{message: String, students: Object, errorCode: Number}>(this.APIURL + '/api/auth/getStudents');
     }
+
+    getStudentById(id: String) {
+        return this.http.get<{message: String, student: Object, errorCode: Number}>(this.APIURL + '/api/auth/student/' + id);
+    }
 }

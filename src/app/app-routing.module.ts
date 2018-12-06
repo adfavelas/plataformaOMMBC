@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent},
   { path: 'problem/:id', component: ProblemComponent},
   { path: 'profile', component: ProfileComponent},
+  { path: 'profile/:id', component: ProfileComponent},
   { path: 'ranking', component: RankingComponent},
   { path: 'problems', component: ProblemsComponent},
   { path: 'settings', component: SettingsComponent},

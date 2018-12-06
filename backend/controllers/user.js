@@ -352,3 +352,14 @@ exports.getAllStudents = (req,res)=> {
         }
     });
 }
+
+exports.getStudentProfile = (req,res) => {
+    Student.findById(req.params.id, (err , student)=>{
+        if(err) {
+            console.log(err)
+            return res.json({errorCode:1, message: "No se ha encontrado usuario"});
+        } else {
+            return res.json({errorCode: 0, message: "Usuario encontrado exitosamente", student});
+        }
+    });
+}

@@ -54,6 +54,10 @@ router.put('/changePasswordFromRestore',(req,res,next) => {
 
 router.get('/getStudents', (req,res,next)=> {
     userFunctions.getAllStudents(req,res);
-})
+});
+
+router.get('/student/:id', (req,res,next)=>{
+    userFunctions.getStudentProfile(req,res);
+});
 
 module.exports = router;

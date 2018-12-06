@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { ProblemService } from '../problem.service';
+import { StudentsService } from '../students.service';
 
 
 @Component({
@@ -15,28 +16,51 @@ export class ProfileComponent implements OnInit {
     pendingProblems;
     correctProblems;
 
-    constructor(private profileService: ProfileService,  private router: Router,
-        private authService: AuthService, private problemService: ProblemService) {}
+    constructor(private profileService: ProfileService,  private router: Router, private studentService: StudentsService,
+        private activatedRoute: ActivatedRoute, private problemService: ProblemService) {}
 
     ngOnInit() {
-        this.profileService.getUserObject().subscribe(res => {
-            if (res.errorCode === 3) {
-                this.router.navigate(['login']);
-                sessionStorage.removeItem('token');
+        this.activatedRoute.paramMap.subscribe( (paramMap: ParamMap) => {
+            const id = paramMap.get('id');
+            if (id) {
+                this.studentService.getStudentById(id).subscribe( res => {
+                    this.student = res.student;
+                    if (this.student) {
+                        this.problemService.getPendingProblems(this.student._id).subscribe(pendingProblemsResponse => {
+                            if (pendingProblemsResponse.errorCode === 0) {
+                                this.pendingProblems = pendingProblemsResponse.problems;
+                            }
+                        });
+            
+                        this.problemService.getCorrectProblems(this.student._id).subscribe(correctProblemsResponse => {
+                            if (correctProblemsResponse.errorCode === 0) {
+                                this.correctProblems = correctProblemsResponse.problems;
+                            }
+                        });
+                    }
+                });
+            } else {
+                this.profileService.getUserObject().subscribe(res => {
+                    if (res.errorCode === 3) {
+                        this.router.navigate(['login']);
+                        sessionStorage.removeItem('token');
+                    }
+                    this.student = res.student;
+                    this.problemService.getPendingProblems(this.student._id).subscribe(pendingProblemsResponse => {
+                        if (pendingProblemsResponse.errorCode === 0) {
+                            this.pendingProblems = pendingProblemsResponse.problems;
+                        }
+                    });
+        
+                    this.problemService.getCorrectProblems(this.student._id).subscribe(correctProblemsResponse => {
+                        if (correctProblemsResponse.errorCode === 0) {
+                            this.correctProblems = correctProblemsResponse.problems;
+                        }
+                    });
+                });
             }
-            this.student = res.student;
-            this.problemService.getPendingProblems(this.student._id).subscribe(pendingProblemsResponse => {
-                if (pendingProblemsResponse.errorCode === 0) {
-                    this.pendingProblems = pendingProblemsResponse.problems;
-                }
-            });
-
-            this.problemService.getCorrectProblems(this.student._id).subscribe(correctProblemsResponse => {
-                if (correctProblemsResponse.errorCode === 0) {
-                    this.correctProblems = correctProblemsResponse.problems;
-                }
-            });
         });
+        
     }
 
 }
