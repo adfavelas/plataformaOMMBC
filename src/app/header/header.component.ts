@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
     console.log(this.router.url);
     this.isLoggedIn = this.authService.isUserLoggedIn();
     this.authService.isAuth$.subscribe( res => {
-      if ( res ) {
+      if ( res  && res !== null) {
         this.isLoggedIn = true;
         $(document).ready(function() {
           $('.dropdown-trigger').dropdown();

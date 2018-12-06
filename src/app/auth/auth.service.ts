@@ -50,7 +50,7 @@ export class AuthService {
 
     logout() {
         sessionStorage.removeItem('token');
-        this.isAuth.next(this.token);
+        this.isAuth.next(null);
     }
 
     forgotPassword(email: string) {

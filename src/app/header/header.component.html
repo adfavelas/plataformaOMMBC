@@ -5,7 +5,7 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
             <!-- Starts ng if -->
 
-                <div *ngIf="isLoggedIn">
+                <div [hidden]="!isLoggedIn">
                     <li><a [routerLink]="['/home']"><i class="material-icons left">home</i>Inicio</a></li>
                     <li><a class="dropdown-trigger" data-target="dropdownPractice"><i class="material-icons left">edit</i>Practica<i class="material-icons right">arrow_drop_down</i></a></li>
                     <li><a [routerLink]="['/ranking']"><i class="material-icons left">insert_chart</i>Ranking</a></li>
