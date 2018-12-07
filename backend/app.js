@@ -9,6 +9,7 @@ dotenv.load();
 const app = express();
 const userRoutes = require('./routes/userRoutes');
 const problemRoutes = require('./routes/problemRoutes');
+const faqQuestionRoutes = require('./routes/faqQuestionRoutes');
 
 mongoose.connect(
   `mongodb+srv://${process.env.user}:${process.env.password}@cluster0-zs90m.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true}
@@ -38,6 +39,7 @@ app.use((req, res, next) => {
 
 app.use('/api/auth', userRoutes);
 app.use('/api/problems', problemRoutes);
+app.use('/api/faq', faqQuestionRoutes);
 
 
 module.exports = app;
