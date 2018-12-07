@@ -16,18 +16,16 @@ export class ProblemsComponent implements OnInit {
     constructor(private problemService: ProblemService, private router: Router) { }
 
     ngOnInit() {
+        // $(document).ready(function() {
+        //     const primaryColorLight = '#0767A4';
+        // });
         this.problemService.getProblems(null).subscribe(res => {
-            if (res.message === 'Success' && res.problems) {
-                console.log(res);
+            if (res.errorCode === 0) {
                 this.problems = res.problems;
+                $('select').formSelect();
+                const secondaryColor = '#0693BE';
+                $('.dropdown-content li:not(.disabled) > a, .dropdown-content li:not(.disabled) > span').css('color', secondaryColor);
             }
-        });
-        $(document).ready(function() {
-            const primaryColorLight = '#0767A4';
-            const secondaryColor = '#0693BE';
-
-            $('select').formSelect();
-            $('.dropdown-content li:not(.disabled) > a, .dropdown-content li:not(.disabled) > span').css('color', secondaryColor);
         });
     }
 

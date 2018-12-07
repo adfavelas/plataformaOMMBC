@@ -321,7 +321,6 @@ exports.sendRestoreEmail = (req,res) => {
 
 exports.restorePasswordAccess = (req,res) => {
     let token = req.params.token;
-    console.log('------?????HERE');
     jwt.verify(token, process.env.JWTSECRET, (err, decoded)=> {
         if(err){
             return res.json({message: "Ha ocurrido un error.", errorCode: 1});

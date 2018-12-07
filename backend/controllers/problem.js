@@ -21,9 +21,8 @@ exports.getProblems = (req,res)=> {
         if (err) {
             console.log(err);
             return res.json({message: "Ha ocurrido un error, por favor intentalo mas tarde.", errorCode: 1})
-        } else {
-            return res.json({message: "Success", problems: fetchedProblems, errorCode: 1});
-        }
+        } 
+        return res.json({message: "Success", problems: fetchedProblems, errorCode: 0});
     }); 
 }
 

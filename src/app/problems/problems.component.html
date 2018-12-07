@@ -3,7 +3,7 @@
         <h1 class="center-align title-text">Lista de Problemas</h1>
     </div>
 
-    <div class="row" *ngIf="problems else noProblems" >
+    <div class="row" [hidden]="!problems">
         <div class="row">
             <div class="col s4">
                 <label>Area</label>
@@ -79,7 +79,7 @@
         </div>
     </div>
 
-    <ng-template #noProblems>
+    <div [hidden]="problems">
         <div class="row center-align">
             <div class="row">
                 <h3>Por el momento no hay problemas disponibles.</h3>
@@ -91,5 +91,5 @@
                 </div>
             </div>
         </div>
-    </ng-template>
+    </div>
 </div>
