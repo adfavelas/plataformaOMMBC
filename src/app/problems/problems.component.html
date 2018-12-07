@@ -56,10 +56,10 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let problem of problems" (click)="viewProblem(problem._id)">
-                            <td>{{problem.area}}</td>
-                            <td>{{problem.topic}}</td>
-                            <td>{{problem.problemDescription}}</td>
-                            <td>{{problem.level}}</td>
+                            <td class="center-align">{{problem.area}}</td>
+                            <td class="center-align">{{problem.topic}}</td>
+                            <td class="problemDescription">{{problem.problemDescription | slice:0:200}} ...</td>
+                            <td class="center-align">{{problem.level}}</td>
                         </tr>
                     </tbody>
                 </table>
