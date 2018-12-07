@@ -24,6 +24,9 @@ export class ProfileComponent implements OnInit {
             const id = paramMap.get('id');
             if (id) {
                 this.studentService.getStudentById(id).subscribe( res => {
+                    if (res.errorCode === 1) {
+                        this.router.navigate(['404']);
+                    }
                     this.student = res.student;
                     if (this.student) {
                         this.problemService.getPendingProblems(this.student._id).subscribe(pendingProblemsResponse => {

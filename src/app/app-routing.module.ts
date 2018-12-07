@@ -38,7 +38,8 @@ const routes: Routes = [
   { path: 'updatePassword', component: UpdatePasswordComponent},
   { path: 'guidedLearning', component: GuidedLearningComponent},
   { path: 'restorePassword/:token', component: RestorePasswordComponent},
-  { path: '**', component: Error404Component}
+  { path: '404', component: Error404Component},
+  { path: '**', component: Error404Component},
 ];
 
 @NgModule({
