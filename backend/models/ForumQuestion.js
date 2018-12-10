@@ -9,6 +9,7 @@ const forumQuestionSchema = mongoose.Schema({
         {
             reply: { type: String, required: true },
             date: { type: Date, required: true },
+            replierName  : { type: String, required: true },
             replierId  : { type: String, required: true }
         }
     ]
