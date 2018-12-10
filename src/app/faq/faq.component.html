@@ -1,7 +1,7 @@
 <div class="container">
     <h1 class="center-align title-text">Preguntas Frecuentes</h1>
 
-    <div [hidden]="!questions">
+    <div [hidden]="questions == null">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, reiciendis ipsam. Tenetur inventore non eveniet eaque perspiciatis quos quis perferendis dolores, dolore corporis ea pariatur ad, reprehenderit molestiae, similique nisi!</p>
     
         <ul class="collapsible">
@@ -12,7 +12,7 @@
         </ul>
     </div>
 
-    <div [hidden]="questions">
+    <div [hidden]="questions != null">
         <div class="row center-align">
             <div class="row">
                 <h3>Por el momento no hay preguntas disponibles.</h3>

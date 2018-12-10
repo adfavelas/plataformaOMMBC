@@ -6,14 +6,15 @@ import { FaqService } from '../faq.service';
 declare var $: any;
 
 @Component({
-  selector: 'app-faq',
-  templateUrl: './faq.component.html',
-  styleUrls: ['./faq.component.sass']
+    selector: 'app-faq',
+    templateUrl: './faq.component.html',
+    styleUrls: ['./faq.component.sass']
 })
+
 export class FaqComponent implements OnInit {
     questions;
 
-    constructor(private authService: AuthService, 
+    constructor(private authService: AuthService,
                 private faqService: FaqService,
                 private router: Router) { }
 

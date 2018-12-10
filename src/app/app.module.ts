@@ -25,6 +25,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ProblemsComponent } from './problems/problems.component';
 import { ProblemComponent } from './problem/problem.component';
 import { RankingComponent } from './ranking/ranking.component';
+import { ForumComponent } from './forum/forum.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { RankingComponent } from './ranking/ranking.component';
     ForgotPasswordComponent,
     ProblemsComponent,
     ProblemComponent,
-    RankingComponent
+    RankingComponent,
+    ForumComponent
   ],
   imports: [
     BrowserModule,
