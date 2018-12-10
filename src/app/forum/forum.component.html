@@ -4,6 +4,36 @@
 	<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, reiciendis ipsam. Tenetur inventore non eveniet eaque perspiciatis quos quis perferendis dolores, dolore corporis ea pariatur ad, reprehenderit molestiae, similique nisi!</p>
 
 	<ul class="collapsible popout">
+		<!-- <li *ngFor="let question of questions">
+			<div class="collapsible-header">{{question.title}}</div>
+			<div class="collapsible-body">
+				<div class="row question">
+					<p>{{question.question}}</p>
+				</div>
+				<div class="row">
+					<p>Respuestas</p>
+					<ul class="collection">
+						<li class="collection-item avatar" *ngFor="let reply of question.replies">
+							<i class="material-icons circle red">play_arrow</i>
+							<span class="title">{{reply.replierId}}</span>
+							<p>{{reply.reply}}</p>
+						</li>
+					</ul>
+				</div>
+				<div class="row">
+					<p>Escribe una respuesta</p>
+					<form action="">
+						<div class="input-field col s11">
+							<textarea id="reply" class="materialize-textarea"></textarea>
+							<label for="reply">Respuesta</label>
+						</div>
+						<div class="input-field col s1">
+							<button class="btn waves-effect" type="submit"><i class="material-icons">send</i></button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</li> -->
 		<li>
 			<div class="collapsible-header">
 				Título de la Pregunta

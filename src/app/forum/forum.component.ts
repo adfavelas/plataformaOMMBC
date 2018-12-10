@@ -8,7 +8,7 @@ declare let $: any;
   styleUrls: ['./forum.component.sass']
 })
 export class ForumComponent implements OnInit {
-
+  questions;
   constructor() { }
 
   ngOnInit() {
@@ -18,6 +18,6 @@ export class ForumComponent implements OnInit {
       $('.tooltipped').tooltip();
       $('.modal').modal();
     });
-  }
+}
 
 }

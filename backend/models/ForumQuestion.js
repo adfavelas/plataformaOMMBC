@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const forumQuestionSchema = mongoose.Schema({
+    title: { type: String, requirede: true },
     question: { type: String, required: true },
     date: { type: Date, required: true },
     questionerId: { type: String, required: true },
