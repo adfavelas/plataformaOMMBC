@@ -7,4 +7,8 @@ router.get('', checkToken, (req, res, next) => {
     faqQuestionFunctions.getQuestions(req, res);
 });
 
+router.get('/forum', checkToken , (req,res,next)=> {
+    faqQuestionFunctions.getForumQuestions(req,res);
+});
+
 module.exports = router;

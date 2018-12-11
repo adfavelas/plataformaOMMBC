@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ForumService } from '../forum.service';
 
 declare let $: any;
 
@@ -9,7 +10,7 @@ declare let $: any;
 })
 export class ForumComponent implements OnInit {
   questions;
-  constructor() { }
+  constructor(private forumService: ForumService ) { }
 
   ngOnInit() {
     $(document).ready(function() {
@@ -18,6 +19,11 @@ export class ForumComponent implements OnInit {
       $('.tooltipped').tooltip();
       $('.modal').modal();
     });
+
+    this.forumService.getForumQuesiions().subscribe( res => {
+      console.log(res);
+    });
+
 }
 
 }

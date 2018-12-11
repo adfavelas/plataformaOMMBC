@@ -13,4 +13,5 @@ export class FaqService {
     return this.http.get<{ message: string, questions: object, errorCode: number }>(this.APIURL + '/api/faq');
   }
 
+
 }
