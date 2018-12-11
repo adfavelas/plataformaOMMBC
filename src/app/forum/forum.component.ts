@@ -21,7 +21,9 @@ export class ForumComponent implements OnInit {
     });
 
     this.forumService.getForumQuesiions().subscribe( res => {
-      console.log(res);
+      if (res.errorCode === 0) {
+        this.questions = res.forumQuestions;
+      }
     });
 
 }
