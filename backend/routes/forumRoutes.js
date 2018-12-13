@@ -14,6 +14,10 @@ router.post('/createForumQuestion', checkToken, (req,res,next)=>{
     forumFunctions.createForumQuestion(req,res);
 });
 
+router.put('/createReply', checkToken, (req,res,next)=> {
+    // questionId, pregunta , emailUser
+    forumFunctions.createReply(req,res);
+});
 // router.get('/create' , (req,res,next)=> {
 //     const now = Date.now();
 //     const forum = new ForumQuestion({
