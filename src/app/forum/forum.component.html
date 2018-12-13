@@ -21,14 +21,22 @@
 					</ul>
 				</div>
 				<div class="row">
+					<div *ngIf="replyError != null" class="container ">
+						<ul class="collection">
+							<li class="collection-item center-align collection-item-error">{{replyError}}</li>
+						</ul>
+						<p class="center-align"></p>
+					</div>
+				</div>
+				<div class="row">
 					<p>Escribe una respuesta</p>
-					<form action="">
+					<form action="" [formGroup]="replyForm">
 						<div class="input-field col s11">
-							<textarea id="reply" class="materialize-textarea"></textarea>
+							<textarea formControlName="reply" id="reply" class="materialize-textarea"></textarea>
 							<label for="reply">Respuesta</label>
 						</div>
 						<div class="input-field col s1">
-							<button class="btn waves-effect" type="submit"><i class="material-icons">send</i></button>
+							<button (click)="createReply()" class="btn waves-effect" type="submit"><i class="material-icons">send</i></button>
 						</div>
 					</form>
 				</div>
@@ -48,14 +56,14 @@
 		<div class="modal-content">
 			<h4>Envía tu Pregunta</h4>
 
-			<div *ngIf="error != null" class="container ">
+			<div *ngIf="questionError != null" class="container ">
 				<ul class="collection">
-					<li class="collection-item center-align collection-item-error">{{error}}</li>
+					<li class="collection-item center-align collection-item-error">{{questionError}}</li>
 				</ul>
 				<p class="center-align"></p>
 			</div>
 			
-			<form action="" [formGroup]="form">
+			<form action="" [formGroup]="questionForm">
 				<div class="row">
 					<div class="input-field col s12">
 						<input formControlName="title" placeholder="Título que se mostrará para la pregunta" id="questionTitle" type="text" class="validate">

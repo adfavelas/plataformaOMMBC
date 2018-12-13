@@ -13,6 +13,10 @@ export class ForumService {
   }
 
   createForumQuestion(question: Object): any {
-    return this.http.put<{ message: String, errorCode: Number, result: Object}>(this.APIURL + '/api/forum/createForumQuestion', question);
+    return this.http.post<{ message: String, errorCode: Number }>(this.APIURL + '/api/forum/createForumQuestion', question);
+  }
+
+  createForumReply(reply: Object): any {
+    return this.http.post<{ message: String, errorCode: Number }>(this.APIURL + '/api/forum/createReply', reply);
   }
 }
