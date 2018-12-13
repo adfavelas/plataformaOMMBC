@@ -17,6 +17,6 @@ export class ForumService {
   }
 
   createForumReply(reply: Object): any {
-    return this.http.post<{ message: String, errorCode: Number }>(this.APIURL + '/api/forum/createReply', reply);
+    return this.http.put<{ message: String, errorCode: Number }>(this.APIURL + '/api/forum/createReply', reply);
   }
 }
