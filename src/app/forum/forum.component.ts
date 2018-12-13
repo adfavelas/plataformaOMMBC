@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ForumService } from '../forum.service';
+import { ForumService } from '../services/forum.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 declare let $: any;

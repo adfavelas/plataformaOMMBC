@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileService } from '../profile.service';
+import { ProfileService } from '../services/profile.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../services/auth.service';
 
 declare var $: any;
 declare var M: any;

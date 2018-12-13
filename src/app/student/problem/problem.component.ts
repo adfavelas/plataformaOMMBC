@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { ProblemService } from '../problem.service';
+import { ProblemService } from '../../services/problem.service';
 
 declare var $: any;
 declare var M: any;

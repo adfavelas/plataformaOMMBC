@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileService } from '../profile.service';
+import { ProfileService } from '../services/profile.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
-import { ProblemService } from '../problem.service';
-import { StudentsService } from '../students.service';
+import { AuthService } from '../services/auth.service';
+import { ProblemService } from '../services/problem.service';
+import { StudentsService } from '../services/students.service';
 
 
 @Component({

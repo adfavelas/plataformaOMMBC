@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ProblemService } from '../problem.service';
+import { ProblemService } from '../../services/problem.service';
 import { Router } from '@angular/router';
 
 declare var $: any;
