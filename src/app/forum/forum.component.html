@@ -38,61 +38,41 @@
 
 
 	<div class="fixed-action-btn">
-		<a class="btn-floating btn-large tooltipped modal-trigger" data-position="left" data-tooltip="Envía tu Pregunta" href="#modal1">
+		<a class="btn-floating btn-large tooltipped modal-trigger" data-position="left" data-tooltip="Envía tu Pregunta" href="#forumQuestionModal">
 			<i class="large material-icons">add</i>
 		</a>
 	</div>
 
 	<!-- Modal Structure -->
-	<div id="modal1" class="modal">
+	<div id="forumQuestionModal" class="modal">
 		<div class="modal-content">
 			<h4>Envía tu Pregunta</h4>
+
+			<div *ngIf="error != null" class="container ">
+				<ul class="collection">
+					<li class="collection-item center-align collection-item-error">{{error}}</li>
+				</ul>
+				<p class="center-align"></p>
+			</div>
 			
-			<form action="">
+			<form action="" [formGroup]="form">
 				<div class="row">
 					<div class="input-field col s12">
-						<input placeholder="Título que se mostrará para la pregunta" id="questionTitle" type="text" class="validate">
+						<input formGroupName="title" placeholder="Título que se mostrará para la pregunta" id="questionTitle" type="text" class="validate">
 						<label for="questionTitle">Título</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<textarea placeholder="Descripción de la pregunta. Explica tu pregunta de manera detallada." id="questionDescription" class="materialize-textarea"></textarea>
+						<textarea formGroupName="question" placeholder="Descripción de la pregunta. Explica tu pregunta de manera detallada." id="questionDescription" class="materialize-textarea"></textarea>
 						<label for="questionDescription">Descripción</label>
 					</div>
 				</div>
 			</form>
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-			<a href="#!" class="modal-close waves-effect waves-green btn-flat">Enviar</a>
+			<a class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+			<a (click)="createQuestion()" class="waves-effect waves-green btn-flat">Enviar</a>
 		</div>
 	</div>
-
-	<!-- <ul class="collapsible popout">
-		<li>
-			<div class="collapsible-header">Envía tu Pregunta</div>
-			<div class="collapsible-body">
-				<form action="">
-					<div class="row">
-						<div class="input-field col s12">
-							<input placeholder="Título que se mostrará para la pregunta" id="questionTitle" type="text" class="validate">
-							<label for="questionTitle">Título</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<textarea placeholder="Descripción de la pregunta. Explica tu pregunta de manera detallada." id="questionDescription" class="materialize-textarea"></textarea>
-							<label for="questionDescription">Descripción</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<button class="btn waves-effect" type="submit">Enviar</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</li>
-	</ul> -->
 </div>	
