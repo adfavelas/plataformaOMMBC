@@ -10,7 +10,7 @@
 				<div class="row question">
 					<p>{{question.question}}</p>
 				</div>
-				<div class="row">
+				<div [hidden]="!question.replies" class="row">
 					<p>Respuestas</p>
 					<ul class="collection">
 						<li class="collection-item avatar" *ngFor="let reply of question.replies">
@@ -36,7 +36,7 @@
 							<label for="reply">Respuesta</label>
 						</div>
 						<div class="input-field col s1">
-							<button (click)="createReply()" class="btn waves-effect" type="submit"><i class="material-icons">send</i></button>
+							<a (click)="createReply(question._id)" class="btn waves-effect"><i class="material-icons">send</i></a>
 						</div>
 					</form>
 				</div>

@@ -60,8 +60,9 @@ export class ForumComponent implements OnInit {
     };
   }
 
-  buildReply(): Object {
+  buildReply(questionId: string): Object {
     return {
+      questionId: questionId,
       reply: this.replyForm.controls.reply.value
     };
   }
@@ -79,8 +80,8 @@ export class ForumComponent implements OnInit {
     });
   }
 
-  createReply(): void {
-    const newReply = this.buildReply();
+  createReply(questionId: string): void {
+    const newReply = this.buildReply(questionId);
     this.forumService.createForumReply(newReply).subscribe(res => {
       if (res.errorCode === 0) {
         this.getForumQuestions();
