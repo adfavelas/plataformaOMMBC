@@ -26,6 +26,6 @@ exports.createForumQuestion = (req,res)=> {
         return res.json({message: "success", errorCode: 0 , result});
     }).catch( err => {
         console.log(err);
-        return res.json({errorCode: 1, message: "failed"});
+        return res.json({errorCode: 1, message: "The question could not be created."});
     });
 }
