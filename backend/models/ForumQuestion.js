@@ -4,7 +4,7 @@ const forumQuestionSchema = mongoose.Schema({
     title: { type: String, required: true },
     question: { type: String, required: true },
     date: { type: Date, required: true },
-    questionerId: { type: String, required: true },
+    questionerEmail: { type: String, required: true },
     replies: [
         {
             reply: { type: String, required: true },

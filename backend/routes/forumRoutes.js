@@ -9,6 +9,11 @@ router.get('', checkToken , (req,res,next)=> {
     forumFunctions.getForumQuestions(req,res);
 });
 
+
+router.get('/createForumQuestion', checkToken, (req,res,next)=>{
+    forumFunctions.createForumQuestion(req,res);
+});
+
 // router.get('/create' , (req,res,next)=> {
 //     const now = Date.now();
 //     const forum = new ForumQuestion({
