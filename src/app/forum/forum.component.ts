@@ -11,12 +11,16 @@ declare let $: any;
 })
 export class ForumComponent implements OnInit {
   questions;
-  error;
-  form: FormGroup;
+  replyError;
+  questionError;
+  questionForm: FormGroup;
+  replyForm: FormGroup;
+
   constructor(private forumService: ForumService ) { }
 
   ngOnInit() {
-    this.initForm();
+    this.initQuestionForm();
+    this.initReplyForm();
     $(document).ready(function() {
       $('.collapsible').collapsible();
       $('.fixed-action-btn').floatingActionButton();
@@ -28,10 +32,16 @@ export class ForumComponent implements OnInit {
 
   }
 
-  initForm(): void {
-    this.form = new FormGroup({
+  initQuestionForm(): void {
+    this.questionForm = new FormGroup({
       title: new FormControl(null, Validators.required),
       question: new FormControl(null, Validators.required)
+    });
+  }
+
+  initReplyForm(): void {
+    this.replyForm = new FormGroup({
+      reply: new FormControl(null, Validators.required)
     });
   }
 
@@ -45,8 +55,14 @@ export class ForumComponent implements OnInit {
 
   buildQuestion(): Object {
     return {
-      title: this.form.controls.title.value,
-      question: this.form.controls.question.value
+      title: this.questionForm.controls.title.value,
+      question: this.questionForm.controls.question.value
+    };
+  }
+
+  buildReply(): Object {
+    return {
+      reply: this.replyForm.controls.reply.value
     };
   }
 
@@ -55,9 +71,22 @@ export class ForumComponent implements OnInit {
     this.forumService.createForumQuestion(newQuestion).subscribe(res => {
       if (res.errorCode === 0) {
         this.getForumQuestions();
+        this.questionForm.reset();
         $('#forumQuestionModal').modal('close');
       } else {
-        this.error = res.message;
+        this.questionError = res.message;
+      }
+    });
+  }
+
+  createReply(): void {
+    const newReply = this.buildReply();
+    this.forumService.createForumReply(newReply).subscribe(res => {
+      if (res.errorCode === 0) {
+        this.getForumQuestions();
+        this.replyForm.reset();
+      } else {
+        this.replyError = res.message;
       }
     });
   }
