@@ -58,13 +58,13 @@
 			<form action="" [formGroup]="form">
 				<div class="row">
 					<div class="input-field col s12">
-						<input formGroupName="title" placeholder="Título que se mostrará para la pregunta" id="questionTitle" type="text" class="validate">
+						<input formControlName="title" placeholder="Título que se mostrará para la pregunta" id="questionTitle" type="text" class="validate">
 						<label for="questionTitle">Título</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<textarea formGroupName="question" placeholder="Descripción de la pregunta. Explica tu pregunta de manera detallada." id="questionDescription" class="materialize-textarea"></textarea>
+						<textarea formControlName="question" placeholder="Descripción de la pregunta. Explica tu pregunta de manera detallada." id="questionDescription" class="materialize-textarea"></textarea>
 						<label for="questionDescription">Descripción</label>
 					</div>
 				</div>

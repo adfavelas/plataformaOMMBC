@@ -12,7 +12,7 @@ export class ForumService {
     return this.http.get<{ message: string, forumQuestions: Object, errorCode: number}>(this.APIURL + '/api/forum');
   }
 
-  // createForumDummy() {
-  //   return this.http.get<{ message: string, forumQuestions: Object, errorCode: number}>(this.APIURL + '/api/forum/create');
-  // }
+  createForumQuestion(question: Object): any {
+    return this.http.post<{ message: String, errorCode: Number, result: Object}>(this.APIURL + '/api/forum/createForumQuestion', question);
+  }
 }

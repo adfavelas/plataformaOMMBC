@@ -13,12 +13,11 @@ exports.getForumQuestions = (req,res)=> {
 
 exports.createForumQuestion = (req,res)=> {
     const date = Date.now();
-
     const forumQuestion = new ForumQuestion({
         title : req.body.title,
         question: req.body.question,
         date: date,
-        questionerId: req.user.email,
+        questionerEmail: req.user.email,
         replies: []
     });
 

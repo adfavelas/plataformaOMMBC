@@ -10,7 +10,7 @@ router.get('', checkToken , (req,res,next)=> {
 });
 
 
-router.get('/createForumQuestion', checkToken, (req,res,next)=>{
+router.post('/createForumQuestion', checkToken, (req,res,next)=>{
     forumFunctions.createForumQuestion(req,res);
 });
 

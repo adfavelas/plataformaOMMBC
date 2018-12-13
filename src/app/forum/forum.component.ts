@@ -30,8 +30,8 @@ export class ForumComponent implements OnInit {
 
   initForm(): void {
     this.form = new FormGroup({
-      title: new FormControl(Validators.required),
-      question: new FormControl(Validators.required)
+      title: new FormControl(null, Validators.required),
+      question: new FormControl(null, Validators.required)
     });
   }
 
@@ -43,12 +43,11 @@ export class ForumComponent implements OnInit {
     });
   }
 
-  buildQuestions(): object {
-    const newQuestion = {
+  buildQuestion(): Object {
+    return {
       title: this.form.controls.title.value,
-      question: this.form.controls.question.value,
+      question: this.form.controls.question.value
     };
-    return newQuestion;
   }
 
   createQuestion(): void {
