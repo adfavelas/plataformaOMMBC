@@ -10,7 +10,7 @@ export class ProfileService {
 
 
     getUserObject() {
-        return this.http.get<{student: Object, errorCode: number}>(this.APIURL + '/api/auth/profile');
+        return this.http.get<{student: any, errorCode: number}>(this.APIURL + '/api/auth/profile');
     }
 
     updateStudent(body: Object) {

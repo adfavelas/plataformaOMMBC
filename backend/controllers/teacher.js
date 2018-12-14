@@ -16,8 +16,9 @@ exports.getPendingTeachers = (req, res, next) => {
             if (err) {
                 console.log(err);
                 return res.json({ message: 'Ha ocurrido un error, por favor intentalo más tarde.', teachers: null, errorCode: 1 });
+            } else  {
+                return res.json({ message: 'success', teachers: teachers, errorCode: 0 });
             }
-            return res.json({ message: 'success', teachers: teachers, errorCode: 0 });
         });
     });
 }

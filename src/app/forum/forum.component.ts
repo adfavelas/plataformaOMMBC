@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ForumService } from '../services/forum.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ProfileService } from '../services/profile.service';
 
 declare let $: any;
 
@@ -16,7 +17,7 @@ export class ForumComponent implements OnInit {
   questionForm: FormGroup;
   replyForm: FormGroup;
 
-  constructor(private forumService: ForumService ) { }
+  constructor(private forumService: ForumService, private profileService: ProfileService ) { }
 
   ngOnInit() {
     this.initQuestionForm();
@@ -80,15 +81,26 @@ export class ForumComponent implements OnInit {
     });
   }
 
-  createReply(questionId: string): void {
-    const newReply = this.buildReply(questionId);
+  createReply(question): void {
+    const newReply = this.buildReply(question._id);
     this.forumService.createForumReply(newReply).subscribe(res => {
       if (res.errorCode === 0) {
-        this.getForumQuestions();
-        this.replyForm.reset();
+        this.addReply(newReply, question);
       } else {
         this.replyError = res.message;
       }
+      this.replyForm.reset();
+    });
+  }
+
+  addReply(newReply, question) {
+    this.profileService.getUserObject().subscribe( res => {
+      console.log(res);
+      newReply.date = Date.now();
+      newReply.replierName = res.student.name;
+      newReply.replierEmail = res.student.email;
+      question.replies.push(newReply);
+
     });
   }
 
