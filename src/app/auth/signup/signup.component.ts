@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 declare var $: any;
 declare var M: any;
@@ -20,14 +20,17 @@ export class SignupComponent implements OnInit {
     form: FormGroup;
     uploading = false;
     error: String = null;
-
-    constructor(private authService: AuthService, private router: Router) {
+    role = 'student';
+    constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
         if (this.authService.isUserLoggedIn()) {
           this.router.navigate(['home']);
         }
     }
 
     ngOnInit() {
+
+
+
         this.initForm();
 
         $(document).ready(function() {
@@ -193,6 +196,7 @@ export class SignupComponent implements OnInit {
             state: this.form.get('state').value,
             schoolName: this.form.get('schoolName').value,
             password: this.form.get('password').value,
+            role: this.role
         };
         return body;
     }
