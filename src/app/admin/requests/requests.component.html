@@ -1,0 +1,28 @@
+<div class="container">
+  <h1 class="center-align title-text">Solicitudes de Maestros</h1>
+
+  <div class="row">
+    <table class="highlight">
+      <thead>
+        <tr>
+            <th class="title-text center-align">Name</th>
+            <th class="title-text center-align">Email</th>
+            <th class="title-text center-align">Status</th>
+            <th class="title-text center-align">Action</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr *ngFor="let teacher of teachers">
+          <td class="center-align">{{teacher.name}}</td>
+          <td class="center-align">{{teacher.email}}</td>
+          <td class="center-align">{{teacher.status}}</td>
+          <td class="center-align">
+            <a (click)="acceptTeacher(teacher._id)" class="waves-effect btn">Accept</a> &nbsp;&nbsp;
+            <a (click)="declineTeacher(teacher._id)" class="waves-effect btn decline-btn">Decline</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

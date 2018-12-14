@@ -12,6 +12,7 @@ const userRoutes = require('./routes/userRoutes');
 const problemRoutes = require('./routes/problemRoutes');
 const faqQuestionRoutes = require('./routes/faqQuestionRoutes');
 const forumRoutes = require('./routes/forumRoutes');
+const teacherRoutes = require('./routes/teacherRoutes');
 
 mongoose.connect(
   `mongodb+srv://${process.env.user}:${process.env.password}@cluster0-zs90m.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true}
@@ -44,6 +45,7 @@ app.use('/api/auth', userRoutes);
 app.use('/api/problems', problemRoutes);
 app.use('/api/faq', faqQuestionRoutes);
 app.use('/api/forum', forumRoutes);
+app.use('/api/teachers', teacherRoutes);
 
 
 module.exports = app;

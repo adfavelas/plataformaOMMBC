@@ -19,6 +19,7 @@ import { ProblemsComponent } from './student/problems/problems.component';
 import { ProblemComponent } from './student/problem/problem.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { ForumComponent } from './forum/forum.component';
+import { RequestsComponent } from './admin/requests/requests.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,8 @@ const routes: Routes = [
   { path: 'guidedLearning', component: GuidedLearningComponent},
   { path: 'restorePassword/:token', component: RestorePasswordComponent},
   { path: 'forum', component: ForumComponent},
+
+  { path: 'requests', component: RequestsComponent},
   { path: '404', component: Error404Component},
   { path: '**', component: Error404Component},
 ];

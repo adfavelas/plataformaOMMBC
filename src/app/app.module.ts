@@ -26,6 +26,7 @@ import { ProblemsComponent } from './student/problems/problems.component';
 import { ProblemComponent } from './student/problem/problem.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { ForumComponent } from './forum/forum.component';
+import { RequestsComponent } from './admin/requests/requests.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ForumComponent } from './forum/forum.component';
     ProblemsComponent,
     ProblemComponent,
     RankingComponent,
-    ForumComponent
+    ForumComponent,
+    RequestsComponent
   ],
   imports: [
     BrowserModule,
