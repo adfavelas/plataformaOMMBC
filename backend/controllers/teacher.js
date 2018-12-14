@@ -7,16 +7,17 @@ exports.getPendingTeachers = (req, res, next) => {
             console.log(err);
             return res.json({ message: 'Ha ocurrido un error, por favor intentalo más tarde.', teachers: null, errorCode: 1 });
         }
-        user.forEach((user) => {
-            const pendingTeachers = [];
-            Teacher.findOne({ email: user.email }, (err, teacher) => {
-                if (err) {
-                    console.log(err);
-                    return res.json({ message: 'Ha ocurrido un error, por favor intentalo más tarde.', teachers: null, errorCode: 1 });
-                }
-                pendingTeachers.push(teacher);
-            });
-            return res.json({ message: 'success', teachers: pendingTeachers, errorCode: 0 });
+        const pendingTeachersEmails = [];
+        users.forEach((user) => {
+            pendingTeachersEmails.push(user.email);
+        });
+
+        Teacher.find({ email: pendingTeachersEmails }, (err, teachers) => {
+            if (err) {
+                console.log(err);
+                return res.json({ message: 'Ha ocurrido un error, por favor intentalo más tarde.', teachers: null, errorCode: 1 });
+            }
+            return res.json({ message: 'success', teachers: teachers, errorCode: 0 });
         });
     });
 }
