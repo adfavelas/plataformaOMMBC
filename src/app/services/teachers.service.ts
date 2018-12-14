@@ -12,4 +12,9 @@ export class TeachersService {
   getPendingTeachers() {
     return this.http.get<{ message: String, teachers: Object, errorCode: Number }>(this.APIURL + '/api/teachers/getPendingTeachers');
   }
+
+  registerTeacher(body: Object) {
+    console.log(body);
+    return this.http.post<{message: String, errorCode: Number}>(`${this.APIURL}/api/teachers/createTeacher`, body);
+  }
 }

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { TeachersService } from 'src/app/services/teachers.service';
 
 declare var $: any;
 declare var M: any;
@@ -21,7 +22,7 @@ export class SignupComponent implements OnInit {
     uploading = false;
     error: String = null;
     role = 'student';
-    constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
+    constructor(private authService: AuthService, private router: Router, private teacherService: TeachersService) {
         if (this.authService.isUserLoggedIn()) {
           this.router.navigate(['home']);
         }
@@ -29,8 +30,9 @@ export class SignupComponent implements OnInit {
 
     ngOnInit() {
 
-
-
+        if ( this.router.url.includes('teacher')) {
+            this.role = 'teacher';
+        }
         this.initForm();
 
         $(document).ready(function() {
@@ -156,22 +158,41 @@ export class SignupComponent implements OnInit {
             this.uploading = true;
             modalInstance.open();
             const authData = this.buildUserObject();
-            this.authService.createUser(authData).subscribe( res => {
-                this.serverResponse = res.message;
-                console.log(res);
-                if ( res.errorCode === 0 ) {
-                    this.uploading = false;
-                    modalInstance.open();
-                } else {
-                    modalInstance.close();
-                    this.error = res.message;
-                    this.form.reset();
-                    this.birthDate = '';
-                    this.uploading = false;
-                }
-            }, err => {
-                console.log(err);
-            });
+            if ( this.role === 'student') {
+                this.authService.createUser(authData).subscribe( res => {
+                    this.serverResponse = res.message;
+                    console.log(res);
+                    if ( res.errorCode === 0 ) {
+                        this.uploading = false;
+                        modalInstance.open();
+                    } else {
+                        modalInstance.close();
+                        this.error = res.message;
+                        this.form.reset();
+                        this.birthDate = '';
+                        this.uploading = false;
+                    }
+                }, err => {
+                    console.log(err);
+                });
+            } else if ( this.role === 'teacher') {
+                this.teacherService.registerTeacher(authData).subscribe( res => {
+                    this.serverResponse = res.message;
+                    console.log(res);
+                    if ( res.errorCode === 0 ) {
+                        this.uploading = false;
+                        modalInstance.open();
+                    } else {
+                        modalInstance.close();
+                        this.error = res.message;
+                        this.form.reset();
+                        this.birthDate = '';
+                        this.uploading = false;
+                    }
+                }, err => {
+                    console.log(err);
+                });
+            }
         } else {
             this.error = 'Verifica que todos los campos estén correctamente llenos.';
             return;
