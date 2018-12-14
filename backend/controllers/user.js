@@ -70,7 +70,7 @@ exports.createUser = (req,res,next) => {
           email: req.body.email,
           password: hash,
           status: 'pending',
-          role: 'student'
+          role: req.body.role
         });
         
         user.save().then( result => {

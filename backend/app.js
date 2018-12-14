@@ -22,6 +22,7 @@ mongoose.connect(
 })
 .catch(() => {
   console.log("Connection failed!");
+  process.exit(1);
 });
 
 
