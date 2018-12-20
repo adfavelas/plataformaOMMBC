@@ -27,18 +27,22 @@ export class ProblemComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.problemService.getProblemById(this.problemId).subscribe(res => {
+            if (res.errorCode === 0) {
+                this.problem = res.problem;
+            } else {
+                this.router.navigate(['problems']);
+            }
+        });
         this.problemService.isProblemAnswered(this.problemId).subscribe(res => {
             if (res.answer === null) {
                 this.isAnswered = true;
-                
+                //get answer;
+                const answer = 'asdfasdfasdfasdf';
+                $('#answeredPreview').text(answer);
+                MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'preview']);
             }
-            this.problemService.getProblemById(this.problemId).subscribe( res => {
-                if (res.errorCode === 0) {
-                    this.problem = res.problem;
-                }
-             });
-            
-        })
+        });
 
         $('.modal').modal({ dismissible: false });
         $('.tabs').tabs();
@@ -83,7 +87,6 @@ export class ProblemComponent implements OnInit {
     }
 
     navigatetoProblems() {
-        console.log('navifate');
         this.router.navigate(['problems']);
     }
 }

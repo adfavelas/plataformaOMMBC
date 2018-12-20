@@ -15,60 +15,63 @@
             
             <h5 class="left-align">Respuesta</h5>
 
-            <div *ngIf="error != null" class="container ">
+            <div *ngIf="error != null">
                 <ul class="collection">
                     <li class="collection-item center-align collection-item-error">{{ error }}</li>
                 </ul>
-                <p class="center-align"></p>
             </div>
+            
+            <div [hidden]="!isAnswered">
+                <ul class="collection">
+                    <li class="collection-item center-align collection-item-success">Tu respuesta ya ha sido enviada. No podrás enviar otra respuesta hasta que la enviada haya sido revisada por un maestro.</li>
+                </ul>
 
-            <div class="row">
-                <div class="col s12">
-                    <ul class="tabs">
-                        <li class="tab col s2"><a class="active" href="#answerTab">Respuesta</a></li>
-                        <li class="tab col s2"><a href="#previewAnswerTab" (click)="preview(answer)">Vista Previa</a></li>
-                    </ul>
+                <div class="row">
+                    <p id="answeredPreview" class="previewField"></p>
+                </div>
+
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <button class="waves-effect waves-light btn-large" [routerLink]="['/problems']">Regresar a la lista de problemas</button>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div id="answerTab">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">insert_comment</i>
-                            <textarea #answer id="answer" class="materialize-textarea"></textarea>
-                            <label for="answer">Respuesta</label>
-                        </div> 
+            <div [hidden]="isAnswered">
+                <div class="row">
+                    <div class="col s12">
+                        <ul class="tabs">
+                            <li class="tab col s2"><a class="active" href="#answerTab">Respuesta</a></li>
+                            <li class="tab col s2"><a href="#previewAnswerTab" (click)="preview(answer)">Vista Previa</a></li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div id="answerTab">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">insert_comment</i>
+                                <textarea #answer id="answer" class="materialize-textarea"></textarea>
+                                <label for="answer">Respuesta</label>
+                            </div> 
+                        </div>
+                    </div>
+                    
+                    <div id="previewAnswerTab">
+                        <div class="row">
+                            <p id="preview" class="previewField"></p>
+                        </div>
                     </div>
                 </div>
                 
-                <div id="previewAnswerTab">
-                    <div class="row">
-                        <p id="preview"></p>
+                <div class="row">
+                    <div class="col s6 center-align">
+                        <button class="waves-effect waves-light btn-large">Cancelar</button>
                     </div>
-                </div>
-            </div>
-            
-            <!-- <div class="row">
-                <div class="input-field col m12 l5">
-                    <i class="material-icons prefix">insert_comment</i>
-                    <textarea #answer id="answer" class="materialize-textarea"></textarea>
-                    <label for="answer">Respuesta</label>
-                </div> 
-                <div class="col m12 l2 center-align">
-                    <button class="waves-effect waves-light btn-large" (click)="preview(answer)">Vista Previa</button>
-                </div>
-                <div class="col m12 l5">
-                    <p id="preview"></p>
-                </div>
-            </div> -->
-            
-            <div class="row">
-                <div class="col s6 center-align">
-                    <button class="waves-effect waves-light btn-large">Cancelar</button>
-                </div>
-                <div class="col s6 center-align">
-                    <button class="waves-effect waves-light btn-large" (click)="submitProblem(answer)">Responder</button>
+                    <div class="col s6 center-align">
+                        <button class="waves-effect waves-light btn-large" (click)="submitProblem(answer)">Responder</button>
+                    </div>
                 </div>
             </div>
 
