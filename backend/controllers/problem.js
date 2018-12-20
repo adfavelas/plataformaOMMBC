@@ -127,6 +127,7 @@ exports.checkIfProblemAnswered = (req,res) => {
         if (err) {
             return res.json({message: "No se ha encontrado", errorCode: 1}) 
         } else {
+            answer.answer = Buffer.from(answer.answer, 'base64').toString('utf8')
             return res.json({message: "success", errorCode: 0, answer});
         }
     });

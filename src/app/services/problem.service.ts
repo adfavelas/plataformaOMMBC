@@ -38,6 +38,6 @@ export class ProblemService {
     }
 
     isProblemAnswered(problemId: String) {
-        return this.http.get<{message: String, errorCode: Number, answer: Object|undefined}>(`${this.APIURL}/api/problems/problemAnswered/${problemId}`);
+        return this.http.get<{message: String, errorCode: Number, answer: any}>(`${this.APIURL}/api/problems/problemAnswered/${problemId}`);
     }
 }
