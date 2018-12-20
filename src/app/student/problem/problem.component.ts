@@ -27,25 +27,19 @@ export class ProblemComponent implements OnInit {
     }
 
     ngOnInit() {
-
-        this.problemService.isProblemAnswered(this.problemId).subscribe(res => {
-            console.log(res);
-            if (res.errorCode === 3) {
-                this.router.navigate(['']);
-            }
-            if (res.answer !== null) {
-                this.isAnswered = true;
-                const answer = res.answer.answer;
-                $('#answeredPreview').text(answer);
-                MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'answeredPreview']);
-            } else {
-                this.problemService.getProblemById(this.problemId).subscribe(res => {
-                    if (res.errorCode === 0) {
-                        this.problem = res.problem;
-                    } else {
-                        this.router.navigate(['problems']);
+        this.problemService.getProblemById(this.problemId).subscribe(res => {
+            if (res.errorCode === 0) {
+                this.problem = res.problem;
+                this.problemService.isProblemAnswered(this.problemId).subscribe(response => {
+                    if (response.answer !== null) {
+                        this.isAnswered = true;
+                        const answer = response.answer.answer;
+                        $('#answeredPreview').text(answer);
+                        MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'answeredPreview']);
                     }
                 });
+            } else {
+                this.router.navigate(['problems']);
             }
         });
 
