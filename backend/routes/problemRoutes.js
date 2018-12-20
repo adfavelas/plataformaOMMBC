@@ -23,4 +23,8 @@ router.get('/answeredProblems/:studentId', checkToken, (req,res,next)=>{
     problemFunctions.getAnsweredProblems(req,res);
 });
 
+router.get('/problemAnswered/:problemId', checkToken, (req,res,next)=> {
+    problemFunctions.checkIfProblemAnswered(req,res);
+});
+
 module.exports = router;

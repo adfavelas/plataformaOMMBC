@@ -19,7 +19,7 @@ export class ProblemComponent implements OnInit {
         problem;
         empty = true;
         clicked = false;
-
+        isAnswered = false;
         constructor(private activatedRoute: ActivatedRoute, private problemService: ProblemService, private router: Router) {
         this.activatedRoute.paramMap.subscribe( (paramMap: ParamMap) => {
             this.problemId = paramMap.get('id');
@@ -27,11 +27,18 @@ export class ProblemComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.problemService.getProblemById(this.problemId).subscribe( res => {
-           if (res.errorCode === 0) {
-               this.problem = res.problem;
-           }
-        });
+        this.problemService.isProblemAnswered(this.problemId).subscribe(res => {
+            if (res.answer === null) {
+                this.isAnswered = true;
+                
+            }
+            this.problemService.getProblemById(this.problemId).subscribe( res => {
+                if (res.errorCode === 0) {
+                    this.problem = res.problem;
+                }
+             });
+            
+        })
 
         $('.modal').modal({ dismissible: false });
         $('.tabs').tabs();

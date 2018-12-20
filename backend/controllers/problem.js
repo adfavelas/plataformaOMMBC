@@ -48,7 +48,7 @@ exports.submitProblem = (req,res)=> {
         } else {
             const answer = new Answer({
                 problemId: req.body.problemId,
-                studentId: student._id,
+                studentEmail: req.user.email,
                 answer: Buffer.from(req.body.answer, 'utf8').toString('base64'),
                 status: 'pending'
             });
@@ -67,7 +67,7 @@ exports.submitProblem = (req,res)=> {
 exports.getPendingProblems = (req, res) => {
     let problemsId = [];
     //Search answers from given student
-    Answer.find({ $and: [ {studentId: req.params.studentId }, {$or: [{status: 'pending'}, {status: 'incorrect'}] } ]}, (err, answers) =>{
+    Answer.find({ $and: [ {studentEmail: req.user.email }, {$or: [{status: 'pending'}, {status: 'incorrect'}] } ]}, (err, answers) =>{
         if (err) {
             console.log(err);
             return res.json({ message: "No se encontraron respuestas.", errorCode: 1});
@@ -95,7 +95,7 @@ exports.getPendingProblems = (req, res) => {
 
 exports.getAnsweredProblems = (req, res) =>{
     let problemsId = [];
-    Answer.find({ $and: [ {studentId: req.params.studentId }, {status: 'correct'} ]}, (err, answers) => {
+    Answer.find({ $and: [ {studentEmail: req.user.email }, {status: 'correct'} ]}, (err, answers) => {
         if(err){
             console.log(err);
             return res.json({ message: "No se encontraron respuestas.", errorCode: 1})
@@ -116,6 +116,18 @@ exports.getAnsweredProblems = (req, res) =>{
                     return res.json({ message: "Success", problems: problems, errorCode: 0});
                 }
             });
+        }
+    });
+}
+
+exports.checkIfProblemAnswered = (req,res) => {
+    const problemId = req.params.problemId;
+    Answer.findOne({studentEmail: req.user.email, problemId: problemId}, (err, answer)=> {
+        console.log(answer);
+        if (err) {
+            return res.json({message: "No se ha encontrado", errorCode: 1}) 
+        } else {
+            return res.json({message: "success", errorCode: 0, answer});
         }
     });
 }

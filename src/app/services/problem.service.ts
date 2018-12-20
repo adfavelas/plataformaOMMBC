@@ -36,4 +36,8 @@ export class ProblemService {
             this.APIURL + '/api/problems/answeredProblems/' + studentId
             );
     }
+
+    isProblemAnswered(problemId: String) {
+        return this.http.get<{message: String, errorCode: Number, answer: Object|undefined}>(`${this.APIURL}/api/problems/problemAnswered/${problemId}`);
+    }
 }
