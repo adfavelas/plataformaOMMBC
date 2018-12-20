@@ -17,6 +17,8 @@
 							<i class="material-icons circle red">play_arrow</i>
 							<span class="title">{{reply.replierName}}</span>
 							<p>{{reply.reply}}</p>
+							<a *ngIf="reply.replierEmail === userEmail" class="waves-effect waves-light btn-flat" style="background-color: red; color: white">Borrar</a>
+
 						</li>
 					</ul>
 				</div>

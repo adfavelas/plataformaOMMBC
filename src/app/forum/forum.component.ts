@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ForumService } from '../services/forum.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProfileService } from '../services/profile.service';
+import { AuthService } from '../services/auth.service';
 
 declare let $: any;
 
@@ -16,12 +17,13 @@ export class ForumComponent implements OnInit {
   questionError;
   questionForm: FormGroup;
   replyForm: FormGroup;
-
-  constructor(private forumService: ForumService, private profileService: ProfileService ) { }
+  userEmail;
+  constructor(private forumService: ForumService, private profileService: ProfileService, private authService: AuthService ) { }
 
   ngOnInit() {
     this.initQuestionForm();
     this.initReplyForm();
+    this.userEmail = this.authService.verifyToken(sessionStorage.getItem('token'));
     $(document).ready(function() {
       $('.collapsible').collapsible();
       $('.fixed-action-btn').floatingActionButton();
