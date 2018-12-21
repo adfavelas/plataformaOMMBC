@@ -31,7 +31,7 @@ export class ProblemComponent implements OnInit {
             if (res.errorCode === 0) {
                 this.problem = res.problem;
                 this.problemService.isProblemAnswered(this.problemId).subscribe(response => {
-                    if (response.answer !== null) {
+                    if (response.errorCode === 0) {
                         this.isAnswered = true;
                         const answer = response.answer.answer;
                         $('#answeredPreview').text(answer);
@@ -71,7 +71,6 @@ export class ProblemComponent implements OnInit {
                     this.uploading = false;
                     modalInstance.open();
                 }
-                console.log(res);
             });
         } else {
             this.error = 'La respuesta no puede estar vacía. Por favor envía una respuesta válida.';

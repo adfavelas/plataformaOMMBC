@@ -123,12 +123,15 @@ exports.getAnsweredProblems = (req, res) =>{
 exports.checkIfProblemAnswered = (req,res) => {
     const problemId = req.params.problemId;
     Answer.findOne({studentEmail: req.user.email, problemId: problemId}, (err, answer)=> {
-        console.log(answer);
         if (err) {
             return res.json({message: "No se ha encontrado", errorCode: 1}) 
         } else {
-            answer.answer = Buffer.from(answer.answer, 'base64').toString('utf8')
-            return res.json({message: "success", errorCode: 0, answer});
+            if (answer) {
+                answer.answer = Buffer.from(answer.answer, 'base64').toString('utf8')
+                return res.json({message: "success", errorCode: 0, answer});
+            }
+            return res.json({message: "No se ha encontrado", errorCode: 1});
+
         }
     });
 }
