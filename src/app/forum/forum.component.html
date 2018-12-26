@@ -17,7 +17,7 @@
 							<i class="material-icons circle red">play_arrow</i>
 							<span class="title">{{reply.replierName}}</span>
 							<p>{{reply.reply}}</p>
-							<a *ngIf="reply.replierEmail === userEmail" class="waves-effect waves-light btn-flat" style="background-color: red; color: white">Borrar</a>
+							<a *ngIf="reply.replierEmail === userEmail" (click)="deleteReply(reply._id, question._id)" class="secondary-content deleteReply"><i class="material-icons">delete</i></a>
 
 						</li>
 					</ul>

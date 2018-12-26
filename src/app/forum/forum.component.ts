@@ -49,7 +49,7 @@ export class ForumComponent implements OnInit {
   }
 
   getForumQuestions(): void {
-    this.forumService.getForumQuesiions().subscribe( res => {
+    this.forumService.getForumQuestions().subscribe( res => {
       if (res.errorCode === 0) {
         this.questions = res.forumQuestions;
       }
@@ -102,7 +102,23 @@ export class ForumComponent implements OnInit {
       newReply.replierName = res.student.name;
       newReply.replierEmail = res.student.email;
       question.replies.push(newReply);
+    });
+  }
 
+  deleteReply(replyId: string, questionId: string): void {
+    this.forumService.deleteForumReply(replyId).subscribe(res => {
+      if (res.errorCode === 0) {
+        const questionIndex = this.questions.indexOf(questionId);
+
+        if (questionIndex > -1) {
+          const question = this.questions[questionIndex];
+          const replyIndex = question.replies.indexOf(replyId);
+
+          if (replyIndex > -1) {
+            this.questions[questionIndex].replies.splice(replyIndex, 1);
+          }
+        }
+      }
     });
   }
 

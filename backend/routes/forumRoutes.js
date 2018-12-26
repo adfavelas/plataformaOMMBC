@@ -5,7 +5,7 @@ const ForumQuestion = require('../models/ForumQuestion');
 const router = express.Router();
 
 
-router.get('', checkToken , (req,res,next)=> {
+router.get('', (req,res,next)=> {
     forumFunctions.getForumQuestions(req,res);
 });
 
@@ -17,6 +17,10 @@ router.post('/createForumQuestion', checkToken, (req,res,next)=>{
 router.put('/createReply', checkToken, (req,res,next)=> {
     // questionId, pregunta , emailUser
     forumFunctions.createReply(req,res);
+});
+
+router.delete('/deleteReply', checkToken, (req, res, next) => {
+    forumFunctions.deleteReplay(req, res, next);
 });
 // router.get('/create' , (req,res,next)=> {
 //     const now = Date.now();

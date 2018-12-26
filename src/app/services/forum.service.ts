@@ -8,7 +8,7 @@ export class ForumService {
   private APIURL = environment.APIURL;
   constructor(private http: HttpClient) { }
 
-  getForumQuesiions() {
+  getForumQuestions() {
     return this.http.get<{ message: string, forumQuestions: Object, errorCode: number}>(this.APIURL + '/api/forum');
   }
 
@@ -18,5 +18,9 @@ export class ForumService {
 
   createForumReply(reply: Object): any {
     return this.http.put<{ message: String, errorCode: Number }>(this.APIURL + '/api/forum/createReply', reply);
+  }
+
+  deleteForumReply(id: String): any {
+    return this.http.delete<{ message: String, errorCode: Number }>(this.APIURL + '/api/forum/deleteReply/' + id);
   }
 }

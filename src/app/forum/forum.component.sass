@@ -10,6 +10,17 @@
 .collection .collection-item.avatar
     border: 1px solid white
     background-color: #f2f2f2
+    
+    &:hover
+        a.deleteReply
+            color: $primary-color-light
+            display: block
+
+    a.deleteReply
+        display: none
+        &:hover
+            color: $primary-accent-color
+            cursor: pointer
 
 .btn, .btn-floating, .btn-large
     @extend %button-style
