@@ -17,10 +17,10 @@ export class ForumService {
   }
 
   createForumReply(reply: Object): any {
-    return this.http.put<{ message: String, errorCode: Number }>(this.APIURL + '/api/forum/createReply', reply);
+    return this.http.put<{ message: String, reply: Object, errorCode: Number }>(this.APIURL + '/api/forum/createReply', reply);
   }
 
-  deleteForumReply(id: String): any {
-    return this.http.delete<{ message: String, errorCode: Number }>(this.APIURL + '/api/forum/deleteReply/' + id);
+  deleteForumReply(replyId: String): any {
+    return this.http.delete<{ message: String, errorCode: Number }>(this.APIURL + '/api/forum/deleteReply/' + replyId);
   }
 }

@@ -30,9 +30,7 @@ export class ForumComponent implements OnInit {
       $('.tooltipped').tooltip();
       $('.modal').modal({ dismissible: false });
     });
-
     this.getForumQuestions();
-
   }
 
   initQuestionForm(): void {
@@ -87,7 +85,7 @@ export class ForumComponent implements OnInit {
     const newReply = this.buildReply(question._id);
     this.forumService.createForumReply(newReply).subscribe(res => {
       if (res.errorCode === 0) {
-        this.addReply(newReply, question);
+        this.addReply(res.reply, question);
       } else {
         this.replyError = res.message;
       }
@@ -97,10 +95,6 @@ export class ForumComponent implements OnInit {
 
   addReply(newReply, question) {
     this.profileService.getUserObject().subscribe( res => {
-      console.log(res);
-      newReply.date = Date.now();
-      newReply.replierName = res.student.name;
-      newReply.replierEmail = res.student.email;
       question.replies.push(newReply);
     });
   }
@@ -108,14 +102,16 @@ export class ForumComponent implements OnInit {
   deleteReply(replyId: string, questionId: string): void {
     this.forumService.deleteForumReply(replyId).subscribe(res => {
       if (res.errorCode === 0) {
-        const questionIndex = this.questions.indexOf(questionId);
+        for (let i = 0; i < this.questions.length; i++) {
+          if (this.questions[i]['_id'] === questionId) {
+            const question = this.questions[i];
 
-        if (questionIndex > -1) {
-          const question = this.questions[questionIndex];
-          const replyIndex = question.replies.indexOf(replyId);
-
-          if (replyIndex > -1) {
-            this.questions[questionIndex].replies.splice(replyIndex, 1);
+            for (let j = 0; j < question.replies.length; j++) {
+              if (question.replies[j]['_id'] === replyId) {
+                this.questions[i].replies.splice(j, 1);
+                return;
+              }
+            }
           }
         }
       }

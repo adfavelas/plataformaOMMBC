@@ -1,20 +1,15 @@
 const ForumQuestion = require('../models/ForumQuestion');
 const ForumReply = require('../models/ForumReply');
 const Student  = require('../models/Student');
+const mongoose = require('mongoose');
 
 exports.getForumQuestions = (req,res)=> {
     ForumQuestion.find().populate('replies').exec((err, forumQuestions) => {
         if (err) {
             console.log(err);
             return res.json({message: 'Ha ocurrido un error', errorCode: 1});
-        } else {
-            forumQuestions.forEach(question => {
-                question.replies.forEach(reply => {
-                    console.log(reply);
-                })
-            });
-            return res.json({message: 'success', errorCode: 0, forumQuestions});
         }
+        return res.json({message: 'success', errorCode: 0, forumQuestions});
     });
 }
 
@@ -39,44 +34,60 @@ exports.createForumQuestion = (req,res)=> {
 
 exports.createReply = (req,res) => {
     ForumQuestion.findById(req.body.questionId, (err, fetchForumQuestion)=> {
-        if ( err ) {
+        if (err) {
             return res.json({message: "Ha ocurrido un error intenta mas tarde", errorCode: 1});
         }
         else {
             Student.findOne({email: req.user.email}, (errStudent, fetchStudent) => {
-                if ( err ) {
+                if (errStudent) {
                     return res.json({message: "Ha ocurrido un error intenta mas tarde ", errorCode: 1});
                 } 
 
-                const reply = {
+                const reply = new ForumReply({
                     reply : req.body.reply,
                     date: Date.now(),
                     replierName: `${fetchStudent.name} ${fetchStudent.lastName}`,
                     replierEmail: req.user.email
-                }
-
-                fetchForumQuestion.replies.push(reply);
-
-                ForumQuestion.findByIdAndUpdate(fetchForumQuestion._id, fetchForumQuestion, (errForum, resultForum)=>{
-                    if ( errForum ) {
+                });
+                
+                reply.save((err) => {
+                    if (err) {
+                        console.log(err);
                         return res.json({message: "Ha ocurrido un error, intenta mas tarde", errorCode: 1});
-                    } 
-                    else {
-                        return res.json({message: "La respuesta se ha agregado exitosamente", errorCode: 0});
                     }
+                    fetchForumQuestion.replies.push(reply._id);
+                    fetchForumQuestion.save((err) => {
+                        if (err) {
+                            console.log(err);
+                            return res.json({message: "Ha ocurrido un error, intenta mas tarde", errorCode: 1});
+                        }
+                        return res.json({message: "La respuesta se ha agregado exitosamente", reply: reply, errorCode: 0});
+                    });
                 });
             });
         }
     });
 }
 
-exports.deleteReplay = (req, res, next) => {
-    const id = req.params.forumReplyId;
-    ForumReply.findOneAndDelete({_id: id}, (err) => {
+exports.deleteReply = (replyId, res, next) => {
+    ForumReply.findOneAndDelete({_id: replyId}, (err) => {
         if (err) {
             console.log(err);
             return res.json({ message: "La respuesta no se pudo eliminar", errorCode: 1 });
         }
-        return res.json({ message: "La respuesta se eliminó exitosamente", errorCode: 0 });
-    })
+        ForumQuestion.findOne({ 'replies': replyId }, (err, question) => {
+            const replyIndex = question.replies.indexOf(replyId);
+            
+            if (replyIndex > -1) {
+                question.replies.splice(replyIndex, 1);
+                question.save((err) => {
+                    if (err) {
+                        console.log(err);
+                        return res.json({ message: "La respuesta no se pudo eliminar", errorCode: 1 });
+                    }
+                    return res.json({ message: "La respuesta se eliminó exitosamente", errorCode: 0 });
+                });
+            }
+        });
+    });
 }
