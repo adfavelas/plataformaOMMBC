@@ -20,30 +20,31 @@ import { ProblemComponent } from './student/problem/problem.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { ForumComponent } from './forum/forum.component';
 import { RequestsComponent } from './admin/requests/requests.component';
-
+import { TokenGuard } from './token-guard';
 
 const routes: Routes = [
   { path: '', component: LandingComponent},
-  { path: 'faq', component: FaqComponent},
-  { path: 'home', component: HomeComponent},
+  { path: 'faq', component: FaqComponent, canActivate: [TokenGuard]},
+  { path: 'home', component: HomeComponent , canActivate: [TokenGuard]},
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'signup/teacher', component: SignupComponent},
-  { path: 'problem/:id', component: ProblemComponent},
-  { path: 'profile', component: ProfileComponent},
-  { path: 'profile/:id', component: ProfileComponent},
-  { path: 'ranking', component: RankingComponent},
-  { path: 'problems', component: ProblemsComponent},
-  { path: 'settings', component: SettingsComponent},
-  { path: 'notifications', component: NotificationsComponent},
-  { path: 'updateProfile', component: UpdateProfileComponent},
+  { path: 'problem/:id', component: ProblemComponent , canActivate: [TokenGuard]},
+  { path: 'profile', component: ProfileComponent, canActivate: [TokenGuard]},
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [TokenGuard]},
+  { path: 'ranking', component: RankingComponent, canActivate: [TokenGuard]},
+  { path: 'problems', component: ProblemsComponent, canActivate: [TokenGuard]},
+  { path: 'settings', component: SettingsComponent, canActivate: [TokenGuard]},
+  { path: 'notifications', component: NotificationsComponent, canActivate: [TokenGuard]},
+  { path: 'updateProfile', component: UpdateProfileComponent, canActivate: [TokenGuard]},
   { path: 'forgotPassword', component: ForgotPasswordComponent},
-  { path: 'updatePassword', component: UpdatePasswordComponent},
-  { path: 'guidedLearning', component: GuidedLearningComponent},
+  { path: 'updatePassword', component: UpdatePasswordComponent , canActivate: [TokenGuard]},
+  { path: 'guidedLearning', component: GuidedLearningComponent, canActivate: [TokenGuard]},
   { path: 'restorePassword/:token', component: RestorePasswordComponent},
-  { path: 'forum', component: ForumComponent},
+  { path: 'forum', component: ForumComponent , canActivate: [TokenGuard]},
 
-  { path: 'requests', component: RequestsComponent},
+  //ADMIN
+  { path: 'requests', component: RequestsComponent, canActivate: [TokenGuard]},
   { path: '404', component: Error404Component},
   { path: '**', component: Error404Component},
 ];
@@ -51,6 +52,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [TokenGuard]
 })
 export class AppRoutingModule {}
