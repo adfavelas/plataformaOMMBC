@@ -14,17 +14,22 @@ export class RequestsComponent implements OnInit {
 
   ngOnInit() {
     this.teacherService.getPendingTeachers().subscribe(res => {
-      console.log(res);
       if (res.errorCode === 0) {
         this.teachers = res.teachers;
       }
     });
   }
-  acceptTeacher(teacherId: string): void {
-    console.log(teacherId);
+  acceptTeacher(teacherEmail: string): void {
+    const teacher = { email: teacherEmail };
+    this.teacherService.acceptTeacher(teacher).subscribe(res => {
+
+    });
   }
-  declineTeacher(teacherId: string): void {
-    console.log(teacherId);
+  declineTeacher(teacherEmail: string): void {
+    const teacher = { email: teacherEmail };
+    this.teacherService.denyTeacher(teacher).subscribe(res => {
+
+    });
   }
 
 }

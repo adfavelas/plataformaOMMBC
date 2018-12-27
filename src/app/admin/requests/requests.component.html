@@ -18,8 +18,8 @@
           <td class="center-align">{{teacher.email}}</td>
           <td class="center-align">{{teacher.status}}</td>
           <td class="center-align">
-            <a (click)="acceptTeacher(teacher._id)" class="waves-effect btn">Accept</a> &nbsp;&nbsp;
-            <a (click)="declineTeacher(teacher._id)" class="waves-effect btn decline-btn">Decline</a>
+            <a (click)="acceptTeacher(teacher.email)" class="waves-effect btn">Accept</a> &nbsp;&nbsp;
+            <a (click)="declineTeacher(teacher.email)" class="waves-effect btn decline-btn">Decline</a>
           </td>
         </tr>
       </tbody>

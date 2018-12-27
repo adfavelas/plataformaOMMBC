@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const Teacher = require('../models/Teacher');
 const bcrypt = require('bcrypt-nodejs');
+
 exports.getPendingTeachers = (req, res, next) => {
     User.find({ $and: [{ role: 'teacher' }, { status: 'pending' }] }, (err, users) => {
         if (err) {
@@ -68,4 +69,28 @@ exports.registerTeacher = (req,res) => {
             return res.json({message: "El correo electrónico que estas registrando ya se encuentra en uso.", errorCode: 1});
         })
     });
+}
+
+exports.acceptTeacher = (req, res, next) => {
+    const teacherEmail = req.body.email;
+
+    User.findOneAndUpdate({ $and: [{ role: 'teacher' }, { status: 'pending' }, { email: teacherEmail }] }, { $set: { status: 'active' }}, (err, teacher) => {
+        if (err) {
+            console.log(err);
+            return res.json({ message: 'Ha ocurrido un error, por favor, intenta más tarde.', errorCode: 1 });
+        }
+        return res.json({ message: 'Maestro aceptado satisfactoriamente', errorCode: 0 });
+    })
+}
+
+exports.denyTeacher = (req, res, next) => {
+    const teacherEmail = req.body.email;
+
+    User.findOneAndUpdate({ $and: [{ role: 'teacher' }, { status: 'pending' }, { email: teacherEmail }] }, { $set: { status: 'denied' }}, (err, teacher) => {
+        if (err) {
+            console.log(err);
+            return res.json({ message: 'Ha ocurrido un error, por favor, intenta más tarde.', errorCode: 1 });
+        }
+        return res.json({ message: 'Maestro negado satisfactoriamente', errorCode: 0 });
+    })
 }

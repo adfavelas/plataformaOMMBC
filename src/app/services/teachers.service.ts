@@ -15,6 +15,14 @@ export class TeachersService {
 
   registerTeacher(body: Object) {
     console.log(body);
-    return this.http.post<{message: String, errorCode: Number}>(`${this.APIURL}/api/teachers/createTeacher`, body);
+    return this.http.post<{ message: String, errorCode: Number}>(`${this.APIURL}/api/teachers/createTeacher`, body);
+  }
+
+  acceptTeacher(body: Object) {
+    return this.http.put<{ messate: String, errorCode: Number }>(this.APIURL + '/api/teachers/acceptTeacher', body);
+  }
+
+  denyTeacher(body: Object) {
+    return this.http.put<{ messate: String, errorCode: Number }>(this.APIURL + '/api/teachers/denyTeacher', body);
   }
 }
