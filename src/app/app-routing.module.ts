@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'forum', component: ForumComponent , canActivate: [TokenGuard]},
 
   //ADMIN
-  { path: 'requests', component: RequestsComponent, canActivate: [TokenGuard]},
+  { path: 'a/requests', component: RequestsComponent, canActivate: [TokenGuard]},
   { path: '404', component: Error404Component},
   { path: '**', component: Error404Component},
 ];

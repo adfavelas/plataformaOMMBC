@@ -19,7 +19,7 @@ router.get('/verifyEmail/:token', (req,res,next)=> {
 });
 
 router.get('/profile', checkToken ,(req,res,next)=> {
-    console.log(req.user);
+    // console.log(req.user);
     // console.log(req.params);
     const email = req.user.email;
     // console.log(email);
@@ -27,7 +27,7 @@ router.get('/profile', checkToken ,(req,res,next)=> {
 });
 
 router.put('/update', checkToken,(req,res,next)=>{
-    console.log(req.body);
+    // console.log(req.body);
     userFunctions.updateStudent(req,res);
 });
 
@@ -36,7 +36,7 @@ router.put('/changePassword', checkToken,(req,res,next)=>{
 });
 
 router.get('/sendRestoreEmail/:email', (req,res,next)=>{
-    console.log(req.params);
+    // console.log(req.params);
     // res.json({message: "Here"});
     userFunctions.sendRestoreEmail(req,res);
 });

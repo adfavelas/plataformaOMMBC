@@ -74,7 +74,6 @@ exports.createUser = (req,res,next) => {
         });
         
         user.save().then( result => {
-            console.log(result);
             const student = new Student({
                 name: req.body.name,
                 lastName: req.body.lastName,
@@ -87,7 +86,6 @@ exports.createUser = (req,res,next) => {
                 totalScore: 0
             });
             student.save().then( response => {
-                console.log(response);
                 sendVerificationEmail(user, (message)=>{
                     res.json({message, errorCode: 0});
                 });
@@ -146,7 +144,7 @@ exports.loginUser = (req,res) => {
 exports.verifyEmail = (token, res) => {
     const date = new Date();
     jwt.verify(token,process.env.JWTSECRET, (err, decoded) => {
-        console.log(decoded);
+        // console.log(decoded);
         User.findOne({email: decoded.email},(err, user)=>{
             if(err) {
                 console.log(err);
@@ -182,14 +180,12 @@ exports.getProfile = (email,res) => {
 
 
 exports.updateStudent = (req,res) => {
-    console.log(req.body.email)
+    // console.log(req.body.email)
     Student.findOne({email: req.user.email}, (err, fetchedStudent)=>{
         if(err){
             return res.json({message: "Usuario no encontrado.", errorCode: 1});
         } else{
-            console.log(fetchedStudent);
-            // fetchedStudent.name  = req.body.name;
-            // fetchedStudent.lastName = req.body.lastName
+            // console.log(fetchedStudent);
             const student = new Student({
                 _id: fetchedStudent._id,
                 name: req.body.name,
@@ -326,7 +322,6 @@ exports.restorePasswordAccess = (req,res) => {
             return res.json({message: "Ha ocurrido un error.", errorCode: 1});
         }
         else {
-            console.log('---------> ' +req.body.email);
             const email = req.body.email;
             User.findOne({email: email}, (err, user)=> {
                 if ( err ){
