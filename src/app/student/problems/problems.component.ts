@@ -20,6 +20,9 @@ export class ProblemsComponent implements OnInit {
         //     const primaryColorLight = '#0767A4';
         // });
         this.problemService.getProblems(null).subscribe(res => {
+            if (res.errorCode === 3) {
+                this.router.navigate(['']);
+            }
             if (res.errorCode === 0) {
                 this.problems = res.problems;
                 $('select').formSelect();
