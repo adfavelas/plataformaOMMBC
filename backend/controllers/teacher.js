@@ -38,7 +38,6 @@ exports.registerTeacher = (req,res) => {
         });
         
         user.save().then( result => {
-            console.log(result);
             const teacher = new Teacher({
                 name: req.body.name,
                 lastName: req.body.lastName,
@@ -50,7 +49,6 @@ exports.registerTeacher = (req,res) => {
                 email: req.body.email
             });
             teacher.save().then( response => {
-                console.log(response);
                 return res.json({message: "Se ha registrado exitosamente ", errorCode: 0})
                 // sendVerificationEmail(user, (message)=>{
                 //     res.json({message, errorCode: 0});
