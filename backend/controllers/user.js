@@ -143,27 +143,18 @@ exports.loginUser = (req,res) => {
 
 exports.verifyEmail = (token, res) => {
     const date = new Date();
-    jwt.verify(token,process.env.JWTSECRET, (err, decoded) => {
+    jwt.verify(token,process.env.JWTSECRET, async(err, decoded) => {
         // console.log(decoded);
-        User.findOne({email: decoded.email},(err, user)=>{
-            if(err) {
-                console.log(err);
-                res.redirect('http://localhost:4200/error');
+        try {
+            const user = await User.findOne({email: decoded.email});
+            if (user.status === 'pending'){
+                user.status = 'active';
+                await User.update({email: decoded.email}, user);
+                res.redirect('http://localhost:4200/login');
             }
-            else {
-                if(user.status === 'pending') {
-                    user.status = 'active';
-                    User.updateOne({email: decoded.email }, user).then(result => {
-                        res.redirect('http://localhost:4200/login');
-                    }).catch(err => {
-                        if(err) {
-                            console.log(err);
-                            res.redirect('http://localhost:4200/error');
-                        }
-                    })
-                }
-            }
-        })    
+        } catch(err) {
+            return res.redirect('http://localhost:4200/error');
+        }
     });
 }
 

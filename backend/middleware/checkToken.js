@@ -5,8 +5,9 @@ module.exports = async(req,res,next) => {
     // console.log(req.authorization);
     const token = req.headers.authorization;
     if (token){
-        jwt.verify(token, "Not Secret", async(err, decoded)=>{
+        jwt.verify(token, process.env.JWTSECRET, async(err, decoded)=>{
             if(err){
+                console.log(err);
                 return res.json({errorCode:3 , message: "Token expired"});
             }
             else {
@@ -31,6 +32,6 @@ module.exports = async(req,res,next) => {
         });   
     }
     else {
-        res.json({errorCode: 3, message: "No se encontro token"});
+        return res.json({errorCode: 3, message: "No se encontro token"});
     }
 }
