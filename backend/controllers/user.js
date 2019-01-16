@@ -170,40 +170,29 @@ exports.getProfile = (email,res) => {
 }
 
 
-exports.updateStudent = (req,res) => {
+exports.updateStudent = async(req,res) => {
     // console.log(req.body.email)
-    Student.findOne({email: req.user.email}, (err, fetchedStudent)=>{
-        if(err){
-            return res.json({message: "Usuario no encontrado.", errorCode: 1});
-        } else{
-            // console.log(fetchedStudent);
-            const student = new Student({
-                _id: fetchedStudent._id,
-                name: req.body.name,
-                lastName: req.body.lastName,
-                // age: req.body.age,
-                schoolName: req.body.schoolName,
-                state: req.body.state,
-                country: req.body.country,
-                birthDate: req.body.birthDate,
-                email: req.user.email,
-                solvedProblems: fetchedStudent.solvedProblems,
-                totalScore: fetchedStudent.totalScore
-            });
-            Student.updateOne({email: req.user.email}, student, (err, result)=>{
-                if(err) {
-                    console.log(err);
-                    return res.json({message: "Ha ocurrido un error intente mas tarde.", errorCode: 1});
-                }
-                else {
-                    console.log(result);
-                    return res.json({message: "Sus datos han sido actualizados.", errorCode: 0});
-                }
-            });
-        }
-    });
-    
-   
+    try {
+        const fetchedStudent = await Student.findOne({email: req.user.email});
+        const student = new Student({
+            _id: fetchedStudent._id,
+            name: req.body.name,
+            lastName: req.body.lastName,
+            // age: req.body.age,
+            schoolName: req.body.schoolName,
+            state: req.body.state,
+            country: req.body.country,
+            birthDate: req.body.birthDate,
+            email: req.user.email,
+            solvedProblems: fetchedStudent.solvedProblems,
+            totalScore: fetchedStudent.totalScore
+        });
+        await Student.updateOne({email: req.user.email}, student);
+        return res.json({message: "Sus datos han sido actualizados.", errorCode: 0});
+    } catch(err) {
+        console.log(err);
+        return res.json({message: "Ha ocurrido un error intente mas tarde.", errorCode: 1});
+    }
 }
 
 exports.changePassword = (req,res)=> {
