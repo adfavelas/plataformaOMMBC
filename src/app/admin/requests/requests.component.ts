@@ -14,8 +14,10 @@ export class RequestsComponent implements OnInit {
 
   ngOnInit() {
     this.teacherService.getPendingTeachers().subscribe(res => {
+      console.log(res);
       if (res.errorCode === 0) {
         this.teachers = res.teachers;
+
       }
     });
   }

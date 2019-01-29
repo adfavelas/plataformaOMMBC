@@ -1,9 +1,10 @@
 const express = require('express');
 const checkToken = require('../middleware/checkToken.js');
 const teacherFunctions = require('../controllers/teacher');
+const checkPermissions = require('../middleware/checkPermissions');
 const router = express.Router();
 
-router.get('/getPendingTeachers', checkToken, (req, res, next) => {
+router.get('/getPendingTeachers', checkPermissions, (req, res, next) => {
     teacherFunctions.getPendingTeachers(req, res, next);
 });
 
