@@ -105,8 +105,12 @@ exports.checkIfProblemAnswered = async (req, res) => {
     const problemId = req.params.problemId;
     try {
         const answer = await Answer.findOne({ studentEmail: req.user.email, problemId: problemId });
-        answer.answer = Buffer.from(answer.answer, 'base64').toStringI('utf8');
-        return res.json({ message: "success", errorCode: 0, answer });
+        if ( answer ) {
+            answer.answer = Buffer.from(answer.answer, 'base64').toStringI('utf8');
+            return res.json({ message: "success", errorCode: 0, answer });
+        } else {
+            return res.json({ message: "No se ha encontrado", errorCode: 1 })
+        }
     } catch (err) {
         console.log(err);
         return res.json({ message: "No se ha encontrado", errorCode: 1 })

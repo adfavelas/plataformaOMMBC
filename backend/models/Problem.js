@@ -20,8 +20,8 @@ const problemSchema = mongoose.Schema({
     title: {type: String, required: true},
     problemDescription: {type: String, required: true},
     image: {type: String},
-    solution : {type: String, required: true},
-    tip: {type: String, required: true},
+    solution : {type: String},
+    tip: {type: String},
     origin: {type: String, required: true},
     problemNumber: {type: Number, required: true}
 });

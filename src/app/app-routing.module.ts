@@ -21,6 +21,7 @@ import { RankingComponent } from './ranking/ranking.component';
 import { ForumComponent } from './forum/forum.component';
 import { RequestsComponent } from './admin/requests/requests.component';
 import { TokenGuard } from './token-guard';
+import { UploadProblemsComponent } from './admin/upload-problems/upload-problems.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent},
@@ -43,9 +44,10 @@ const routes: Routes = [
   { path: 'restorePassword/:token', component: RestorePasswordComponent},
   { path: 'forum', component: ForumComponent , canActivate: [TokenGuard]},
 
-  //ADMIN
+  // ADMIN
   { path: 'a/requests', component: RequestsComponent, canActivate: [TokenGuard]},
   { path: '404', component: Error404Component},
+  {path: 'a/uploadProblems', component: UploadProblemsComponent},
   { path: '**', component: Error404Component},
 ];
 

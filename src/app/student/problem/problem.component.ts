@@ -30,6 +30,8 @@ export class ProblemComponent implements OnInit {
         this.problemService.getProblemById(this.problemId).subscribe(res => {
             if (res.errorCode === 0) {
                 this.problem = res.problem;
+                $('#problemDescription').text(this.problem.problemDescription);
+                MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'problemDescription']);
                 this.problemService.isProblemAnswered(this.problemId).subscribe(response => {
                     if (response.errorCode === 0) {
                         this.isAnswered = true;
