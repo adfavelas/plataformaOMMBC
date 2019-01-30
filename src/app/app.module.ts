@@ -26,9 +26,9 @@ import { ProblemsComponent } from './student/problems/problems.component';
 import { ProblemComponent } from './student/problem/problem.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { ForumComponent } from './forum/forum.component';
-import { RequestsComponent } from './admin/requests/requests.component';
-import { UploadProblemsComponent } from './admin/upload-problems/upload-problems.component';
 
+// Modules
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -51,9 +51,7 @@ import { UploadProblemsComponent } from './admin/upload-problems/upload-problems
     ProblemsComponent,
     ProblemComponent,
     RankingComponent,
-    ForumComponent,
-    RequestsComponent,
-    UploadProblemsComponent
+    ForumComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +59,8 @@ import { UploadProblemsComponent } from './admin/upload-problems/upload-problems
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AdminModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]

@@ -19,9 +19,7 @@ import { ProblemsComponent } from './student/problems/problems.component';
 import { ProblemComponent } from './student/problem/problem.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { ForumComponent } from './forum/forum.component';
-import { RequestsComponent } from './admin/requests/requests.component';
 import { TokenGuard } from './token-guard';
-import { UploadProblemsComponent } from './admin/upload-problems/upload-problems.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent},
@@ -45,9 +43,8 @@ const routes: Routes = [
   { path: 'forum', component: ForumComponent , canActivate: [TokenGuard]},
 
   // ADMIN
-  { path: 'a/requests', component: RequestsComponent, canActivate: [TokenGuard]},
+  { path: 'a', loadChildren: './admin/admin.module#AdminModule'},
   { path: '404', component: Error404Component},
-  {path: 'a/uploadProblems', component: UploadProblemsComponent},
   { path: '**', component: Error404Component},
 ];
 
