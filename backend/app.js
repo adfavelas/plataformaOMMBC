@@ -43,6 +43,8 @@ app.use(cors());
 //   next();
 // });
 
+app.use(express.static(path.resolve('angular')))
+
 app.use('/api/auth', userRoutes);
 app.use('/api/problems', problemRoutes);
 app.use('/api/faq', faqQuestionRoutes);
@@ -50,5 +52,7 @@ app.use('/api/forum', forumRoutes);
 app.use('/api/teachers', teacherRoutes);
 app.use('/ommbc/api/admin', adminRoutes);
 
-
+app.get('*', (req,res,next) => {
+  res.sendFile(__dirname + 'index.html');
+})
 module.exports = app;

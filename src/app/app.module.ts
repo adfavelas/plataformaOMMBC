@@ -59,8 +59,7 @@ import { AdminModule } from './admin/admin.module';
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule,
-    AdminModule
+    FormsModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]

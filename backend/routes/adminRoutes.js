@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const multer    = require('multer');
+const checkPermissions   = require('../middleware/checkPermissions');
+
 const fileHandler = require('../middleware/fileHandler');
 const fs  = require('fs');
 
@@ -15,7 +17,7 @@ const storage = multer.diskStorage({
     }
 })
 
-router.post('/upload', multer({storage: storage}).any(),fileHandler,  (req,res) => {
+router.post('/upload', checkPermissions , multer({storage: storage}).any(),fileHandler,  (req,res) => {
     fs.unlink(`./temp/${req.fileName}`, (err) => {
         if (err ) {
             console.log(err);
@@ -24,5 +26,9 @@ router.post('/upload', multer({storage: storage}).any(),fileHandler,  (req,res) 
     });
     return res.json({message: "Uploaded Succesfully", errorCode: 0});
 });
+
+router.get('/checkPermissions', checkPermissions, (req,res) => {
+    res.json({message: "Allowed", errorCode: 0});
+})
 
 module.exports = router;

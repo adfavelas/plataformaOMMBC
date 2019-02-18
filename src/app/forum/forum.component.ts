@@ -3,6 +3,7 @@ import { ForumService } from '../services/forum.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProfileService } from '../services/profile.service';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 declare let $: any;
 
@@ -18,7 +19,9 @@ export class ForumComponent implements OnInit {
   questionForm: FormGroup;
   replyForm: FormGroup;
   userEmail;
-  constructor(private forumService: ForumService, private profileService: ProfileService, private authService: AuthService ) { }
+  constructor(private forumService: ForumService, private profileService: ProfileService, private authService: AuthService,
+              private router: Router
+    ) { }
 
   ngOnInit() {
     this.initQuestionForm();
@@ -50,6 +53,8 @@ export class ForumComponent implements OnInit {
     this.forumService.getForumQuestions().subscribe( res => {
       if (res.errorCode === 0) {
         this.questions = res.forumQuestions;
+      } else {
+        this.router.navigate(['']);
       }
     });
   }

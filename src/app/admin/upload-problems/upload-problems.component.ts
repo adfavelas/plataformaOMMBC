@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload-problems',
@@ -8,9 +9,16 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class UploadProblemsComponent implements OnInit {
   csvFile: any;
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService, private router: Router) { }
 
   ngOnInit() {
+    this.adminService.checkPermissions().subscribe( res => {
+      if (res.errorCode === 0) {
+        // continue
+      } else {
+        this.router.navigate(['']);
+      }
+    });
   }
 
   setFile(event: Event) {

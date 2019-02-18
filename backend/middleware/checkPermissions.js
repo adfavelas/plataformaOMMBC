@@ -8,7 +8,7 @@ module.exports = async (req,res,next) => {
             const decoded = await jwt.decode(token, process.env.JWTSECRET);
             if (decoded  && decoded.email) {
                 const user = await User.findOne({email: decoded.email});
-                if (user.role === 'admin') {
+                if (user.role === 'superuser') {
                     return next();
                 } 
                 return res.json({message: "Restricted Access", errorCode: 4});

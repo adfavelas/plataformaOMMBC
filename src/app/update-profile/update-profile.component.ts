@@ -27,7 +27,7 @@ export class UpdateProfileComponent implements OnInit {
     ngOnInit() {
 
         this.profileService.getUserObject().subscribe(res => {
-            if (res.errorCode ===  3) {
+            if (res.errorCode ===  3 ) {
                 this.router.navigate(['login']);
             }
             this.profile = res.student;

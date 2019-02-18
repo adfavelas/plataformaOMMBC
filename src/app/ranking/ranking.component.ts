@@ -16,6 +16,8 @@ export class RankingComponent implements OnInit {
             console.log(res);
             if (res.errorCode === 0) {
                 this.students = res.students;
+            } else {
+                this.router.navigate(['']);
             }
         });
     }
