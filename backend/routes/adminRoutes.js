@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
     }
 })
 
-router.post('/upload', checkPermissions , multer({storage: storage}).any(),fileHandler,  (req,res) => {
+router.post('/upload', checkPermissions, multer({storage: storage}).any(),fileHandler,  (req,res) => {
     fs.unlink(`./temp/${req.fileName}`, (err) => {
         if (err ) {
             console.log(err);

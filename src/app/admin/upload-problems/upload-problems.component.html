@@ -1,8 +1,40 @@
 <div class="container">
-  <form>
-    <h2>Upload Problems (Ingresar aqui el CSV)</h2>
-    <label for="file">Upload!</label><br>
-    <input type="file" name="file" (change)="setFile($event)">
-    <button (click)="onUpload()">Upload</button>
-  </form>
-</div>
+    <div class="row">
+      <h1 class="center-align title-text">Agregar Problemas</h1>
+    </div>
+
+    <div class="row">
+      <p>
+        Para agregar nuevos problemas a la base de datos, por favor utiliza el botón que se encuentra debajo de este párrafo ("Archivo (CSV)") para seleccionar el archivo csv con los problemas que se deseen agregar.
+      </p>
+      <p>
+        El archivo .csv deberá contar con las siguientes columnas: <br><br>idOmmbc,	area,	topic,	Tema,	level,	problemNumber,	problemDescription,	image,	tip,	solution,	origin,	keywords,	notes,	list,	y advanced.
+        <br><br>De no contener estos campos, la consistencia de la información podría verse comprometida.
+      </p>
+      
+    </div>
+  
+    <div class="row">
+      <form>
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>Archivo (CSV)</span>
+            <input type="file" name="file" (change)="setFile($event)">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row center-align">
+      <a class="waves-effect waves-light btn-large" (click)="onUpload()"><i class="material-icons right">cloud</i>Agregar Problemas</a>
+    </div>
+<!--   
+    <form>
+      <h2>Upload Problems (Ingresar aqui el CSV)</h2>
+      <label for="file">Upload!</label><br>
+      <input type="file" name="file" (change)="setFile($event)">
+      <button (click)="onUpload()">Upload</button>
+    </form> -->
+  </div>
